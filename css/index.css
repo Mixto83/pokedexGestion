@@ -1,0 +1,52 @@
+.pokedexFondo {
+    display: flex;
+    flex-direction: row;
+    width: 1920px;
+    height: 1080px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+.abierta{
+    background-image: url("../assets/cosa.jpg");
+    visibility:hidden;
+}
+
+.cerrada{
+    background-image:none;
+}
+
+.mitad1 {
+    background-image: url("../assets/pokemon_images/101.png");
+    width: 960px;
+    height: 1080px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    flex:1;
+}
+
+.fondo{
+
+    background-image: url("../assets/cosa.jpg");
+    display:none;
+    width: 960px;
+    height: 1080px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    flex:1;
+
+}
+
+.mitad2 {
+    background-image: url("../assets/pokemon_images/102.png");
+    width: 960px;
+    height: 1080px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    flex: 1;
+
+}

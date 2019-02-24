@@ -1,12 +1,41 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<title>Pokedex-gestion</title>
-<script src="js/index.js"></script>
-<link rel="stylesheet" type="text/css" href="index.css">
+    <title>Pokedex-gestion</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'></script>
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+
 </head>
+
 <body>
-
-
+    <button class="abrir">Abrir</button>
+    <button class="cerrar">Cerrar</button>
+    <div class="pokedexFondo">
+        <div class="mitad1"></div>
+        <div class="fondo"></div>
+        <div class="mitad2"></div>
+    </div>
 </body>
-</html> 
+
+
+<script>
+        $(".abrir").click(function(){
+                $('.mitad1').animate({"left":"-=960px"},"slow");
+                $('.mitad2').animate({"left":"+=960px"},"slow");
+                $('.fondo').fadeIn("slow");
+        });
+
+        $(".cerrar").click(function(){
+                $('.mitad1').animate({"left":"+=960px"},"slow");
+                $('.mitad2').animate({"left":"-=960px"},"slow");
+                //$('.fondo').fadeOut("slow");
+                $('.fondo').animate({
+                    opacity:0,
+                    width:"toggle"
+                },100);
+        });
+
+    </script>
+</html>
