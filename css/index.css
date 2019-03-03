@@ -18,30 +18,17 @@
 }
 
 .mitad1 {
-    background-image: url("../assets/pokemon_images/101.png");
+    background-image: url("../pruebas/pokedexL.png");
     width: 960px;
     height: 1080px;
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
     flex:1;
-}
-
-.fondo{
-
-    background-image: url("../assets/cosa.jpg");
-    display:none;
-    width: 960px;
-    height: 1080px;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-    flex:1;
-
 }
 
 .mitad2 {
-    background-image: url("../assets/pokemon_images/102.png");
+    background-image: url("../pruebas/pokedexR.png");
     width: 960px;
     height: 1080px;
     background-repeat: no-repeat;
@@ -49,4 +36,55 @@
     position: relative;
     flex: 1;
 
+}
+.fondo{
+    background-image: url("../pruebas/mockup.png");
+    display:none;
+    width: 1920px;
+    height: 1080px;
+    background-position: top left;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    flex:1;
+}
+
+.ventanaPokemon{
+    background-image: url("../pruebas/ventanaPokemon.png");
+    display:none;
+    width: 280px;
+    height: 280px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: relative;
+    top: 100px;
+    left: 100px;
+    background-position: top left;
+    flex: 1;
+}
+
+.imagenPokemon{
+    display:none;
+    width: 256px;
+    height: 256px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: relative;
+    top: 10px;
+    left: 10px;
+    background-position: top left;
+    flex: 1;
+}
+
+.infoPokemon{
+    display:none;
+    width: 280px;
+    height: 280px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: relative;
+    top: 400px;
+    left: 100px;
+    background-position: top left;
+    flex: 1;
 }

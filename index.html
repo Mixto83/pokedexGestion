@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Pokedex-gestion</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'></script>
+    <script src="js/index.js"></script>
     <link rel="stylesheet" type="text/css" href="css/index.css">
 
 </head>
@@ -12,30 +12,58 @@
 <body>
     <button class="abrir">Abrir</button>
     <button class="cerrar">Cerrar</button>
+    <button class="anterior">Anterior Pokemon</button>
+    <button class="siguiente">Siguiente Pokemon</button>
     <div class="pokedexFondo">
         <div class="mitad1"></div>
-        <div class="fondo"></div>
+        <div class="fondo">
+            <div class="ventanaPokemon">
+                <div class="imagenPokemon">
+                        <img id="myimg" src="assets/pokemon_images/1.png"/>
+                        <div class="textoPokemon">
+                            <p id="textoPk" style="font-size:40px; font-family:Times New Roman" >Informacion del Pokemon</p>
+                        </div>
+                </div>
+            </div>
+        </div>
         <div class="mitad2"></div>
     </div>
 </body>
 
 
 <script>
+    var poke1 = new Pokemon(1, 'Bulbasaur', 'Planta', 'Veneno', 1, false, 1, document.getElementById("myimg"));
+    //pokeArray = [poke1, poke2, poke3];//Funciona, lo dejo como referencia para futura implementacion
+        $(".anterior").click(function(){
+            poke1.id -= 1;
+            myimg.src = "assets/pokemon_images/" + poke1.id +".png";
+            document.getElementById("textoPk").innerHTML = "Nombre: " + poke1.name + "\nTipo1: " + poke1.type1 + "\nTipo2: " + poke1.type2;
+        });
+        $(".siguiente").click(function(){
+            //Hara falta un if que compruebe si tiene varias formas
+            poke1.id += 1;
+            myimg.src = "assets/pokemon_images/" + poke1.id +".png";
+            document.getElementById("textoPk").innerHTML = "Nombre: " + poke1.name + "\nTipo1: " + poke1.type1 + "\nTipo2: " + poke1.type2;
+        });
         $(".abrir").click(function(){
                 $('.mitad1').animate({"left":"-=960px"},"slow");
                 $('.mitad2').animate({"left":"+=960px"},"slow");
                 $('.fondo').fadeIn("slow");
+                $('.ventanaPokemon').fadeIn("slow");
+                $('.imagenPokemon').fadeIn("slow");
+                //$('.imagenPokemon').attr('src', "assets/pokemon_images/1.png");
+                //$('.imagenPokemon').attr('background-image', url("../assets/pokemon_images/727.png"))
+                
         });
 
         $(".cerrar").click(function(){
                 $('.mitad1').animate({"left":"+=960px"},"slow");
                 $('.mitad2').animate({"left":"-=960px"},"slow");
-                //$('.fondo').fadeOut("slow");
-                $('.fondo').animate({
+                $('.fondo').fadeOut("slow");
+                /*$('.fondo').animate({
                     opacity:0,
                     width:"toggle"
-                },100);
+                },100);*/
         });
-
     </script>
 </html>
