@@ -1,65 +1,63 @@
-body{
-    width:100%;
-    margin:auto;
-    min-width:600px;
-    max-width:2000px
+body {
+    width: 100%;
+    margin: auto;
+    min-width: 600px;
+    max-width: 2000px
 }
 
 .pokedexFondo {
-    display: flex;
-    flex-direction: row;
+    display: grid;
     width: 1920px;
     height: 1080px;
     background-repeat: no-repeat;
     background-size: cover;
-    position: relative;
-}
-
-.abierta{
-    background-image: url("../assets/cosa.jpg");
-    visibility:hidden;
-}
-
-.cerrada{
-    background-image:none;
 }
 
 .mitad1 {
     background-image: url("../assets/PokedexL.png");
+    grid-row-start: 1;
+    grid-row-end:3;
+    grid-column-start:1;
+    grid-column-end:1;
     width: 960px;
     height: 1080px;
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
-    flex:1;
 }
 
 .mitad2 {
     background-image: url("../assets/PokedexR.png");
+    grid-row-start: 1;
+    grid-row-end:3;
+    grid-column-start:3;
+    grid-column-end:3;
     width: 960px;
     height: 1080px;
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
-    flex: 1;
 
 }
 
 .fondo{
     background-image: url("../assets/Pantallapokedex.png");
     display:none;
+    grid-row-start: 1;
+    grid-row-end:3;
+    grid-column-start:2;
+    grid-column-end:2;
     width: 1920px;
     height: 1080px;
     background-position: top left;
     background-repeat: no-repeat;
     background-size: cover;
     position: absolute;
-    flex:1;
 }
 
-.ventanaPokemon{
+.ventanaPokemon {
     background-image: url("../assets/ventanaPokemon.png");
-    display:none;
+    display: none;
     width: 280px;
     height: 280px;
     background-repeat: no-repeat;
@@ -68,12 +66,11 @@ body{
     top: 100px;
     left: 100px;
     background-position: top left;
-    flex: 1;
 }
 
-.imgListado{
+ #imgListado.p1{
     background-image: url("../assets/mockup_listado.png");
-    display:none;
+    display: none;
     width: 731px;
     height: 60px;
     background-repeat: no-repeat;
@@ -85,8 +82,8 @@ body{
     flex: 1;
 }
 
-.txtListado{
-    position:absolute;
+.txtListado {
+    position: absolute;
     top: 45px;
     left: 20px;
     font-family: Arial;
@@ -96,9 +93,9 @@ body{
     padding-right: 20px;
 }
 
-.imgListado2{
+#imgListado.p2 {
     background-image: url("../assets/mockup_listado.png");
-    display:none;
+    display: none;
     width: 731px;
     height: 60px;
     background-repeat: no-repeat;
@@ -110,8 +107,8 @@ body{
     flex: 1;
 }
 
-.txtListado2{
-    position:absolute;
+.txtListado2 {
+    position: absolute;
     top: 185px;
     left: 20px;
     font-family: Arial;
@@ -121,9 +118,9 @@ body{
     padding-right: 20px;
 }
 
-.imgListado3{
+#imgListado.p3{
     background-image: url("../assets/mockup_listado.png");
-    display:none;
+    display: none;
     width: 731px;
     height: 60px;
     background-repeat: no-repeat;
@@ -135,8 +132,8 @@ body{
     flex: 1;
 }
 
-.txtListado3{
-    position:absolute;
+.txtListado3 {
+    position: absolute;
     top: 325px;
     left: 20px;
     font-family: Arial;
@@ -146,9 +143,9 @@ body{
     padding-right: 20px;
 }
 
-.imgListado4{
+#imgListado.p4 {
     background-image: url("../assets/mockup_listado.png");
-    display:none;
+    display: none;
     width: 731px;
     height: 60px;
     background-repeat: no-repeat;
@@ -160,8 +157,8 @@ body{
     flex: 1;
 }
 
-.txtListado4{
-    position:absolute;
+.txtListado4 {
+    position: absolute;
     top: 465px;
     left: 20px;
     font-family: Arial;
@@ -171,9 +168,9 @@ body{
     padding-right: 20px;
 }
 
-.imgListado5{
+#imgListado.p5 {
     background-image: url("../assets/mockup_listado.png");
-    display:none;
+    display: none;
     width: 731px;
     height: 60px;
     background-repeat: no-repeat;
@@ -185,8 +182,8 @@ body{
     flex: 1;
 }
 
-.txtListado5{
-    position:absolute;
+.txtListado5 {
+    position: absolute;
     top: 605px;
     left: 20px;
     font-family: Arial;
@@ -196,9 +193,9 @@ body{
     padding-right: 20px;
 }
 
-.imgListado6{
+#imgListado.p6 {
     background-image: url("../assets/mockup_listado.png");
-    display:none;
+    display: none;
     width: 731px;
     height: 60px;
     background-repeat: no-repeat;
@@ -210,8 +207,8 @@ body{
     flex: 1;
 }
 
-.txtListado6{
-    position:absolute;
+.txtListado6 {
+    position: absolute;
     top: 745px;
     left: 20px;
     font-family: Arial;
@@ -221,9 +218,9 @@ body{
     padding-right: 20px;
 }
 
-.imgListado7{
+#imgListado.p7{
     background-image: url("../assets/mockup_listado.png");
-    display:none;
+    display: none;
     width: 731px;
     height: 60px;
     background-repeat: no-repeat;
@@ -235,8 +232,8 @@ body{
     flex: 1;
 }
 
-.txtListado7{
-    position:absolute;
+.txtListado7 {
+    position: absolute;
     top: 885px;
     left: 20px;
     font-family: Arial;
@@ -245,6 +242,7 @@ body{
     padding-left: 20px;
     padding-right: 20px;
 }
+
 /*.textoListado{
     display:none;
     width: 715px;
@@ -259,8 +257,8 @@ body{
 }*/
 
 
-.imagenPokemon{
-    display:none;
+.imagenPokemon {
+    display: none;
     width: 256px;
     height: 256px;
     background-repeat: no-repeat;
@@ -272,8 +270,8 @@ body{
     flex: 1;
 }
 
-.infoPokemon{
-    display:none;
+.infoPokemon {
+    display: none;
     width: 280px;
     height: 280px;
     background-repeat: no-repeat;
@@ -284,4 +282,3 @@ body{
     background-position: top left;
     flex: 1;
 }
-
