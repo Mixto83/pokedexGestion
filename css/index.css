@@ -25,7 +25,7 @@ body{
 }
 
 .mitad1 {
-    background-image: url("../assets/pokedexL.png");
+    background-image: url("../assets/PokedexL.png");
     width: 960px;
     height: 1080px;
     background-repeat: no-repeat;
@@ -35,7 +35,7 @@ body{
 }
 
 .mitad2 {
-    background-image: url("../assets/pokedexR.png");
+    background-image: url("../assets/PokedexR.png");
     width: 960px;
     height: 1080px;
     background-repeat: no-repeat;
@@ -44,6 +44,7 @@ body{
     flex: 1;
 
 }
+
 .fondo{
     background-image: url("../assets/Pantallapokedex.png");
     display:none;
@@ -70,6 +71,194 @@ body{
     flex: 1;
 }
 
+.imgListado{
+    background-image: url("../assets/mockup_listado.png");
+    display:none;
+    width: 731px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: relative;
+    top: 50px;
+    left: 30px;
+    background-position: top left;
+    flex: 1;
+}
+
+.txtListado{
+    position:absolute;
+    top: 45px;
+    left: 20px;
+    font-family: Arial;
+    font-size: 20px;
+    color: black;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.imgListado2{
+    background-image: url("../assets/mockup_listado.png");
+    display:none;
+    width: 731px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: relative;
+    top: 130px;
+    left: 30px;
+    background-position: top left;
+    flex: 1;
+}
+
+.txtListado2{
+    position:absolute;
+    top: 185px;
+    left: 20px;
+    font-family: Arial;
+    font-size: 20px;
+    color: black;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.imgListado3{
+    background-image: url("../assets/mockup_listado.png");
+    display:none;
+    width: 731px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: relative;
+    top: 210px;
+    left: 30px;
+    background-position: top left;
+    flex: 1;
+}
+
+.txtListado3{
+    position:absolute;
+    top: 325px;
+    left: 20px;
+    font-family: Arial;
+    font-size: 20px;
+    color: black;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.imgListado4{
+    background-image: url("../assets/mockup_listado.png");
+    display:none;
+    width: 731px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: relative;
+    top: 290px;
+    left: 30px;
+    background-position: top left;
+    flex: 1;
+}
+
+.txtListado4{
+    position:absolute;
+    top: 465px;
+    left: 20px;
+    font-family: Arial;
+    font-size: 20px;
+    color: black;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.imgListado5{
+    background-image: url("../assets/mockup_listado.png");
+    display:none;
+    width: 731px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: relative;
+    top: 370px;
+    left: 30px;
+    background-position: top left;
+    flex: 1;
+}
+
+.txtListado5{
+    position:absolute;
+    top: 605px;
+    left: 20px;
+    font-family: Arial;
+    font-size: 20px;
+    color: black;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.imgListado6{
+    background-image: url("../assets/mockup_listado.png");
+    display:none;
+    width: 731px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: relative;
+    top: 450px;
+    left: 30px;
+    background-position: top left;
+    flex: 1;
+}
+
+.txtListado6{
+    position:absolute;
+    top: 745px;
+    left: 20px;
+    font-family: Arial;
+    font-size: 20px;
+    color: black;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.imgListado7{
+    background-image: url("../assets/mockup_listado.png");
+    display:none;
+    width: 731px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: relative;
+    top: 530px;
+    left: 30px;
+    background-position: top left;
+    flex: 1;
+}
+
+.txtListado7{
+    position:absolute;
+    top: 885px;
+    left: 20px;
+    font-family: Arial;
+    font-size: 20px;
+    color: black;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+/*.textoListado{
+    display:none;
+    width: 715px;
+    height: 260px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: relative;
+    top: 2px;
+    left: 2px;
+    background-position: top left;
+    flex: 1;
+}*/
+
+
 .imagenPokemon{
     display:none;
     width: 256px;
@@ -95,3 +284,4 @@ body{
     background-position: top left;
     flex: 1;
 }
+

@@ -10,3 +10,6 @@ class Pokemon {
         this.image = image;
     }
 }
+
+
+
