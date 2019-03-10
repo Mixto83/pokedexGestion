@@ -22,7 +22,7 @@ for (var i in pokeArray) {
     pokeArray[i].image = "assets/pokemon_images/" + pokeArray[i].id + ".png";
 }
 
-$(".anterior").click(function () {
+$(".buttonLeftViewer").click(function () {
     if (currentPokemon.id == 1) {
         currentPokemon = pokeArray[pokeArray.length - 1];
     } else {
@@ -33,7 +33,7 @@ $(".anterior").click(function () {
         currentPokemon.type1 + "\nTipo2: " + currentPokemon.type2;
 });
 
-$(".siguiente").click(function () {
+$(".buttonRightViewer").click(function () {
     //Hara falta un if que compruebe si tiene varias formas
     if (currentPokemon.id == pokeArray.length) {
         currentPokemon = pokeArray[0];
@@ -68,21 +68,7 @@ function init() {
     //$('.imagenPokemon').fadeIn("slow");
     $('#imgListado.p1').fadeTo(10, 0.5);
     $('#imgListado.p7').fadeTo(10, 0.5);
-    $('#imgListado.p2').fadeIn("slow");
-    $('#imgListado.p3').fadeIn("slow");
-    $('#imgListado.p4').fadeIn("slow");
-    $('#imgListado.p5').fadeIn("slow");
-    $('#imgListado.p6').fadeIn("slow");
-    $('#imgListado.p7').fadeIn("slow");
-    $('#imgListado.p1').fadeIn("slow");
-
-    $('.txtListado').fadeIn("slow");
-    $('.txtListado2').fadeIn("slow");
-    $('.txtListado3').fadeIn("slow");
-    $('.txtListado4').fadeIn("slow");
-    $('.txtListado5').fadeIn("slow");
-    $('.txtListado6').fadeIn("slow");
-    $('.txtListado7').fadeIn("slow");
+    showList();
 
     document.getElementById("listaPk1").innerHTML = pokeArray[0].id + " " +
         pokeArray[0].name;
@@ -163,8 +149,45 @@ function hideList() {
     $('.txtListado6').fadeOut("fast");
     $('.txtListado7').fadeOut("fast");
 
+    $('.buttonDown').fadeOut("slow");
+    $('.buttonUp').fadeOut("slow");
+    $('.buttonRight').fadeOut("slow");
+    $('.buttonLeft').fadeOut("slow");
+
     $('.ventanaPokemon').fadeIn("slow");
     $('.imagenPokemon').fadeIn("slow");
+
+    $('.buttonRightViewer').fadeIn("slow");
+    $('.buttonLeftViewer').fadeIn("slow");
+}
+
+function showList(){
+    $('#imgListado.p2').fadeIn("slow");
+    $('#imgListado.p3').fadeIn("slow");
+    $('#imgListado.p4').fadeIn("slow");
+    $('#imgListado.p5').fadeIn("slow");
+    $('#imgListado.p6').fadeIn("slow");
+    $('#imgListado.p7').fadeIn("slow");
+    $('#imgListado.p1').fadeIn("slow");
+
+    $('.txtListado').fadeIn("slow");
+    $('.txtListado2').fadeIn("slow");
+    $('.txtListado3').fadeIn("slow");
+    $('.txtListado4').fadeIn("slow");
+    $('.txtListado5').fadeIn("slow");
+    $('.txtListado6').fadeIn("slow");
+    $('.txtListado7').fadeIn("slow");
+
+    $('.buttonDown').fadeIn("slow");
+    $('.buttonUp').fadeIn("slow");
+    $('.buttonRight').fadeIn("slow");
+    $('.buttonLeft').fadeIn("slow");
+
+    $('.ventanaPokemon').fadeOut("fast");
+    $('.imagenPokemon').fadeOut("fast");
+
+    $('.buttonRightViewer').fadeOut("slow");
+    $('.buttonLeftViewer').fadeOut("slow");
 }
 
 $(".addPokemon").click(function () {
@@ -175,14 +198,10 @@ $(".addPokemon").click(function () {
     alert("Hecho" + newPoke.id);
 });
 
-$(".avanzaLista").click(function () {
-    if (firstPokemon.id + 6 == pokeArray.length) {
-        firstPokemon = pokeArray[0]; //Provisional, deberia sustituir el ultimo, no el primero
-    } else {
+$(".buttonDown").click(function () {
+    if (firstPokemon.id + 6 < pokeArray.length) {
         firstPokemon = pokeArray[firstPokemon.id];
     }
-
-
     document.getElementById("listaPk1").innerHTML = firstPokemon.id + " " +
         firstPokemon.name;
     document.getElementById("listaPk2").innerHTML = pokeArray[firstPokemon.id].id + " " +
@@ -212,11 +231,41 @@ $(".avanzaLista").click(function () {
     */
 })
 
-$(".atrasaLista").click(function () {
-    if (firstPokemon.id == 1) {
-        firstPokemon = pokeArray[pokeArray.length - 1];
-    } else {
+$(".buttonUp").click(function () {
+    if (firstPokemon.id !== 1) {
         firstPokemon = pokeArray[firstPokemon.id - 2];
+    }
+    document.getElementById("listaPk1").innerHTML = firstPokemon.id + " " +
+        firstPokemon.name;
+    document.getElementById("listaPk2").innerHTML = pokeArray[firstPokemon.id].id + " " +
+        pokeArray[firstPokemon.id].name;
+    document.getElementById("listaPk3").innerHTML = pokeArray[firstPokemon.id + 1].id + " " +
+        pokeArray[firstPokemon.id + 1].name;
+    document.getElementById("listaPk4").innerHTML = pokeArray[firstPokemon.id + 2].id + " " +
+        pokeArray[firstPokemon.id + 2].name;
+    document.getElementById("listaPk5").innerHTML = pokeArray[firstPokemon.id + 3].id + " " +
+        pokeArray[firstPokemon.id + 3].name;
+    document.getElementById("listaPk6").innerHTML = pokeArray[firstPokemon.id + 4].id + " " +
+        pokeArray[firstPokemon.id + 4].name;
+    document.getElementById("listaPk7").innerHTML = pokeArray[firstPokemon.id + 5].id + " " +
+        pokeArray[firstPokemon.id + 5].name;
+})
+
+$(".buttonRight").click(function () {
+    if (firstPokemon.id + 12 < pokeArray.length) {
+        firstPokemon = pokeArray[firstPokemon.id + 6];
+    } else if (firstPokemon.id + 11 < pokeArray.length) {
+        firstPokemon = pokeArray[firstPokemon.id + 5];
+    } else if (firstPokemon.id + 10 < pokeArray.length) {
+        firstPokemon = pokeArray[firstPokemon.id + 4];
+    } else if (firstPokemon.id + 9 < pokeArray.length) {
+        firstPokemon = pokeArray[firstPokemon.id + 3];
+    } else if (firstPokemon.id + 8 < pokeArray.length) {
+        firstPokemon = pokeArray[firstPokemon.id + 2];
+    } else if (firstPokemon.id + 7 < pokeArray.length) {
+        firstPokemon = pokeArray[firstPokemon.id + 1];
+    } else if (firstPokemon.id + 6 < pokeArray.length) {
+        firstPokemon = pokeArray[firstPokemon.id];
     }
 
     document.getElementById("listaPk1").innerHTML = firstPokemon.id + " " +
@@ -235,29 +284,22 @@ $(".atrasaLista").click(function () {
         pokeArray[firstPokemon.id + 5].name;
 })
 
-$(".avanzaVarios").click(function () {
-    //Falta control de indxexOutOfBounds
-    firstPokemon = pokeArray[firstPokemon.id + 6];
-    document.getElementById("listaPk1").innerHTML = firstPokemon.id + " " +
-        firstPokemon.name;
-    document.getElementById("listaPk2").innerHTML = pokeArray[firstPokemon.id].id + " " +
-        pokeArray[firstPokemon.id].name;
-    document.getElementById("listaPk3").innerHTML = pokeArray[firstPokemon.id + 1].id + " " +
-        pokeArray[firstPokemon.id + 1].name;
-    document.getElementById("listaPk4").innerHTML = pokeArray[firstPokemon.id + 2].id + " " +
-        pokeArray[firstPokemon.id + 2].name;
-    document.getElementById("listaPk5").innerHTML = pokeArray[firstPokemon.id + 3].id + " " +
-        pokeArray[firstPokemon.id + 3].name;
-    document.getElementById("listaPk6").innerHTML = pokeArray[firstPokemon.id + 4].id + " " +
-        pokeArray[firstPokemon.id + 4].name;
-    document.getElementById("listaPk7").innerHTML = pokeArray[firstPokemon.id + 5].id + " " +
-        pokeArray[firstPokemon.id + 5].name;
-})
-
-$(".atrasaVarios").click(function () {
-    //Falta control de indxexOutOfBounds
+$(".buttonLeft").click(function () {
+    if (firstPokemon.id - 8 >= 0) {
     firstPokemon = pokeArray[firstPokemon.id - 8];
-
+    } else if (firstPokemon.id - 7 >= 0) {
+        firstPokemon = pokeArray[firstPokemon.id - 7];
+    } else if (firstPokemon.id - 6 >= 0) {
+        firstPokemon = pokeArray[firstPokemon.id - 6];
+    } else if (firstPokemon.id - 5 >= 0) {
+        firstPokemon = pokeArray[firstPokemon.id - 5];
+    } else if (firstPokemon.id - 5 >= 0) {
+            firstPokemon = pokeArray[firstPokemon.id - 5];
+    } else if (firstPokemon.id - 4 >= 0) {
+        firstPokemon = pokeArray[firstPokemon.id - 4];
+    } else if (firstPokemon.id - 3 >= 0) {
+        firstPokemon = pokeArray[firstPokemon.id - 3];
+    }
     document.getElementById("listaPk1").innerHTML = firstPokemon.id + " " +
         firstPokemon.name;
     document.getElementById("listaPk2").innerHTML = pokeArray[firstPokemon.id].id + " " +
@@ -276,23 +318,8 @@ $(".atrasaVarios").click(function () {
 
 $(".cerrarVentana").click(function () {
     if (pokeDisplayed) {
-        $('.ventanaPokemon').fadeOut("fast");
-        $('.imagenPokemon').fadeOut("fast");
-        $('#imgListado.p2').fadeIn("slow");
-        $('#imgListado.p3').fadeIn("slow");
-        $('#imgListado.p4').fadeIn("slow");
-        $('#imgListado.p5').fadeIn("slow");
-        $('#imgListado.p6').fadeIn("slow");
-        $('#imgListado.p7').fadeIn("slow");
-        $('#imgListado.p1').fadeIn("slow");
+        showList();
         pokeDisplayed = false;
-        $('.txtListado').fadeIn("slow");
-        $('.txtListado2').fadeIn("slow");
-        $('.txtListado3').fadeIn("slow");
-        $('.txtListado4').fadeIn("slow");
-        $('.txtListado5').fadeIn("slow");
-        $('.txtListado6').fadeIn("slow");
-        $('.txtListado7').fadeIn("slow");
     }
 })
 
