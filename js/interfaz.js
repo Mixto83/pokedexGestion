@@ -1,31 +1,31 @@
 var pokeDisplayed = false;
-
 var pokeSrc = "assets/pokemon_images/";
-var poke1 = new Pokemon(1, 'Bulbasaur', 'Planta', 'Veneno', 1, false, 1, document.getElementById("pokeImg"));
-var poke2 = new Pokemon(2, 'Ivysaur', 'Planta', 'Veneno', 1, false, 1, document.getElementById("pokeImg"));
-var poke3 = new Pokemon(3, 'Venusaur', 'Planta', 'Veneno', 1, false, 2, document.getElementById("pokeImg"));
-var poke4 = new Pokemon(4, 'Charmander', 'Fuego', 'None', 1, false, 1, document.getElementById("pokeImg"));
-var poke5 = new Pokemon(5, 'Charmeleon', 'Fuego', 'None', 1, false, 1, document.getElementById("pokeImg"));
-var poke6 = new Pokemon(6, 'Charizard', 'Fuego', 'Volador', 1, false, 3, document.getElementById("pokeImg"));
-var poke7 = new Pokemon(7, 'Squirtle', 'Agua', 'None', 1, false, 1, document.getElementById("pokeImg"));
-var poke8 = new Pokemon(8, 'Wartortle', 'Agua', 'None', 1, false, 1, document.getElementById("pokeImg"));
-var poke9 = new Pokemon(9, 'Blastoise', 'Agua', 'None', 1, false, 2, document.getElementById("pokeImg"));
-var poke10 = new Pokemon(10, 'Caterpie', 'Bicho', 'None', 1, false, 1, document.getElementById("pokeImg"));
-var poke11 = new Pokemon(11, 'Metapod', 'Bicho', 'None', 1, false, 1, document.getElementById("pokeImg"));
-var poke12 = new Pokemon(12, 'Butterfree', 'Bicho', 'Volador', 1, false, 1, document.getElementById("pokeImg"));
-var poke13 = new Pokemon(13, 'Weedle', 'Bicho', 'Veneno', 1, false, 1, document.getElementById("pokeImg"));
-var poke14 = new Pokemon(14, 'Kakuna', 'Bicho', 'Veneno', 1, false, 1, document.getElementById("pokeImg"));
-var poke15 = new Pokemon(15, 'Beedrill', 'Bicho', 'Veneno', 1, false, 2, document.getElementById("pokeImg"));
-var poke16 = new Pokemon(16, 'Pidgey', 'Normal', 'Volador', 1, false, 1, document.getElementById("pokeImg"));
-var poke17 = new Pokemon(17, 'Pidgeotto', 'Normal', 'Volador', 1, false, 1, document.getElementById("pokeImg"));
-var poke18 = new Pokemon(18, 'Pidgeot', 'Normal', 'Volador', 1, false, 2, document.getElementById("pokeImg"));
-var poke19 = new Pokemon(19, 'Rattata', 'Normal', 'None', 1, false, 1, document.getElementById("pokeImg"));
-var poke20 = new Pokemon(20, 'Raticate', 'Normal', 'None', 1, false, 1, document.getElementById("pokeImg"));
-var poke21 = new Pokemon(21, 'Spearow', 'Bicho', 'Volador', 1, false, 1, document.getElementById("pokeImg"));
-var poke22 = new Pokemon(22, 'Fearow', 'Bicho', 'Volador', 1, false, 1, document.getElementById("pokeImg"));
-var poke23 = new Pokemon(23, 'Ekans', 'Veneno', 'None', 1, false, 1, document.getElementById("pokeImg"));
-var poke24 = new Pokemon(24, 'Arbok', 'Veneno', 'None', 1, false, 1, document.getElementById("pokeImg"));
-var poke25 = new Pokemon(25, 'Pikachu', 'Electrico', 'None', 1, false, 5, document.getElementById("pokeImg"));
+
+var poke1 = new Pokemon(1, 'Bulbasaur', 'Planta', 'Veneno', 1, false, 1);
+var poke2 = new Pokemon(2, 'Ivysaur', 'Planta', 'Veneno', 1, false, 1);
+var poke3 = new Pokemon(3, 'Venusaur', 'Planta', 'Veneno', 1, false, 2);
+var poke4 = new Pokemon(4, 'Charmander', 'Fuego', 'None', 1, false, 1);
+var poke5 = new Pokemon(5, 'Charmeleon', 'Fuego', 'None', 1, false, 1);
+var poke6 = new Pokemon(6, 'Charizard', 'Fuego', 'Volador', 1, false, 3);
+var poke7 = new Pokemon(7, 'Squirtle', 'Agua', 'None', 1, false, 1);
+var poke8 = new Pokemon(8, 'Wartortle', 'Agua', 'None', 1, false, 1);
+var poke9 = new Pokemon(9, 'Blastoise', 'Agua', 'None', 1, false, 2);
+var poke10 = new Pokemon(10, 'Caterpie', 'Bicho', 'None', 1, false, 1);
+var poke11 = new Pokemon(11, 'Metapod', 'Bicho', 'None', 1, false, 1);
+var poke12 = new Pokemon(12, 'Butterfree', 'Bicho', 'Volador', 1, false, 1);
+var poke13 = new Pokemon(13, 'Weedle', 'Bicho', 'Veneno', 1, false, 1);
+var poke14 = new Pokemon(14, 'Kakuna', 'Bicho', 'Veneno', 1, false, 1);
+var poke15 = new Pokemon(15, 'Beedrill', 'Bicho', 'Veneno', 1, false, 2);
+var poke16 = new Pokemon(16, 'Pidgey', 'Normal', 'Volador', 1, false, 1);
+var poke17 = new Pokemon(17, 'Pidgeotto', 'Normal', 'Volador', 1, false, 1);
+var poke18 = new Pokemon(18, 'Pidgeot', 'Normal', 'Volador', 1, false, 2);
+var poke19 = new Pokemon(19, 'Rattata', 'Normal', 'None', 1, false, 1);
+var poke20 = new Pokemon(20, 'Raticate', 'Normal', 'None', 1, false, 1);
+var poke21 = new Pokemon(21, 'Spearow', 'Bicho', 'Volador', 1, false, 1);
+var poke22 = new Pokemon(22, 'Fearow', 'Bicho', 'Volador', 1, false, 1);
+var poke23 = new Pokemon(23, 'Ekans', 'Veneno', 'None', 1, false, 1);
+var poke24 = new Pokemon(24, 'Arbok', 'Veneno', 'None', 1, false, 1);
+var poke25 = new Pokemon(25, 'Pikachu', 'Electrico', 'None', 1, false, 5);
 
 pokeArray = [poke1, poke2, poke3, poke4, poke5, poke6, poke7, poke8, poke9, poke10, poke11, poke12, 
     poke13, poke14, poke15, poke16, poke17, poke18, poke19, poke20, poke21, poke22, poke23, poke24];
@@ -99,21 +99,7 @@ function init() {
     $('#imgListado.p1').fadeTo(10, 0.5);
     $('#imgListado.p7').fadeTo(10, 0.5);
     showList();
-
-    document.getElementById("listaPk1").innerHTML = pokeArray[0].id + " " +
-        pokeArray[0].name;
-    document.getElementById("listaPk2").innerHTML = pokeArray[1].id + " " +
-        pokeArray[1].name;
-    document.getElementById("listaPk3").innerHTML = pokeArray[2].id + " " +
-        pokeArray[2].name;
-    document.getElementById("listaPk4").innerHTML = pokeArray[3].id + " " +
-        pokeArray[3].name;
-    document.getElementById("listaPk5").innerHTML = pokeArray[4].id + " " +
-        pokeArray[4].name;
-    document.getElementById("listaPk6").innerHTML = pokeArray[5].id + " " +
-        pokeArray[5].name;
-    document.getElementById("listaPk7").innerHTML = pokeArray[6].id + " " +
-        pokeArray[6].name;
+    updateList();
 
     
    // $('.p1, .p2, .p3, .p4, .p5, .p6, .p7').bind("click", '#imgLis   tado',eventosListaPokemon); // Genera y permite controlar las imagenes en un solo método
@@ -232,7 +218,7 @@ $(".addPokemon").click(function () {
 
 $(".buttonDown").click(function () {
     if (firstPokemon.arrayPos + 7 < pokeArray.length) {
-        firstPokemon = pokeArray[firstPokemon.id];
+        firstPokemon = pokeArray[firstPokemon.arrayPos+1];
     }
     updateList();
     /*var pos = $('.imgListado7').position();
@@ -354,4 +340,14 @@ $(".cerrar").click(function () {
     $('.txtListado6').fadeOut("slow");
     $('.txtListado7').fadeOut("slow");
 
+});
+
+$(".cambiaOrden").click(function(){
+    pokeArray = pokeArray.reverse();
+    for (var i =0; i < pokeArray.length; i++) {
+        pokeArray[i].image = pokeSrc + pokeArray[i].id + ".png";
+        pokeArray[i].arrayPos = i;
+    }
+    firstPokemon = pokeArray[0];
+    updateList();
 });
