@@ -185,14 +185,14 @@ $("body").on("click",".pokedexFondo .fondo #imgListado",function(event){
 }); //Este permite que todo lo que se genere con #imgListado tenga este metodo directamente, sin tener que bindearlo dinamicamente
 
 function eventosListaPokemon(event) {
-    if(firstPokemon.arrayPos+getEnum(event.target.className)<=pokeArray.length){
-    hideList();
-    showPokemonDetail();
-    currentPokemon = pokeArray[firstPokemon.arrayPos + getEnum(event.target.className)];
-    pokeImg.src = currentPokemon.image;
-    document.getElementById("textoPk").innerHTML = "Nombre: " + currentPokemon.name + "\nTipo1: " +
+    if(firstPokemon.arrayPos+getEnum(event.target.className)<pokeArray.length){
+        hideList();
+        showPokemonDetail();
+        currentPokemon = pokeArray[firstPokemon.arrayPos + getEnum(event.target.className)];
+        pokeImg.src = currentPokemon.image;
+        document.getElementById("textoPk").innerHTML = "Nombre: " + currentPokemon.name + "\nTipo1: " +
         currentPokemon.type1 + "\nTipo2: " + currentPokemon.type2;
-    pokeDisplayed = true;
+        pokeDisplayed = true;
     }
 
 }
@@ -456,8 +456,8 @@ $(".cerrar").click(function () {
     $('.txtListado5').fadeOut("slow");
     $('.txtListado6').fadeOut("slow");
     $('.txtListado7').fadeOut("slow");
-
-    hideFormEngadir()
+    hidePokemonDetail();
+    hideFormEngadir();
 
 });
 
