@@ -1,6 +1,6 @@
 var pokeDisplayed = false;
+var engadirDisplayed = false;
 var pokeSrc = "assets/pokemon_images/";
-
 //Variables para probar que funciona la lista
 var poke1 = new Pokemon(1, 'Bulbasaur', 'Planta', 'Veneno', 1, false, 1);
 var poke2 = new Pokemon(2, 'Ivysaur', 'Planta', 'Veneno', 1, false, 1);
@@ -22,8 +22,8 @@ var poke17 = new Pokemon(17, 'Pidgeotto', 'Normal', 'Volador', 1, false, 1);
 var poke18 = new Pokemon(18, 'Pidgeot', 'Normal', 'Volador', 1, false, 2);
 var poke19 = new Pokemon(19, 'Rattata', 'Normal', 'None', 1, false, 1);
 var poke20 = new Pokemon(20, 'Raticate', 'Normal', 'None', 1, false, 1);
-var poke21 = new Pokemon(21, 'Spearow', 'Bicho', 'Volador', 1, false, 1);
-var poke22 = new Pokemon(22, 'Fearow', 'Bicho', 'Volador', 1, false, 1);
+var poke21 = new Pokemon(21, 'Spearow', 'Normal', 'Volador', 1, false, 1);
+var poke22 = new Pokemon(22, 'Fearow', 'Normal', 'Volador', 1, false, 1);
 var poke23 = new Pokemon(23, 'Ekans', 'Veneno', 'None', 1, false, 1);
 var poke24 = new Pokemon(24, 'Arbok', 'Veneno', 'None', 1, false, 1);
 var poke25 = new Pokemon(25, 'Pikachu', 'Electrico', 'None', 1, false, 5);
@@ -102,6 +102,7 @@ $('.deletePokemon').click(function(){
 
 // Función para ver el siguiente pokemon en el visor
 $(".buttonLeftViewer").click(function () {
+    formCount = 1;
     if (currentPokemon.arrayPos == 0) {
         currentPokemon = pokeArray[pokeArray.length - 1];
     } else {
@@ -120,6 +121,7 @@ $(".buttonLeftViewer").click(function () {
 
 //Función para ver el anterior pokemon en el visor
 $(".buttonRightViewer").click(function () {
+    formCount = 1;
     if (currentPokemon.arrayPos == pokeArray.length - 1) {
         currentPokemon = pokeArray[0];
     } else {
@@ -291,7 +293,7 @@ $(".addPokemon").click(function () {
     newPoke.image = "assets/pokemon_images/" + newPoke.id + ".png";
     newPoke.arrayPos = pokeArray.length;
     pokeArray.push(newPoke);
-    alert("Hecho " + newPoke.id);*/
+    alert("Hecho " + newPoke.id);
     //Metodo de insercion por el usuario
     //Faltara incluirlo en la BD
     /*var newId = parseInt(prompt("Id", "150"));
@@ -322,6 +324,7 @@ $(".addPokemon").click(function () {
 function engadirPokemon(){
     hideList();
     showFormEngadir();
+    engadirDisplayed = true;
 }
 
 // Metodo para mostrar el formulario
@@ -451,7 +454,11 @@ $(".cerrarVentana").click(function () {
         showList();
         hidePokemonDetail();
         pokeDisplayed = false;
-
+    }
+    if (engadirDisplayed){
+        showList();
+        hideFormEngadir();
+        engadirDisplayed = false;
     }
 })
 
