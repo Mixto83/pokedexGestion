@@ -138,12 +138,15 @@ $("body").on("click",".pokedexFondo .fondo #imgListado",function(event){
 }); //Este permite que todo lo que se genere con #imgListado tenga este metodo directamente, sin tener que bindearlo dinamicamente
 
 function eventosListaPokemon(event) {
+    if(firstPokemon.arrayPos+getEnum(event.target.className)<=pokeArray.length){
     hideList();
+    showPokemonDetail();
     currentPokemon = pokeArray[firstPokemon.arrayPos + getEnum(event.target.className)];
     pokeImg.src = currentPokemon.image;
     document.getElementById("textoPk").innerHTML = "Nombre: " + currentPokemon.name + "\nTipo1: " +
         currentPokemon.type1 + "\nTipo2: " + currentPokemon.type2;
     pokeDisplayed = true;
+    }
 
 }
 
@@ -169,12 +172,24 @@ function hideList() {
     $('.buttonRight').fadeOut("slow");
     $('.buttonLeft').fadeOut("slow");
 
+}
+
+function showPokemonDetail(){
     $('.ventanaPokemon').fadeIn("slow");
     $('.imagenPokemon').fadeIn("slow");
 
     $('.buttonRightViewer').fadeIn("slow");
     $('.buttonLeftViewer').fadeIn("slow");
     formCount = 1;
+}
+
+function hidePokemonDetail(){
+
+    $('.ventanaPokemon').fadeOut("fast");
+    $('.imagenPokemon').fadeOut("fast");
+
+    $('.buttonRightViewer').fadeOut("slow");
+    $('.buttonLeftViewer').fadeOut("slow");
 }
 
 function showList(){
@@ -199,21 +214,33 @@ function showList(){
     $('.buttonRight').fadeIn("slow");
     $('.buttonLeft').fadeIn("slow");
 
-    $('.ventanaPokemon').fadeOut("fast");
-    $('.imagenPokemon').fadeOut("fast");
-
-    $('.buttonRightViewer').fadeOut("slow");
-    $('.buttonLeftViewer').fadeOut("slow");
 }
 
 $(".addPokemon").click(function () {
     //Prueba para comprobar que se añaden al array y se leen bien
+    engadirPokemon();
+   /*
     var newPoke = new Pokemon(150, 'Mewtwo', 'Psiquico', 'None', 1, true, 3, document.getElementById("pokeImg"));
     newPoke.image = "assets/pokemon_images/" + newPoke.id + ".png";
     newPoke.arrayPos = pokeArray.length;
     pokeArray.push(newPoke);
-    alert("Hecho " + newPoke.id);
+    alert("Hecho " + newPoke.id);*/
 });
+
+//Engadir es anhadir en gallego
+function engadirPokemon(){
+    hideList();
+    showFormEngadir();
+}
+
+// Metodo para mostrar el formulario
+function showFormEngadir(){
+    $(".engadirPokemon").fadeIn("slow");
+}
+
+function hideFormEngadir(){
+    $(".engadirPokemon").fadeOut("fast");
+}
 
 $(".buttonDown").click(function () {
     if (firstPokemon.arrayPos + 7 < pokeArray.length) {
@@ -289,7 +316,9 @@ function updateList(){
 $(".cerrarVentana").click(function () {
     if (pokeDisplayed) {
         showList();
+        hidePokemonDetail();
         pokeDisplayed = false;
+
     }
 })
 
@@ -321,6 +350,8 @@ $(".cerrar").click(function () {
     $('.txtListado5').fadeOut("slow");
     $('.txtListado6').fadeOut("slow");
     $('.txtListado7').fadeOut("slow");
+    
+    hideFormEngadir()
 
 });
 

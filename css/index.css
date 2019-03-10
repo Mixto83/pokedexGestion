@@ -120,6 +120,15 @@ body {
     left: 100px;
     background-position: top left;
 }
+.engadirPokemon{
+    display:none;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: relative;
+    top: 100px;
+    left: 100px;
+    background-position: top left;
+}
 
 .buttonRightViewer{
     background-image: url("../assets/botonDerecha.png");
