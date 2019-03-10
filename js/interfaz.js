@@ -3,42 +3,72 @@ var pokeDisplayed = false;
 var pokeSrc = "assets/pokemon_images/";
 var poke1 = new Pokemon(1, 'Bulbasaur', 'Planta', 'Veneno', 1, false, 1, document.getElementById("pokeImg"));
 var poke2 = new Pokemon(2, 'Ivysaur', 'Planta', 'Veneno', 1, false, 1, document.getElementById("pokeImg"));
-var poke3 = new Pokemon(3, 'Venusaur', 'Planta', 'Veneno', 1, false, 1, document.getElementById("pokeImg"));
+var poke3 = new Pokemon(3, 'Venusaur', 'Planta', 'Veneno', 1, false, 2, document.getElementById("pokeImg"));
 var poke4 = new Pokemon(4, 'Charmander', 'Fuego', 'None', 1, false, 1, document.getElementById("pokeImg"));
 var poke5 = new Pokemon(5, 'Charmeleon', 'Fuego', 'None', 1, false, 1, document.getElementById("pokeImg"));
-var poke6 = new Pokemon(6, 'Charizard', 'Fuego', 'Volador', 1, false, 1, document.getElementById("pokeImg"));
+var poke6 = new Pokemon(6, 'Charizard', 'Fuego', 'Volador', 1, false, 3, document.getElementById("pokeImg"));
 var poke7 = new Pokemon(7, 'Squirtle', 'Agua', 'None', 1, false, 1, document.getElementById("pokeImg"));
 var poke8 = new Pokemon(8, 'Wartortle', 'Agua', 'None', 1, false, 1, document.getElementById("pokeImg"));
-var poke9 = new Pokemon(9, 'Blastoise', 'Agua', 'None', 1, false, 1, document.getElementById("pokeImg"));
+var poke9 = new Pokemon(9, 'Blastoise', 'Agua', 'None', 1, false, 2, document.getElementById("pokeImg"));
 var poke10 = new Pokemon(10, 'Caterpie', 'Bicho', 'None', 1, false, 1, document.getElementById("pokeImg"));
 var poke11 = new Pokemon(11, 'Metapod', 'Bicho', 'None', 1, false, 1, document.getElementById("pokeImg"));
 var poke12 = new Pokemon(12, 'Butterfree', 'Bicho', 'Volador', 1, false, 1, document.getElementById("pokeImg"));
 var poke13 = new Pokemon(13, 'Weedle', 'Bicho', 'Veneno', 1, false, 1, document.getElementById("pokeImg"));
 var poke14 = new Pokemon(14, 'Kakuna', 'Bicho', 'Veneno', 1, false, 1, document.getElementById("pokeImg"));
 var poke15 = new Pokemon(15, 'Beedrill', 'Bicho', 'Veneno', 1, false, 2, document.getElementById("pokeImg"));
+var poke16 = new Pokemon(16, 'Pidgey', 'Normal', 'Volador', 1, false, 1, document.getElementById("pokeImg"));
+var poke17 = new Pokemon(17, 'Pidgeotto', 'Normal', 'Volador', 1, false, 1, document.getElementById("pokeImg"));
+var poke18 = new Pokemon(18, 'Pidgeot', 'Normal', 'Volador', 1, false, 2, document.getElementById("pokeImg"));
+var poke19 = new Pokemon(19, 'Rattata', 'Normal', 'None', 1, false, 1, document.getElementById("pokeImg"));
+var poke20 = new Pokemon(20, 'Raticate', 'Normal', 'None', 1, false, 1, document.getElementById("pokeImg"));
+var poke21 = new Pokemon(21, 'Spearow', 'Bicho', 'Volador', 1, false, 1, document.getElementById("pokeImg"));
+var poke22 = new Pokemon(22, 'Fearow', 'Bicho', 'Volador', 1, false, 1, document.getElementById("pokeImg"));
+var poke23 = new Pokemon(23, 'Ekans', 'Veneno', 'None', 1, false, 1, document.getElementById("pokeImg"));
+var poke24 = new Pokemon(24, 'Arbok', 'Veneno', 'None', 1, false, 1, document.getElementById("pokeImg"));
+var poke25 = new Pokemon(25, 'Pikachu', 'Electrico', 'None', 1, false, 5, document.getElementById("pokeImg"));
 
-pokeArray = [poke1, poke2, poke3, poke4, poke5, poke6, poke7, poke8, poke9, poke10, poke11, poke12, poke13, poke14, poke15];
-for (var i in pokeArray) {
-    pokeArray[i].image = "assets/pokemon_images/" + pokeArray[i].id + ".png";
+pokeArray = [poke1, poke2, poke3, poke4, poke5, poke6, poke7, poke8, poke9, poke10, poke11, poke12, 
+    poke13, poke14, poke15, poke16, poke17, poke18, poke19, poke20, poke21, poke22, poke23, poke24];
+for (var i =0; i < pokeArray.length; i++) {
+    pokeArray[i].image = pokeSrc + pokeArray[i].id + ".png";
+    pokeArray[i].arrayPos = i;
 }
 
+$(".formas").click(function(){
+    if (currentPokemon.nForms > 1){
+        formCount++;
+        if (formCount <= currentPokemon.nForms){
+            currentPokemon.image = "assets/pokemon_images/" + currentPokemon.id + "-" + formCount + ".png";
+        } else {
+            formCount = 1;
+            currentPokemon.image = "assets/pokemon_images/" + currentPokemon.id + ".png";
+        }
+        
+        pokeImg.src = currentPokemon.image;
+    }
+})
 $(".buttonLeftViewer").click(function () {
-    if (currentPokemon.id == 1) {
+    if (currentPokemon.arrayPos == 0) {
         currentPokemon = pokeArray[pokeArray.length - 1];
     } else {
-        currentPokemon = pokeArray[currentPokemon.id - 2];
+        currentPokemon = pokeArray[currentPokemon.arrayPos - 1];
     }
     pokeImg.src = currentPokemon.image;
-    document.getElementById("textoPk").innerHTML = "Nombre: " + currentPokemon.name + "\nTipo1: " +
+    if (currentPokemon.type2 !== 'None'){
+        document.getElementById("textoPk").innerHTML = "Nombre: " + currentPokemon.name + "\nTipo1: " +
         currentPokemon.type1 + "\nTipo2: " + currentPokemon.type2;
+    } else {
+        document.getElementById("textoPk").innerHTML = "Nombre: " + currentPokemon.name + "\nTipo1: " +
+        currentPokemon.type1;
+    }
+    
 });
 
 $(".buttonRightViewer").click(function () {
-    //Hara falta un if que compruebe si tiene varias formas
-    if (currentPokemon.id == pokeArray.length) {
+    if (currentPokemon.arrayPos == pokeArray.length - 1) {
         currentPokemon = pokeArray[0];
     } else {
-        currentPokemon = pokeArray[currentPokemon.id];
+        currentPokemon = pokeArray[currentPokemon.arrayPos + 1];
     }
 
     pokeImg.src = currentPokemon.image;
@@ -124,7 +154,7 @@ $("body").on("click",".pokedexFondo .fondo #imgListado",function(event){
 function eventosListaPokemon(event) {
     console.log(event.target.className);
     hideList();
-    currentPokemon = pokeArray[firstPokemon.id-1 + getEnum(event.target.className)];
+    currentPokemon = pokeArray[firstPokemon.arrayPos + getEnum(event.target.className)];
     pokeImg.src = currentPokemon.image;
     document.getElementById("textoPk").innerHTML = "Nombre: " + currentPokemon.name + "\nTipo1: " +
         currentPokemon.type1 + "\nTipo2: " + currentPokemon.type2;
@@ -159,6 +189,7 @@ function hideList() {
 
     $('.buttonRightViewer').fadeIn("slow");
     $('.buttonLeftViewer').fadeIn("slow");
+    formCount = 1;
 }
 
 function showList(){
@@ -192,30 +223,18 @@ function showList(){
 
 $(".addPokemon").click(function () {
     //Prueba para comprobar que se añaden al array y se leen bien
-    var newPoke = new Pokemon(16, 'Pidgey', 'Normal', 'Veneno', 1, false, 1, document.getElementById("pokeImg"));
+    var newPoke = new Pokemon(150, 'Mewtwo', 'Psiquico', 'None', 1, true, 3, document.getElementById("pokeImg"));
     newPoke.image = "assets/pokemon_images/" + newPoke.id + ".png";
+    newPoke.arrayPos = pokeArray.length;
     pokeArray.push(newPoke);
-    alert("Hecho" + newPoke.id);
+    alert("Hecho " + newPoke.id);
 });
 
 $(".buttonDown").click(function () {
-    if (firstPokemon.id + 6 < pokeArray.length) {
+    if (firstPokemon.arrayPos + 7 < pokeArray.length) {
         firstPokemon = pokeArray[firstPokemon.id];
     }
-    document.getElementById("listaPk1").innerHTML = firstPokemon.id + " " +
-        firstPokemon.name;
-    document.getElementById("listaPk2").innerHTML = pokeArray[firstPokemon.id].id + " " +
-        pokeArray[firstPokemon.id].name;
-    document.getElementById("listaPk3").innerHTML = pokeArray[firstPokemon.id + 1].id + " " +
-        pokeArray[firstPokemon.id + 1].name;
-    document.getElementById("listaPk4").innerHTML = pokeArray[firstPokemon.id + 2].id + " " +
-        pokeArray[firstPokemon.id + 2].name;
-    document.getElementById("listaPk5").innerHTML = pokeArray[firstPokemon.id + 3].id + " " +
-        pokeArray[firstPokemon.id + 3].name;
-    document.getElementById("listaPk6").innerHTML = pokeArray[firstPokemon.id + 4].id + " " +
-        pokeArray[firstPokemon.id + 4].name;
-    document.getElementById("listaPk7").innerHTML = pokeArray[firstPokemon.id + 5].id + " " +
-        pokeArray[firstPokemon.id + 5].name;
+    updateList();
     /*var pos = $('.imgListado7').position();
     alert(pos);
     $('.imgListado1').position(pos);
@@ -232,92 +251,69 @@ $(".buttonDown").click(function () {
 })
 
 $(".buttonUp").click(function () {
-    if (firstPokemon.id !== 1) {
-        firstPokemon = pokeArray[firstPokemon.id - 2];
+    if (firstPokemon.arrayPos !== 0) {
+        firstPokemon = pokeArray[firstPokemon.arrayPos - 1];
     }
-    document.getElementById("listaPk1").innerHTML = firstPokemon.id + " " +
-        firstPokemon.name;
-    document.getElementById("listaPk2").innerHTML = pokeArray[firstPokemon.id].id + " " +
-        pokeArray[firstPokemon.id].name;
-    document.getElementById("listaPk3").innerHTML = pokeArray[firstPokemon.id + 1].id + " " +
-        pokeArray[firstPokemon.id + 1].name;
-    document.getElementById("listaPk4").innerHTML = pokeArray[firstPokemon.id + 2].id + " " +
-        pokeArray[firstPokemon.id + 2].name;
-    document.getElementById("listaPk5").innerHTML = pokeArray[firstPokemon.id + 3].id + " " +
-        pokeArray[firstPokemon.id + 3].name;
-    document.getElementById("listaPk6").innerHTML = pokeArray[firstPokemon.id + 4].id + " " +
-        pokeArray[firstPokemon.id + 4].name;
-    document.getElementById("listaPk7").innerHTML = pokeArray[firstPokemon.id + 5].id + " " +
-        pokeArray[firstPokemon.id + 5].name;
+
+    updateList();
 })
 
 $(".buttonRight").click(function () {
-    if (firstPokemon.id + 12 < pokeArray.length) {
-        firstPokemon = pokeArray[firstPokemon.id + 6];
-    } else if (firstPokemon.id + 11 < pokeArray.length) {
-        firstPokemon = pokeArray[firstPokemon.id + 5];
-    } else if (firstPokemon.id + 10 < pokeArray.length) {
-        firstPokemon = pokeArray[firstPokemon.id + 4];
-    } else if (firstPokemon.id + 9 < pokeArray.length) {
-        firstPokemon = pokeArray[firstPokemon.id + 3];
-    } else if (firstPokemon.id + 8 < pokeArray.length) {
-        firstPokemon = pokeArray[firstPokemon.id + 2];
-    } else if (firstPokemon.id + 7 < pokeArray.length) {
-        firstPokemon = pokeArray[firstPokemon.id + 1];
-    } else if (firstPokemon.id + 6 < pokeArray.length) {
-        firstPokemon = pokeArray[firstPokemon.id];
+    if (firstPokemon.arrayPos + 13 < pokeArray.length) {
+        firstPokemon = pokeArray[firstPokemon.arrayPos + 7];
+    } else if (firstPokemon.arrayPos + 12 < pokeArray.length) {
+        firstPokemon = pokeArray[firstPokemon.arrayPos + 6];
+    } else if (firstPokemon.arrayPos + 11 < pokeArray.length) {
+        firstPokemon = pokeArray[firstPokemon.arrayPos + 5];
+    } else if (firstPokemon.arrayPos + 10 < pokeArray.length) {
+        firstPokemon = pokeArray[firstPokemon.arrayPos + 4];
+    } else if (firstPokemon.arrayPos + 9 < pokeArray.length) {
+        firstPokemon = pokeArray[firstPokemon.arrayPos + 3];
+    } else if (firstPokemon.arrayPos + 8 < pokeArray.length) {
+        firstPokemon = pokeArray[firstPokemon.arrayPos + 2];
+    } else if (firstPokemon.arrayPos + 7 < pokeArray.length) {
+        firstPokemon = pokeArray[firstPokemon.arrayPos + 1];
     }
 
-    document.getElementById("listaPk1").innerHTML = firstPokemon.id + " " +
-        firstPokemon.name;
-    document.getElementById("listaPk2").innerHTML = pokeArray[firstPokemon.id].id + " " +
-        pokeArray[firstPokemon.id].name;
-    document.getElementById("listaPk3").innerHTML = pokeArray[firstPokemon.id + 1].id + " " +
-        pokeArray[firstPokemon.id + 1].name;
-    document.getElementById("listaPk4").innerHTML = pokeArray[firstPokemon.id + 2].id + " " +
-        pokeArray[firstPokemon.id + 2].name;
-    document.getElementById("listaPk5").innerHTML = pokeArray[firstPokemon.id + 3].id + " " +
-        pokeArray[firstPokemon.id + 3].name;
-    document.getElementById("listaPk6").innerHTML = pokeArray[firstPokemon.id + 4].id + " " +
-        pokeArray[firstPokemon.id + 4].name;
-    document.getElementById("listaPk7").innerHTML = pokeArray[firstPokemon.id + 5].id + " " +
-        pokeArray[firstPokemon.id + 5].name;
+    updateList();
 })
 
 $(".buttonLeft").click(function () {
-    if (firstPokemon.id - 8 >= 0) {
-    firstPokemon = pokeArray[firstPokemon.id - 8];
-    } else if (firstPokemon.id - 7 >= 0) {
-        firstPokemon = pokeArray[firstPokemon.id - 7];
-    } else if (firstPokemon.id - 6 >= 0) {
-        firstPokemon = pokeArray[firstPokemon.id - 6];
-    } else if (firstPokemon.id - 5 >= 0) {
-        firstPokemon = pokeArray[firstPokemon.id - 5];
-    } else if (firstPokemon.id - 5 >= 0) {
-            firstPokemon = pokeArray[firstPokemon.id - 5];
-    } else if (firstPokemon.id - 4 >= 0) {
-        firstPokemon = pokeArray[firstPokemon.id - 4];
-    } else if (firstPokemon.id - 3 >= 0) {
-        firstPokemon = pokeArray[firstPokemon.id - 3];
-    } else if (firstPokemon.id - 2 >= 0){
-        firstPokemon = pokeArray[firstPokemon.id - 2];
+    if (firstPokemon.arrayPos - 7 >= 0) {
+    firstPokemon = pokeArray[firstPokemon.arrayPos - 7];
+    } else if (firstPokemon.arrayPos - 6 >= 0) {
+        firstPokemon = pokeArray[firstPokemon.arrayPos - 6];
+    } else if (firstPokemon.arrayPos - 5 >= 0) {
+        firstPokemon = pokeArray[firstPokemon.arrayPos - 5];
+    } else if (firstPokemon.arrayPos - 4 >= 0) {
+        firstPokemon = pokeArray[firstPokemon.arrayPos - 4];
+    } else if (firstPokemon.arrayPos - 3 >= 0) {
+        firstPokemon = pokeArray[firstPokemon.arrayPos - 3];
+    } else if (firstPokemon.arrayPos - 2 >= 0) {
+        firstPokemon = pokeArray[firstPokemon.arrayPos - 2];
+    } else if (firstPokemon.arrayPos - 1 >= 0){
+        firstPokemon = pokeArray[firstPokemon.arrayPos - 1];
     }
-    document.getElementById("listaPk1").innerHTML = firstPokemon.id + " " +
-        firstPokemon.name;
-    document.getElementById("listaPk2").innerHTML = pokeArray[firstPokemon.id].id + " " +
-        pokeArray[firstPokemon.id].name;
-    document.getElementById("listaPk3").innerHTML = pokeArray[firstPokemon.id + 1].id + " " +
-        pokeArray[firstPokemon.id + 1].name;
-    document.getElementById("listaPk4").innerHTML = pokeArray[firstPokemon.id + 2].id + " " +
-        pokeArray[firstPokemon.id + 2].name;
-    document.getElementById("listaPk5").innerHTML = pokeArray[firstPokemon.id + 3].id + " " +
-        pokeArray[firstPokemon.id + 3].name;
-    document.getElementById("listaPk6").innerHTML = pokeArray[firstPokemon.id + 4].id + " " +
-        pokeArray[firstPokemon.id + 4].name;
-    document.getElementById("listaPk7").innerHTML = pokeArray[firstPokemon.id + 5].id + " " +
-        pokeArray[firstPokemon.id + 5].name;
+    
+    updateList();
 })
 
+function updateList(){
+    document.getElementById("listaPk1").innerHTML = firstPokemon.id + " " +
+        firstPokemon.name;
+    document.getElementById("listaPk2").innerHTML = pokeArray[firstPokemon.arrayPos+1].id + " " +
+        pokeArray[firstPokemon.arrayPos+1].name;
+    document.getElementById("listaPk3").innerHTML = pokeArray[firstPokemon.arrayPos + 2].id + " " +
+        pokeArray[firstPokemon.arrayPos + 2].name;
+    document.getElementById("listaPk4").innerHTML = pokeArray[firstPokemon.arrayPos + 3].id + " " +
+        pokeArray[firstPokemon.arrayPos + 3].name;
+    document.getElementById("listaPk5").innerHTML = pokeArray[firstPokemon.arrayPos + 4].id + " " +
+        pokeArray[firstPokemon.arrayPos + 4].name;
+    document.getElementById("listaPk6").innerHTML = pokeArray[firstPokemon.arrayPos + 5].id + " " +
+        pokeArray[firstPokemon.arrayPos + 5].name;
+    document.getElementById("listaPk7").innerHTML = pokeArray[firstPokemon.arrayPos + 6].id + " " +
+        pokeArray[firstPokemon.arrayPos + 6].name;
+}
 $(".cerrarVentana").click(function () {
     if (pokeDisplayed) {
         showList();
