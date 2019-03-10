@@ -47,6 +47,32 @@ $(".formas").click(function(){
         pokeImg.src = currentPokemon.image;
     }
 })
+
+$('.deletePokemon').click(function(){
+    //Falta controlar que no rompa la app cuando el tamano de la lista es menor que 7 o cuando se borra uno de los ultimos 7 de la lista
+    var deletePos = currentPokemon.arrayPos;
+
+    if(pokeDisplayed){
+        console.log("Se borro: " + currentPokemon.toString());
+        pokeArray.splice(deletePos,1);
+    }
+
+    for (var i = deletePos; i < pokeArray.length; i++){
+        pokeArray[i].arrayPos = i;
+    }
+    currentPokemon = pokeArray[deletePos];
+
+    if (firstPokemon.arrayPos === deletePos){
+        firstPokemon = currentPokemon;
+    }
+
+    document.getElementById("textoPk").innerHTML = "Nombre: " + currentPokemon.name + "\nTipo1: " +
+    currentPokemon.type1 + "\nTipo2: " + currentPokemon.type2;
+    pokeImg.src = currentPokemon.image;
+    console.log("Next Pokemon: " + pokeArray[currentPokemon.arrayPos+1]);
+
+    updateList();
+});
 $(".buttonLeftViewer").click(function () {
     if (currentPokemon.arrayPos == 0) {
         currentPokemon = pokeArray[pokeArray.length - 1];
@@ -208,12 +234,23 @@ function showList(){
 }
 
 $(".addPokemon").click(function () {
-    //Prueba para comprobar que se añaden al array y se leen bien
-    var newPoke = new Pokemon(150, 'Mewtwo', 'Psiquico', 'None', 1, true, 3, document.getElementById("pokeImg"));
+    //Metodo de insercion por el usuario
+    //Faltara incluirlo en la BD
+    var newId = parseInt(prompt("Id", "150"));
+    var newName = prompt("Nombre", 'Mewtwo');
+    var newType1 = prompt("Tipo1", 'Psiquico');
+    var newType2 = prompt("Tipo2", 'None');
+    var newGen = parseInt(prompt("Generacion", "1"));
+    var newLegendary = Boolean(prompt("Legendario", "true"));
+    var newForms = parseInt(prompt("Formas", "3"));
+    var newPoke = new Pokemon(newId, newName, newType1, newType2, newGen, newLegendary, newForms);
+    
+    //var newPoke = new Pokemon(150, 'Mewtwo', 'Psiquico', 'None', 1, true, 3);
     newPoke.image = "assets/pokemon_images/" + newPoke.id + ".png";
     newPoke.arrayPos = pokeArray.length;
     pokeArray.push(newPoke);
     alert("Hecho " + newPoke.id);
+    console.log(newPoke.legendary === true);
 });
 
 $(".buttonDown").click(function () {
