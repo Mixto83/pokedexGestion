@@ -299,6 +299,8 @@ $(".buttonLeft").click(function () {
         firstPokemon = pokeArray[firstPokemon.id - 4];
     } else if (firstPokemon.id - 3 >= 0) {
         firstPokemon = pokeArray[firstPokemon.id - 3];
+    } else if (firstPokemon.id - 2 >= 0){
+        firstPokemon = pokeArray[firstPokemon.id - 2];
     }
     document.getElementById("listaPk1").innerHTML = firstPokemon.id + " " +
         firstPokemon.name;
