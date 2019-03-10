@@ -138,7 +138,6 @@ $("body").on("click",".pokedexFondo .fondo #imgListado",function(event){
 }); //Este permite que todo lo que se genere con #imgListado tenga este metodo directamente, sin tener que bindearlo dinamicamente
 
 function eventosListaPokemon(event) {
-    console.log(event.target.className);
     hideList();
     currentPokemon = pokeArray[firstPokemon.arrayPos + getEnum(event.target.className)];
     pokeImg.src = currentPokemon.image;
@@ -221,19 +220,6 @@ $(".buttonDown").click(function () {
         firstPokemon = pokeArray[firstPokemon.arrayPos+1];
     }
     updateList();
-    /*var pos = $('.imgListado7').position();
-    alert(pos);
-    $('.imgListado1').position(pos);
-    $('.imgListado1').animate({"top":"470px"},"slow");
-    $('.imgListado2').animate({"top":"-10px"},"slow");
-    $('.imgListado3').animate({"top":"70px"},"slow");
-    $('.imgListado4').animate({"top":"150px"},"slow");
-    $('.imgListado5').animate({"top":"230px"},"slow");
-    $('.imgListado6').animate({"top":"310px"},"slow");
-    $('.imgListado7').animate({"top":"390px"},"slow");
-    $('.imgListado7').fadeTo(10,1);
-    $('.imgListado2').fadeTo(10,0.5);
-    */
 })
 
 $(".buttonUp").click(function () {
@@ -315,10 +301,6 @@ $(".cerrar").click(function () {
         "left": "0%"
     }, "slow");
     $('.fondo').fadeOut("slow");
-    /*$('.fondo').animate({
-        opacity:0,
-        width:"toggle"
-    },100);*/
     if (pokeDisplayed) {
         $('.ventanaPokemon').fadeOut("fast");
         $('.imagenPokemon').fadeOut("fast");
