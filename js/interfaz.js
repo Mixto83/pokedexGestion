@@ -28,7 +28,7 @@ var poke24 = new Pokemon(24, 'Arbok', 'Veneno', 'None', 1, false, 1);
 var poke25 = new Pokemon(25, 'Pikachu', 'Electrico', 'None', 1, false, 5);
 
 pokeArray = [poke1, poke2, poke3, poke4, poke5, poke6, poke7, poke8, poke9, poke10, poke11, poke12, 
-    poke13, poke14, poke15, poke16, poke17, poke18, poke19, poke20, poke21, poke22, poke23, poke24];
+    poke13, poke14, poke15, poke16, poke17, poke18, poke19, poke20, poke21, poke22, poke23, poke24, poke25];
 for (var i =0; i < pokeArray.length; i++) {
     pokeArray[i].image = pokeSrc + pokeArray[i].id + ".png";
     pokeArray[i].arrayPos = i;
@@ -49,30 +49,51 @@ $(".formas").click(function(){
 })
 
 $('.deletePokemon').click(function(){
-    //Falta controlar que no rompa la app cuando el tamano de la lista es menor que 7 o cuando se borra uno de los ultimos 7 de la lista
+
     var deletePos = currentPokemon.arrayPos;
 
+    //Solo permite eliminar Pokemon en el visor
     if(pokeDisplayed){
         console.log("Se borro: " + currentPokemon.toString());
         pokeArray.splice(deletePos,1);
     }
-
+    
+    //Reasigna las posiciones en el array de los Pokemon
     for (var i = deletePos; i < pokeArray.length; i++){
         pokeArray[i].arrayPos = i;
     }
-    currentPokemon = pokeArray[deletePos];
 
-    if (firstPokemon.arrayPos === deletePos){
+    //Si el pokemon borrado es el ultimo, coge el primero, si no, coge el siguiente
+    if (deletePos === pokeArray.length){
+        currentPokemon = pokeArray[0];
+    } else {
+        currentPokemon = pokeArray[deletePos];
+    }
+    
+    //Si la lista esta vacia, ponemos a null first y current Poke
+    //En caso de borrar uno de los 7 ultimos Pokemon o de borrar el primero, actualiza correctamente la lista
+    if (pokeArray.length === 0){
+        firstPokemon = null;
+        currentPokemon = null;
+    } else if(deletePos >= pokeArray.length - 6 && pokeArray.length >= 7){
+        firstPokemon = pokeArray[pokeArray.length - 7];
+    } else if (firstPokemon.arrayPos === deletePos){
         firstPokemon = currentPokemon;
     }
 
-    document.getElementById("textoPk").innerHTML = "Nombre: " + currentPokemon.name + "\nTipo1: " +
-    currentPokemon.type1 + "\nTipo2: " + currentPokemon.type2;
-    pokeImg.src = currentPokemon.image;
-    console.log("Next Pokemon: " + pokeArray[currentPokemon.arrayPos+1]);
-
+    //Refleja visualmente los cambios
+    if (currentPokemon !== null){
+        document.getElementById("textoPk").innerHTML = "Nombre: " + currentPokemon.name + "\nTipo1: " +
+        currentPokemon.type1 + "\nTipo2: " + currentPokemon.type2;
+        pokeImg.src = currentPokemon.image;
+    } else {
+        pokeImg.src = null;
+        document.getElementById("textoPk").innerHTML = "";
+    }   
     updateList();
+
 });
+
 $(".buttonLeftViewer").click(function () {
     if (currentPokemon.arrayPos == 0) {
         currentPokemon = pokeArray[pokeArray.length - 1];
@@ -111,8 +132,8 @@ $(".mitad2").click(function () {
 });
 
 function init() {
-    currentPokemon = pokeArray[0];
-    firstPokemon = pokeArray[0];
+    currentPokemon = pokeArray[0];//Controla el Pokemon que se ve en el visor de imagenes
+    firstPokemon = pokeArray[0];//Controla cual es el primer Pokemon que se ve en la lista de 7
     $('.mitad1').animate({
         "left": "-49.5%"
     }, "slow");
@@ -236,7 +257,7 @@ function showList(){
 $(".addPokemon").click(function () {
     //Metodo de insercion por el usuario
     //Faltara incluirlo en la BD
-    var newId = parseInt(prompt("Id", "150"));
+    /*var newId = parseInt(prompt("Id", "150"));
     var newName = prompt("Nombre", 'Mewtwo');
     var newType1 = prompt("Tipo1", 'Psiquico');
     var newType2 = prompt("Tipo2", 'None');
@@ -244,13 +265,20 @@ $(".addPokemon").click(function () {
     var newLegendary = Boolean(prompt("Legendario", "true"));
     var newForms = parseInt(prompt("Formas", "3"));
     var newPoke = new Pokemon(newId, newName, newType1, newType2, newGen, newLegendary, newForms);
-    
-    //var newPoke = new Pokemon(150, 'Mewtwo', 'Psiquico', 'None', 1, true, 3);
+    */
+    var newPoke = new Pokemon(150, 'Mewtwo', 'Psiquico', 'None', 1, true, 3);
     newPoke.image = "assets/pokemon_images/" + newPoke.id + ".png";
     newPoke.arrayPos = pokeArray.length;
     pokeArray.push(newPoke);
     alert("Hecho " + newPoke.id);
     console.log(newPoke.legendary === true);
+
+    //Si es el unico Pokemon del array, pasa a ser el primero y actualiza la lista
+    if (pokeArray.length === 1){
+        firstPokemon = pokeArray[0];
+        updateList();
+    }
+    
 });
 
 $(".buttonDown").click(function () {
@@ -322,20 +350,55 @@ $(".buttonLeft").click(function () {
 })
 
 function updateList(){
-    document.getElementById("listaPk1").innerHTML = firstPokemon.id + " " +
-        firstPokemon.name;
-    document.getElementById("listaPk2").innerHTML = pokeArray[firstPokemon.arrayPos+1].id + " " +
-        pokeArray[firstPokemon.arrayPos+1].name;
-    document.getElementById("listaPk3").innerHTML = pokeArray[firstPokemon.arrayPos + 2].id + " " +
-        pokeArray[firstPokemon.arrayPos + 2].name;
-    document.getElementById("listaPk4").innerHTML = pokeArray[firstPokemon.arrayPos + 3].id + " " +
-        pokeArray[firstPokemon.arrayPos + 3].name;
-    document.getElementById("listaPk5").innerHTML = pokeArray[firstPokemon.arrayPos + 4].id + " " +
-        pokeArray[firstPokemon.arrayPos + 4].name;
-    document.getElementById("listaPk6").innerHTML = pokeArray[firstPokemon.arrayPos + 5].id + " " +
+    console.log(pokeArray.length)
+    if (pokeArray.length >= 1){
+        document.getElementById("listaPk1").innerHTML = firstPokemon.id + " " + firstPokemon.name;
+    } else {
+        document.getElementById("listaPk1").innerHTML = "";
+    }
+
+    if (pokeArray.length >= 2){
+        document.getElementById("listaPk2").innerHTML = pokeArray[firstPokemon.arrayPos+1].id + " " +
+            pokeArray[firstPokemon.arrayPos+1].name;
+    } else {
+        document.getElementById("listaPk2").innerHTML = "";
+    }
+
+    if (pokeArray.length >= 3){
+        document.getElementById("listaPk3").innerHTML = pokeArray[firstPokemon.arrayPos + 2].id + " " +
+            pokeArray[firstPokemon.arrayPos + 2].name;
+    } else {
+        document.getElementById("listaPk3").innerHTML = "";
+    }
+
+    if (pokeArray.length >= 4){
+        document.getElementById("listaPk4").innerHTML = pokeArray[firstPokemon.arrayPos + 3].id + " " +
+            pokeArray[firstPokemon.arrayPos + 3].name;
+    } else {
+        document.getElementById("listaPk4").innerHTML = "";
+    }
+
+    if (pokeArray.length >= 5){
+        document.getElementById("listaPk5").innerHTML = pokeArray[firstPokemon.arrayPos + 4].id + " " +
+            pokeArray[firstPokemon.arrayPos + 4].name;
+    } else {
+        document.getElementById("listaPk5").innerHTML = "";
+    }
+
+    if (pokeArray.length >= 6){
+        document.getElementById("listaPk6").innerHTML = pokeArray[firstPokemon.arrayPos + 5].id + " " +
         pokeArray[firstPokemon.arrayPos + 5].name;
-    document.getElementById("listaPk7").innerHTML = pokeArray[firstPokemon.arrayPos + 6].id + " " +
-        pokeArray[firstPokemon.arrayPos + 6].name;
+    } else {
+        document.getElementById("listaPk6").innerHTML = "";
+    }
+
+    if (pokeArray.length >= 7){
+        document.getElementById("listaPk7").innerHTML = pokeArray[firstPokemon.arrayPos + 6].id + " " +
+            pokeArray[firstPokemon.arrayPos + 6].name;
+    } else {
+        document.getElementById("listaPk7").innerHTML = "";
+    }
+    
 }
 $(".cerrarVentana").click(function () {
     if (pokeDisplayed) {
