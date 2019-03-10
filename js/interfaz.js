@@ -147,13 +147,13 @@ function eventosListaPokemon(event) {
 }
 
 function hideList() {
-    $('.imgListado').fadeOut("fast");
-    $('.imgListado2').fadeOut("fast");
-    $('.imgListado3').fadeOut("fast");
-    $('.imgListado4').fadeOut("fast");
-    $('.imgListado5').fadeOut("fast");
-    $('.imgListado6').fadeOut("fast");
-    $('.imgListado7').fadeOut("fast");
+    $('#imgListado.p2').fadeOut("fast");
+    $('#imgListado.p3').fadeOut("fast");
+    $('#imgListado.p4').fadeOut("fast");
+    $('#imgListado.p5').fadeOut("fast");
+    $('#imgListado.p6').fadeOut("fast");
+    $('#imgListado.p7').fadeOut("fast");
+    $('#imgListado.p1').fadeOut("fast");
 
     $('.txtListado').fadeOut("fast");
     $('.txtListado2').fadeOut("fast");
@@ -278,13 +278,13 @@ $(".cerrarVentana").click(function () {
     if (pokeDisplayed) {
         $('.ventanaPokemon').fadeOut("fast");
         $('.imagenPokemon').fadeOut("fast");
-        $('.imgListado').fadeIn("slow");
-        $('.imgListado2').fadeIn("slow");
-        $('.imgListado3').fadeIn("slow");
-        $('.imgListado4').fadeIn("slow");
-        $('.imgListado5').fadeIn("slow");
-        $('.imgListado6').fadeIn("slow");
-        $('.imgListado7').fadeIn("slow");
+        $('#imgListado.p2').fadeIn("slow");
+        $('#imgListado.p3').fadeIn("slow");
+        $('#imgListado.p4').fadeIn("slow");
+        $('#imgListado.p5').fadeIn("slow");
+        $('#imgListado.p6').fadeIn("slow");
+        $('#imgListado.p7').fadeIn("slow");
+        $('#imgListado.p1').fadeIn("slow");
         pokeDisplayed = false;
         $('.txtListado').fadeIn("slow");
         $('.txtListado2').fadeIn("slow");
@@ -313,13 +313,13 @@ $(".cerrar").click(function () {
         $('.imagenPokemon').fadeOut("fast");
         pokeDisplayed = false;
     }
-    $('.imgListado').fadeOut("slow");
-    $('.imgListado2').fadeOut("slow");
-    $('.imgListado3').fadeOut("slow");
-    $('.imgListado4').fadeOut("slow");
-    $('.imgListado5').fadeOut("slow");
-    $('.imgListado6').fadeOut("slow");
-    $('.imgListado7').fadeOut("slow");
+    $('#imgListado.p2').fadeOut("slow");
+    $('#imgListado.p3').fadeOut("slow");
+    $('#imgListado.p4').fadeOut("slow");
+    $('#imgListado.p5').fadeOut("slow");
+    $('#imgListado.p6').fadeOut("slow");
+    $('#imgListado.p7').fadeOut("slow");
+    $('#imgListado.p1').fadeOut("slow");
 
     $('.txtListado').fadeOut("slow");
     $('.txtListado2').fadeOut("slow");
