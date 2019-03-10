@@ -1,6 +1,7 @@
 var pokeDisplayed = false;
 var pokeSrc = "assets/pokemon_images/";
 
+//Variables para probar que funciona la lista
 var poke1 = new Pokemon(1, 'Bulbasaur', 'Planta', 'Veneno', 1, false, 1);
 var poke2 = new Pokemon(2, 'Ivysaur', 'Planta', 'Veneno', 1, false, 1);
 var poke3 = new Pokemon(3, 'Venusaur', 'Planta', 'Veneno', 1, false, 2);
@@ -27,13 +28,17 @@ var poke23 = new Pokemon(23, 'Ekans', 'Veneno', 'None', 1, false, 1);
 var poke24 = new Pokemon(24, 'Arbok', 'Veneno', 'None', 1, false, 1);
 var poke25 = new Pokemon(25, 'Pikachu', 'Electrico', 'None', 1, false, 5);
 
+//Array para probar la lista
 pokeArray = [poke1, poke2, poke3, poke4, poke5, poke6, poke7, poke8, poke9, poke10, poke11, poke12, 
     poke13, poke14, poke15, poke16, poke17, poke18, poke19, poke20, poke21, poke22, poke23, poke24, poke25];
+
+//Se asigna la imagen del pokemon
 for (var i =0; i < pokeArray.length; i++) {
     pokeArray[i].image = pokeSrc + pokeArray[i].id + ".png";
     pokeArray[i].arrayPos = i;
 }
 
+// Creamos un boton para diferenciar los pokemon con diferentes formas (Megas ej)
 $(".formas").click(function(){
     if (currentPokemon.nForms > 1){
         formCount++;
@@ -48,6 +53,7 @@ $(".formas").click(function(){
     }
 })
 
+// Function para eliminar el pokemon que se muestra en pantalla
 $('.deletePokemon').click(function(){
 
     var deletePos = currentPokemon.arrayPos;
@@ -94,6 +100,7 @@ $('.deletePokemon').click(function(){
 
 });
 
+// Función para ver el siguiente pokemon en el visor
 $(".buttonLeftViewer").click(function () {
     if (currentPokemon.arrayPos == 0) {
         currentPokemon = pokeArray[pokeArray.length - 1];
@@ -111,6 +118,7 @@ $(".buttonLeftViewer").click(function () {
     
 });
 
+//Función para ver el anterior pokemon en el visor
 $(".buttonRightViewer").click(function () {
     if (currentPokemon.arrayPos == pokeArray.length - 1) {
         currentPokemon = pokeArray[0];
@@ -123,6 +131,7 @@ $(".buttonRightViewer").click(function () {
         currentPokemon.type1 + "\nTipo2: " + currentPokemon.type2;
 });
 
+//Funciones para abrir la pokedex
 $(".mitad1").click(function () {
     init();
 });
@@ -131,6 +140,7 @@ $(".mitad2").click(function () {
     init();
 });
 
+// Inicia el menú de la pokedex
 function init() {
     currentPokemon = pokeArray[0];//Controla el Pokemon que se ve en el visor de imagenes
     firstPokemon = pokeArray[0];//Controla cual es el primer Pokemon que se ve en la lista de 7
@@ -151,6 +161,8 @@ function init() {
     
    // $('.p1, .p2, .p3, .p4, .p5, .p6, .p7').bind("click", '#imgLis   tado',eventosListaPokemon); // Genera y permite controlar las imagenes en un solo método
 }
+
+//Función para obtener el pokemon según su posición en la lista
 function getEnum(clasePok){
     var numP=-1;
     switch(clasePok){
@@ -180,10 +192,13 @@ function getEnum(clasePok){
     }
     return numP;
 }
+
+//Este permite que todo lo que se genere con #imgListado tenga este metodo directamente, sin tener que bindearlo dinamicamente
 $("body").on("click",".pokedexFondo .fondo #imgListado",function(event){
     eventosListaPokemon(event);
-}); //Este permite que todo lo que se genere con #imgListado tenga este metodo directamente, sin tener que bindearlo dinamicamente
+}); 
 
+//Función que permite mostrar el pokemon
 function eventosListaPokemon(event) {
     if(firstPokemon.arrayPos+getEnum(event.target.className)<pokeArray.length){
         hideList();
@@ -197,6 +212,7 @@ function eventosListaPokemon(event) {
 
 }
 
+//Oculta la lista
 function hideList() {
     $('#imgListado.p2').fadeOut("fast");
     $('#imgListado.p3').fadeOut("fast");
@@ -221,6 +237,7 @@ function hideList() {
 
 }
 
+//Muestra el detalle
 function showPokemonDetail(){
     $('.ventanaPokemon').fadeIn("slow");
     $('.imagenPokemon').fadeIn("slow");
@@ -230,6 +247,7 @@ function showPokemonDetail(){
     formCount = 1;
 }
 
+//Oculta el detalle
 function hidePokemonDetail(){
 
     $('.ventanaPokemon').fadeOut("fast");
@@ -239,6 +257,7 @@ function hidePokemonDetail(){
     $('.buttonLeftViewer').fadeOut("slow");
 }
 
+//Muestra la lista
 function showList(){
     $('#imgListado.p2').fadeIn("slow");
     $('#imgListado.p3').fadeIn("slow");
@@ -262,10 +281,11 @@ function showList(){
     $('.buttonLeft').fadeIn("slow");
 
 }
-
+//TODO
 $(".addPokemon").click(function () {
-    //Prueba para comprobar que se añaden al array y se leen bien
+    //Prueba con formulario 
     engadirPokemon();
+    //Prueba para comprobar que se añaden al array y se leen bien
    /*
     var newPoke = new Pokemon(150, 'Mewtwo', 'Psiquico', 'None', 1, true, 3, document.getElementById("pokeImg"));
     newPoke.image = "assets/pokemon_images/" + newPoke.id + ".png";
@@ -309,10 +329,12 @@ function showFormEngadir(){
     $(".engadirPokemon").fadeIn("slow");
 }
 
+//Oculta el formulario
 function hideFormEngadir(){
     $(".engadirPokemon").fadeOut("fast");
 }
 
+//Baja la lista
 $(".buttonDown").click(function () {
     if (firstPokemon.arrayPos + 7 < pokeArray.length) {
         firstPokemon = pokeArray[firstPokemon.arrayPos+1];
@@ -320,6 +342,7 @@ $(".buttonDown").click(function () {
     updateList();
 })
 
+//Sube la lista
 $(".buttonUp").click(function () {
     if (firstPokemon.arrayPos !== 0) {
         firstPokemon = pokeArray[firstPokemon.arrayPos - 1];
@@ -328,6 +351,7 @@ $(".buttonUp").click(function () {
     updateList();
 })
 
+//Retrocede en la lista en grupo
 $(".buttonRight").click(function () {
     if (firstPokemon.arrayPos + 13 < pokeArray.length) {
         firstPokemon = pokeArray[firstPokemon.arrayPos + 7];
@@ -348,6 +372,7 @@ $(".buttonRight").click(function () {
     updateList();
 })
 
+//Avanza en la lista en grupo
 $(".buttonLeft").click(function () {
     if (firstPokemon.arrayPos - 7 >= 0) {
     firstPokemon = pokeArray[firstPokemon.arrayPos - 7];
@@ -368,6 +393,7 @@ $(".buttonLeft").click(function () {
     updateList();
 })
 
+//Actualiza la lista
 function updateList(){
     console.log(pokeArray.length)
     if (pokeArray.length >= 1){
@@ -419,6 +445,7 @@ function updateList(){
     }
     
 }
+//Cierra la ventana de detalle
 $(".cerrarVentana").click(function () {
     if (pokeDisplayed) {
         showList();
@@ -428,6 +455,7 @@ $(".cerrarVentana").click(function () {
     }
 })
 
+//Cierra la pokedex
 $(".cerrar").click(function () {
     $('.mitad1').animate({
         "left": "0%"
@@ -461,6 +489,7 @@ $(".cerrar").click(function () {
 
 });
 
+//Reordena la pokedex
 $(".cambiaOrden").click(function(){
     pokeArray = pokeArray.reverse();
     for (var i =0; i < pokeArray.length; i++) {
