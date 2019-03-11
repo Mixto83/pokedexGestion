@@ -1,5 +1,8 @@
 var pokeDisplayed = false;
 var engadirDisplayed = false;
+var legendariesFilter = false;
+var genFilter = false;
+var typeFilter = false;
 var pokeSrc = "assets/pokemon_images/";
 //Variables para probar que funciona la lista
 var poke1 = new Pokemon(1, 'Bulbasaur', 'Planta', 'Veneno', 1, false, 1);
@@ -27,10 +30,12 @@ var poke22 = new Pokemon(22, 'Fearow', 'Normal', 'Volador', 1, false, 1);
 var poke23 = new Pokemon(23, 'Ekans', 'Veneno', 'None', 1, false, 1);
 var poke24 = new Pokemon(24, 'Arbok', 'Veneno', 'None', 1, false, 1);
 var poke25 = new Pokemon(25, 'Pikachu', 'Electrico', 'None', 1, false, 5);
-
+var poke26 = new Pokemon(150, 'Mewtwo', 'Psiquico', 'None', 1, true, 3);
+var poke27 = new Pokemon(254, 'Sceptyle', 'Planta', 'None', 3, false, 2);
+var poke28 = new Pokemon(386, 'Deoxys', 'Psiquico', 'None', 3, true, 4);
 //Array para probar la lista
 pokeArray = [poke1, poke2, poke3, poke4, poke5, poke6, poke7, poke8, poke9, poke10, poke11, poke12, 
-    poke13, poke14, poke15, poke16, poke17, poke18, poke19, poke20, poke21, poke22, poke23, poke24, poke25];
+    poke13, poke14, poke15, poke16, poke17, poke18, poke19, poke20, poke21, poke22, poke23, poke24, poke25, poke26, poke27, poke28];
 
 //Se asigna la imagen del pokemon
 for (var i =0; i < pokeArray.length; i++) {
@@ -399,7 +404,7 @@ $(".buttonLeft").click(function () {
 function updateList(){
     console.log(pokeArray.length)
     if (pokeArray.length >= 1){
-        $("#listaPk1").html(firstPokemon.id + " " + firstPokemon.name);
+        $("#listaPk1").html(pokeArray[firstPokemon.arrayPos].id + " " + pokeArray[firstPokemon.arrayPos].name);
     } else {
         $("#listaPk1").html("");
     }
@@ -499,3 +504,108 @@ $(".cambiaOrden").click(function(){
     firstPokemon = pokeArray[0];
     updateList();
 });
+
+//Filtra busqueda por legendarios
+function filterLegendaries(){
+    legendariesFilter = true;
+    legendaryArray = [];
+    for (var i = 0; i < pokeArray.length; i++){
+        if (pokeArray[i].legendary){
+            legendaryArray.push(pokeArray[i]);
+        }
+    }
+    //Debugging
+    for (var i = 0; i < legendaryArray.length; i++){
+        legendaryArray[i].arrayPos = i;
+        console.log(legendaryArray[i].toString());
+    }
+}
+
+//Filtra busqueda por generacion
+function filterGen(genNumber){
+    genFilter = true;
+    genArray = [];
+    for (var i = 0; i < pokeArray.length; i++){
+        if (pokeArray[i].gen === genNumber){
+            genArray.push(pokeArray[i]);
+        }
+    }
+}
+
+//Filtra busqueda por tipo
+function filterType(type1_, type2_){
+    typeFilter = true;
+    typeArray = [];
+    //Si se busca una combinacion de tipos, coge cualquier pokemon que presente dicha combinacion de tipos sin importar el orden
+    //Ej: Buscar Fuego-Volador coge Pokemon de Fuego-Volador o de Volador-Fuego, pero no cualquier otro Volador ni de Fuego.
+    if (type1_ !== 'None' && type2_ !== 'None'){
+        for (var i = 0; i < pokeArray.length; i++){
+            if ((pokeArray[i].type1 === type1_ && pokeArray[i].type2 === type2_) ||
+                (pokeArray[i].type1 === type2_ && pokeArray[i].type2 === type1_)){
+                    typeArray.push(pokeArray[i]);
+                }
+        }
+    //Si solo se rellena type1, comprueba que Pokemon son de ese tipo, independientemente si es el principal o secundario
+    //Ej: Si buscamos Fuego, coge a Charmeleon (solo Fuego), Moltres (Fuego, Volador) y Volcanion (Agua, Fuego)
+    } else if (type2_ === 'None'){
+        for (var i = 0; i < pokeArray.length; i++){
+            if (pokeArray[i].type1 === type1_ || pokeArray[i].type2 === type1_){
+                typeArray.push(pokeArray[i]);
+            }
+        }
+    //Lo mismo que el anterior, pero en lugar de comprobar type1_ comprueba type2_ 
+    //Se podria obligar a que type1 se rellene y evitar esta rama
+    } else if (type1_ === 'None'){
+        for (var i = 0; i < pokeArray.length; i++){
+            if (pokeArray[i].type1 === type2_ || pokeArray[i].type2 === type2_){
+                typeArray.push(pokeArray[i]);
+            }
+        }
+    }
+}
+
+//Guarda en pokeArray el array que queramos filtrar. Guarda pokeArray en un backup para restaurarlo luego
+function swapArrays(origin){
+    backupArray = pokeArray;
+    pokeArray = origin;
+    console.log(backupArray[0].toString());
+}
+
+//Restaura el array de Pokemon
+function restoreArray(){
+    pokeArray = backupArray;
+}
+
+
+$('.soloLegendarios').click(function(){
+    if (!legendariesFilter){
+        filterLegendaries();
+        swapArrays(legendaryArray);
+    } else {
+        restoreArray();
+        legendariesFilter = false; 
+    }
+    updateList();
+})
+
+$('.generacion3').click(function(){
+    if(!genFilter){
+        filterGen(3);
+        swapArrays(genArray);
+    } else {
+        restoreArray();
+        genFilter = false;
+    }
+    updateList();
+})
+
+$('.soloTipo').click(function(){
+    if(!typeFilter){
+        filterType('None', 'Agua');
+        swapArrays(typeArray);
+    } else {
+        restoreArray();
+        typeFilter = false;
+    }
+    updateList();
+})
