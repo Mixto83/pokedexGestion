@@ -48,7 +48,6 @@ $(".formas").click(function(){
             formCount = 1;
             currentPokemon.image = "assets/pokemon_images/" + currentPokemon.id + ".png";
         }
-        
         pokeImg.src = currentPokemon.image;
     }
 })
@@ -89,12 +88,10 @@ $('.deletePokemon').click(function(){
 
     //Refleja visualmente los cambios
     if (currentPokemon !== null){
-        document.getElementById("textoPk").innerHTML = "Nombre: " + currentPokemon.name + "\nTipo1: " +
-        currentPokemon.type1 + "\nTipo2: " + currentPokemon.type2;
-        pokeImg.src = currentPokemon.image;
+        showInfo();
     } else {
         pokeImg.src = null;
-        document.getElementById("textoPk").innerHTML = "";
+        $("#textoPk").html("");
     }   
     updateList();
 
@@ -108,15 +105,7 @@ $(".buttonLeftViewer").click(function () {
     } else {
         currentPokemon = pokeArray[currentPokemon.arrayPos - 1];
     }
-    pokeImg.src = currentPokemon.image;
-    if (currentPokemon.type2 !== 'None'){
-        document.getElementById("textoPk").innerHTML = "Nombre: " + currentPokemon.name + "\nTipo1: " +
-        currentPokemon.type1 + "\nTipo2: " + currentPokemon.type2;
-    } else {
-        document.getElementById("textoPk").innerHTML = "Nombre: " + currentPokemon.name + "\nTipo1: " +
-        currentPokemon.type1;
-    }
-    
+    showInfo();
 });
 
 //Función para ver el anterior pokemon en el visor
@@ -127,11 +116,20 @@ $(".buttonRightViewer").click(function () {
     } else {
         currentPokemon = pokeArray[currentPokemon.arrayPos + 1];
     }
-
-    pokeImg.src = currentPokemon.image;
-    document.getElementById("textoPk").innerHTML = "Nombre: " + currentPokemon.name + "\nTipo1: " +
-        currentPokemon.type1 + "\nTipo2: " + currentPokemon.type2;
+    showInfo();
 });
+
+//Función para mostrar la información del Pokémon en la ventana
+function showInfo(){
+    pokeImg.src = currentPokemon.image;
+    if (currentPokemon.type2 !== 'None'){
+        $("#textoPk").html("Nombre: " + currentPokemon.name + "\nTipo1: " +
+        currentPokemon.type1 + "\nTipo2: " + currentPokemon.type2); 
+    } else {
+        $("#textoPk").html("Nombre: " + currentPokemon.name + "\nTipo1: " +
+        currentPokemon.type1); 
+    }
+}
 
 //Funciones para abrir la pokedex
 $(".mitad1").click(function () {
@@ -206,9 +204,7 @@ function eventosListaPokemon(event) {
         hideList();
         showPokemonDetail();
         currentPokemon = pokeArray[firstPokemon.arrayPos + getEnum(event.target.className)];
-        pokeImg.src = currentPokemon.image;
-        document.getElementById("textoPk").innerHTML = "Nombre: " + currentPokemon.name + "\nTipo1: " +
-        currentPokemon.type1 + "\nTipo2: " + currentPokemon.type2;
+        showInfo();
         pokeDisplayed = true;
     }
 
@@ -287,6 +283,9 @@ function showList(){
 $(".addPokemon").click(function () {
     //Prueba con formulario 
     engadirPokemon();
+    if (pokeDisplayed){
+        hidePokemonDetail();
+    }
     //Prueba para comprobar que se añaden al array y se leen bien
    /*
     var newPoke = new Pokemon(150, 'Mewtwo', 'Psiquico', 'None', 1, true, 3, document.getElementById("pokeImg"));
@@ -400,51 +399,45 @@ $(".buttonLeft").click(function () {
 function updateList(){
     console.log(pokeArray.length)
     if (pokeArray.length >= 1){
-        document.getElementById("listaPk1").innerHTML = firstPokemon.id + " " + firstPokemon.name;
+        $("#listaPk1").html(firstPokemon.id + " " + firstPokemon.name);
     } else {
-        document.getElementById("listaPk1").innerHTML = "";
+        $("#listaPk1").html("");
     }
 
     if (pokeArray.length >= 2){
-        document.getElementById("listaPk2").innerHTML = pokeArray[firstPokemon.arrayPos+1].id + " " +
-            pokeArray[firstPokemon.arrayPos+1].name;
+        $("#listaPk2").html(pokeArray[firstPokemon.arrayPos+1].id + " " + pokeArray[firstPokemon.arrayPos+1].name);
     } else {
-        document.getElementById("listaPk2").innerHTML = "";
+        $("#listaPk2").html("");
     }
 
     if (pokeArray.length >= 3){
-        document.getElementById("listaPk3").innerHTML = pokeArray[firstPokemon.arrayPos + 2].id + " " +
-            pokeArray[firstPokemon.arrayPos + 2].name;
+        $("#listaPk3").html(pokeArray[firstPokemon.arrayPos+2].id + " " + pokeArray[firstPokemon.arrayPos+2].name);
     } else {
-        document.getElementById("listaPk3").innerHTML = "";
+        $("#listaPk3").html("");
     }
 
     if (pokeArray.length >= 4){
-        document.getElementById("listaPk4").innerHTML = pokeArray[firstPokemon.arrayPos + 3].id + " " +
-            pokeArray[firstPokemon.arrayPos + 3].name;
+        $("#listaPk4").html(pokeArray[firstPokemon.arrayPos+3].id + " " + pokeArray[firstPokemon.arrayPos+3].name);
     } else {
-        document.getElementById("listaPk4").innerHTML = "";
+        $("#listaPk4").html("");
     }
 
     if (pokeArray.length >= 5){
-        document.getElementById("listaPk5").innerHTML = pokeArray[firstPokemon.arrayPos + 4].id + " " +
-            pokeArray[firstPokemon.arrayPos + 4].name;
+        $("#listaPk5").html(pokeArray[firstPokemon.arrayPos+4].id + " " + pokeArray[firstPokemon.arrayPos+4].name);
     } else {
-        document.getElementById("listaPk5").innerHTML = "";
+        $("#listaPk5").html("");
     }
 
     if (pokeArray.length >= 6){
-        document.getElementById("listaPk6").innerHTML = pokeArray[firstPokemon.arrayPos + 5].id + " " +
-        pokeArray[firstPokemon.arrayPos + 5].name;
+        $("#listaPk6").html(pokeArray[firstPokemon.arrayPos+5].id + " " + pokeArray[firstPokemon.arrayPos+5].name);
     } else {
-        document.getElementById("listaPk6").innerHTML = "";
+        $("#listaPk6").html("");
     }
 
     if (pokeArray.length >= 7){
-        document.getElementById("listaPk7").innerHTML = pokeArray[firstPokemon.arrayPos + 6].id + " " +
-            pokeArray[firstPokemon.arrayPos + 6].name;
+        $("#listaPk7").html(pokeArray[firstPokemon.arrayPos+6].id + " " + pokeArray[firstPokemon.arrayPos+6].name);
     } else {
-        document.getElementById("listaPk7").innerHTML = "";
+        $("#listaPk7").html("");
     }
     
 }
