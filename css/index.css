@@ -122,12 +122,28 @@ body {
 }
 .engadirPokemon{
     display:none;
+    font-size: 30px;
     background-repeat: no-repeat;
     background-size: auto;
     position: relative;
     top: 100px;
     left: 100px;
     background-position: top left;
+}
+
+.filtros{
+    display:none;
+    font-size: 40px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: absolute;
+    top: 120px;
+    left: 1200px;
+    background-position: top left;
+}
+
+.filtros select{
+    font-size: 40px;
 }
 
 .buttonRightViewer{
@@ -153,6 +169,62 @@ body {
     position: absolute;
     top: 195px;
     left: 20px;
+    background-position: top left;
+    flex:1;
+}
+
+.buttonBack{
+    background-image: url("../assets/BotonBack1.png");
+    display: none;
+    width: 60px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: absolute;
+    top: 20px;
+    left: 9px;
+    background-position: top left;
+    flex:1;
+}
+
+.buttonClose{
+    background-image: url("../assets/botonCerrar.png");
+    display: none;
+    width: 60px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: absolute;
+    top: 20px;
+    left: 1847px;
+    background-position: top left;
+    flex:1;
+}
+
+.buttonDelete{
+    background-image: url("../assets/botonCerrar.png");
+    display: none;
+    width: 60px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: absolute;
+    top: 315px;
+    left: 318px;
+    background-position: top left;
+    flex:1;
+}
+
+.buttonChangeForm{
+    background-image: url("../assets/botonCambioForma.png");
+    display: none;
+    width: 60px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: absolute;
+    top: 28px;
+    left: 200px;
     background-position: top left;
     flex:1;
 }

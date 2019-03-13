@@ -3,6 +3,8 @@ var engadirDisplayed = false;
 var legendariesFilter = false;
 var genFilter = false;
 var typeFilter = false;
+var nameFilter = false;
+var idFilter = false;
 var pokeSrc = "assets/pokemon_images/";
 //Variables para probar que funciona la lista
 var poke1 = new Pokemon(1, 'Bulbasaur', 'Planta', 'Veneno', 1, false, 1);
@@ -33,9 +35,10 @@ var poke25 = new Pokemon(25, 'Pikachu', 'Electrico', 'None', 1, false, 5);
 var poke26 = new Pokemon(150, 'Mewtwo', 'Psiquico', 'None', 1, true, 3);
 var poke27 = new Pokemon(254, 'Sceptyle', 'Planta', 'None', 3, false, 2);
 var poke28 = new Pokemon(386, 'Deoxys', 'Psiquico', 'None', 3, true, 4);
+var poke29 = new Pokemon(793, 'Nihilego', 'Psiquico', 'None', 7, true, 1);
 //Array para probar la lista
 pokeArray = [poke1, poke2, poke3, poke4, poke5, poke6, poke7, poke8, poke9, poke10, poke11, poke12, 
-    poke13, poke14, poke15, poke16, poke17, poke18, poke19, poke20, poke21, poke22, poke23, poke24, poke25, poke26, poke27, poke28];
+    poke13, poke14, poke15, poke16, poke17, poke18, poke19, poke20, poke21, poke22, poke23, poke24, poke25, poke26, poke27, poke28, poke29];
 
 //Se asigna la imagen del pokemon
 for (var i =0; i < pokeArray.length; i++) {
@@ -44,7 +47,7 @@ for (var i =0; i < pokeArray.length; i++) {
 }
 
 // Creamos un boton para diferenciar los pokemon con diferentes formas (Megas ej)
-$(".formas").click(function(){
+$(".buttonChangeForm").click(function(){
     if (currentPokemon.nForms > 1){
         formCount++;
         if (formCount <= currentPokemon.nForms){
@@ -58,7 +61,7 @@ $(".formas").click(function(){
 })
 
 // Function para eliminar el pokemon que se muestra en pantalla
-$('.deletePokemon').click(function(){
+$('.buttonDelete').click(function(){
 
     var deletePos = currentPokemon.arrayPos;
 
@@ -69,9 +72,8 @@ $('.deletePokemon').click(function(){
     }
     
     //Reasigna las posiciones en el array de los Pokemon
-    for (var i = deletePos; i < pokeArray.length; i++){
-        pokeArray[i].arrayPos = i;
-    }
+    updatePokemonIndex();
+
 
     //Si el pokemon borrado es el ultimo, coge el primero, si no, coge el siguiente
     if (deletePos === pokeArray.length){
@@ -134,6 +136,10 @@ function showInfo(){
         $("#textoPk").html("Nombre: " + currentPokemon.name + "\nTipo1: " +
         currentPokemon.type1); 
     }
+    if (currentPokemon.nForms > 1)
+        $('.buttonChangeForm').fadeIn("slow");
+    else
+        $('.buttonChangeForm').fadeOut("slow");
 }
 
 //Funciones para abrir la pokedex
@@ -160,10 +166,10 @@ function init() {
     //$('.imagenPokemon').fadeIn("slow");
     $('#imgListado.p1').fadeTo(10, 0.5);
     $('#imgListado.p7').fadeTo(10, 0.5);
+    $('.buttonClose').fadeIn("slow");
+    showFilters();
     showList();
     updateList();
-
-    
    // $('.p1, .p2, .p3, .p4, .p5, .p6, .p7').bind("click", '#imgLis   tado',eventosListaPokemon); // Genera y permite controlar las imagenes en un solo método
 }
 
@@ -207,8 +213,9 @@ $("body").on("click",".pokedexFondo .fondo #imgListado",function(event){
 function eventosListaPokemon(event) {
     if(firstPokemon.arrayPos+getEnum(event.target.className)<pokeArray.length){
         hideList();
-        showPokemonDetail();
+        hideFilters();
         currentPokemon = pokeArray[firstPokemon.arrayPos + getEnum(event.target.className)];
+        showPokemonDetail();
         showInfo();
         pokeDisplayed = true;
     }
@@ -248,6 +255,8 @@ function showPokemonDetail(){
     $('.buttonRightViewer').fadeIn("slow");
     $('.buttonLeftViewer').fadeIn("slow");
     formCount = 1;
+    $('.buttonBack').fadeIn("slow");
+    
 }
 
 //Oculta el detalle
@@ -258,6 +267,10 @@ function hidePokemonDetail(){
 
     $('.buttonRightViewer').fadeOut("slow");
     $('.buttonLeftViewer').fadeOut("slow");
+
+    $('.buttonBack').fadeOut("slow");
+    $('.buttonChangeForm').fadeOut("slow");
+
 }
 
 //Muestra la lista
@@ -327,6 +340,7 @@ $(".addPokemon").click(function () {
 //Engadir es anhadir en gallego
 function engadirPokemon(){
     hideList();
+    hideFilters();
     showFormEngadir();
     engadirDisplayed = true;
 }
@@ -334,13 +348,23 @@ function engadirPokemon(){
 // Metodo para mostrar el formulario
 function showFormEngadir(){
     $(".engadirPokemon").fadeIn("slow");
+    $(".buttonBack").fadeIn("slow");
 }
 
 //Oculta el formulario
 function hideFormEngadir(){
     $(".engadirPokemon").fadeOut("fast");
+    $(".buttonBack").fadeOut("slow");
 }
 
+function showFilters(){
+    $('.filtros').fadeIn("slow");//Meter en funcion
+
+}
+
+function hideFilters(){
+    $('.filtros').fadeOut("slow");//Meter en funcion
+}
 //Baja la lista
 $(".buttonDown").click(function () {
     if (firstPokemon.arrayPos + 7 < pokeArray.length) {
@@ -447,21 +471,23 @@ function updateList(){
     
 }
 //Cierra la ventana de detalle
-$(".cerrarVentana").click(function () {
+$(".buttonBack").click(function () {
     if (pokeDisplayed) {
         showList();
+        showFilters();
         hidePokemonDetail();
         pokeDisplayed = false;
     }
     if (engadirDisplayed){
         showList();
+        showFilters();
         hideFormEngadir();
         engadirDisplayed = false;
     }
 })
 
 //Cierra la pokedex
-$(".cerrar").click(function () {
+$(".buttonClose").click(function () {
     $('.mitad1').animate({
         "left": "0%"
     }, "slow");
@@ -494,16 +520,13 @@ $(".cerrar").click(function () {
 
 });
 
-//Reordena la pokedex
-$(".cambiaOrden").click(function(){
+//Reordena la Pokedex
+function reversePokedex(){
     pokeArray = pokeArray.reverse();
-    for (var i =0; i < pokeArray.length; i++) {
-        pokeArray[i].image = pokeSrc + pokeArray[i].id + ".png";
-        pokeArray[i].arrayPos = i;
-    }
+    updatePokemonIndex();
     firstPokemon = pokeArray[0];
     updateList();
-});
+}
 
 //Filtra busqueda por legendarios
 function filterLegendaries(){
@@ -568,12 +591,42 @@ function filterType(type1_, type2_){
 function swapArrays(origin){
     backupArray = pokeArray;
     pokeArray = origin;
+    firstPokemon = pokeArray[0];
+    updatePokemonIndex();
     console.log(backupArray[0].toString());
+}
+
+function searchByName(pokeName){
+    nameFilter = true;
+    nameArray = [];
+    for (var i = 0; i < pokeArray.length; i++){
+        if (pokeArray[i].name.includes(pokeName)){
+            nameArray.push(pokeArray[i]);
+        }
+    }
+}
+
+function searchById(pokeId){
+    idFilter = true;
+    idArray = [];
+    for (var i = 0; i < pokeArray.length; i++){
+        var idString = pokeArray[i].id.toString();
+        if (idString.includes(pokeId)){
+            idArray.push(pokeArray[i]);
+        }
+    }
 }
 
 //Restaura el array de Pokemon
 function restoreArray(){
     pokeArray = backupArray;
+    //updatePokemonIndex();
+}
+
+function updatePokemonIndex(){
+    for (var i = 0; i < pokeArray.length; i++){
+        pokeArray[i].arrayPos = i;
+    }
 }
 
 
@@ -608,4 +661,44 @@ $('.soloTipo').click(function(){
         typeFilter = false;
     }
     updateList();
+})
+
+$('.buscaNombre').click(function(){
+    if (!nameFilter){
+        searchByName('saur');
+        swapArrays(nameArray);
+    } else {
+        restoreArray();
+        nameFilter = false;
+    }
+    updateList();
+})
+
+$('.buscaId').click(function(){
+    if (!idFilter){
+        searchById(1);
+        swapArrays(idArray);
+    } else {
+        restoreArray();
+        idFilter = false;
+    }
+    updateList();
+})
+
+$(".cambiaOrden").click(function(){
+    reversePokedex();
+});
+
+$("#checkBoxLegendaries").mousedown(function(){
+    if (this.checked){
+        console.log("Se ha pulsado");
+    }
+})
+
+$('.imagenPokemon').mouseover(function(){
+    $('.buttonDelete').fadeIn("slow");
+})
+
+$('.imagenPokemon').mouseout(function(){
+    $('.buttonDelete').fadeOut("slow");
 })

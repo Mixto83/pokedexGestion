@@ -11,15 +11,14 @@
 </head>
 
 <body>
-    <button class="cerrar">Cerrar</button>
-    <button class="cerrarVentana">Retroceder</button>
     <button class="addPokemon">Insertar Pokemon</button>
     <button class="deletePokemon">Eliminar Pokemon</button>
-    <button class="formas">Cambiar Forma</button>
     <button class="cambiaOrden">Cambiar Orden</button>
     <button class="soloLegendarios">Legendarios</button>
     <button class="generacion3">Filtra Gen</button>
     <button class="soloTipo">Filtra Tipo</button>
+    <button class="buscaNombre">Busca Nombre</button>
+    <button class="buscaId">Busca ID</button>
     <div class="pokedexFondo">
         <div class="fondo">
             <div class="engadirPokemon">
@@ -34,7 +33,6 @@
                     </p>
                     <p>Tipo 2:
                         <select class="tipo2">
-                            <option value="none">---</option>
                             <option value="fuego">Fuego</option>
                             <option value="planta">Planta</option>
                             <option value="agua">Agua</option>
@@ -58,12 +56,79 @@
                     <p><input type="button" value="Engadir"></p>
                 </form>
             </div>
+            <div class="filtros">
+                <form>
+                        <p>Tipo 1:
+                                <select id="t1" class="tipo1">
+                                            <option value="None">Todos</option>
+                                            <option value="Fuego">Fuego</option>
+                                            <option value="Agua">Agua</option>
+                                            <option value="Planta">Planta</option>
+                                            <option value="Electrico">Electrico</option>
+                                            <option value="Psiquico">Psiquico</option>
+                                            <option value="Lucha">Lucha</option>
+                                            <option value="Fantasma">Fantasma</option>
+                                            <option value="Tierra">Tierrra</option>
+                                            <option value="Veneno">Veneno</option>
+                                            <option value="Roca">Roca</option>
+                                            <option value="Volador">Volador</option>
+                                            <option value="Bicho">Bicho</option>
+                                            <option value="Dragon">Dragon</option>
+                                            <option value="Hielo">Hielo</option>
+                                            <option value="Normal">Normal</option>
+                                            <option value="Siniestro">Siniestro</option>
+                                            <option value="Acero">Acero</option>
+                                            <option value="Hada">Hada</option>
+                                </select>
+                            </p>
+                            <p>Tipo 2:
+                                <select class="tipo2">
+                                        <option value="None">Todos</option>
+                                        <option value="Fuego">Fuego</option>
+                                        <option value="Agua">Agua</option>
+                                        <option value="Planta">Planta</option>
+                                        <option value="Electrico">Electrico</option>
+                                        <option value="Psiquico">Psiquico</option>
+                                        <option value="Lucha">Lucha</option>
+                                        <option value="Fantasma">Fantasma</option>
+                                        <option value="Tierra">Tierrra</option>
+                                        <option value="Veneno">Veneno</option>
+                                        <option value="Roca">Roca</option>
+                                        <option value="Volador">Volador</option>
+                                        <option value="Bicho">Bicho</option>
+                                        <option value="Dragon">Dragon</option>
+                                        <option value="Hielo">Hielo</option>
+                                        <option value="Normal">Normal</option>
+                                        <option value="Siniestro">Siniestro</option>
+                                        <option value="Acero">Acero</option>
+                                        <option value="Hada">Hada</option>
+                                </select>
+                            </p>
+                            <p>Generacion:
+                                    <select class="genDisplay">
+                                            <option value=0>Todas</option>
+                                            <option value=1>Primera</option>
+                                            <option value=2>Segunda</option>
+                                            <option value=3>Tercera</option>
+                                            <option value=4>Cuarta</option>
+                                            <option value=5>Quinta</option>
+                                            <option value=6>Sexta</option>
+                                            <option value=7>Septima</option>
+                                    </select>
+                                </p>
+                            <input type="checkbox" name="checkBoxLegendaries" value="false"> Solo Legendarios<br>
+                            <input type="radio" name="orden" value="1">Orden Ascendente<br>
+                            <input type="radio" name="orden" value="2">Orden Descendente<br>
+                            <p>Nombre: <input class="nombre" type="text"></p>
+                            <p>Id: <input class="id" type="number"></p>
+                </form>
+            </div>
             <div class="ventanaPokemon">
                 <div class="imagenPokemon">
                     <img id="pokeImg" src="assets/pokemon_images/1.png" />
-                    <div class="textoPokemon">
+                </div>
+                <div class="textoPokemon">
                         <p id="textoPk" style="font-size:40px; font-family:Times New Roman">Informacion del Pokemon</p>
-                    </div>
                 </div>
             </div>
             <div class="buttonUp"></div>
@@ -72,6 +137,10 @@
             <div class="buttonRight"></div>
             <div class="buttonRightViewer"></div>
             <div class="buttonLeftViewer"></div>
+            <div class="buttonBack"></div>
+            <div class="buttonClose"></div>
+            <div class="buttonChangeForm"></div>
+            <div class="buttonDelete"></div>
             <div id="imgListado" class="p1"></div>
             <div class="txtListado">
                 <p id="listaPk1">Pokemon 1</p>
