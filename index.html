@@ -12,13 +12,6 @@
 
 <body>
     <button class="addPokemon">Insertar Pokemon</button>
-    <button class="deletePokemon">Eliminar Pokemon</button>
-    <button class="cambiaOrden">Cambiar Orden</button>
-    <button class="soloLegendarios">Legendarios</button>
-    <button class="generacion3">Filtra Gen</button>
-    <button class="soloTipo">Filtra Tipo</button>
-    <button class="buscaNombre">Busca Nombre</button>
-    <button class="buscaId">Busca ID</button>
     <div class="pokedexFondo">
         <div class="fondo">
             <div class="engadirPokemon">
@@ -45,7 +38,7 @@
                                 </select>
                     </p>
                     <p>Legendario: 
-                            <input class="legendario" type="checkbox">
+                            <input class="legendario" type="checkbox" value=false>
                     </p>
                     <p>Descripcion: 
                         <textarea class="descripcion" style="resize:none;"></textarea>
@@ -59,7 +52,7 @@
             <div class="filtros">
                 <form>
                         <p>Tipo 1:
-                                <select id="t1" class="tipo1">
+                                <select id="t1" class="tipo1Search">
                                             <option value="None">Todos</option>
                                             <option value="Fuego">Fuego</option>
                                             <option value="Agua">Agua</option>
@@ -82,7 +75,7 @@
                                 </select>
                             </p>
                             <p>Tipo 2:
-                                <select class="tipo2">
+                                <select class="tipo2Search">
                                         <option value="None">Todos</option>
                                         <option value="Fuego">Fuego</option>
                                         <option value="Agua">Agua</option>
@@ -116,11 +109,11 @@
                                             <option value=7>Septima</option>
                                     </select>
                                 </p>
-                            <input type="checkbox" name="checkBoxLegendaries" value="false"> Solo Legendarios<br>
-                            <input type="radio" name="orden" value="1">Orden Ascendente<br>
-                            <input type="radio" name="orden" value="2">Orden Descendente<br>
-                            <p>Nombre: <input class="nombre" type="text"></p>
-                            <p>Id: <input class="id" type="number"></p>
+                            <input type="checkbox" class="checkBoxLegendaries", checked=false> Solo Legendarios<br>
+                            <input type="radio" class="ordenAsc" name="orden" value="1">Orden Ascendente<br>
+                            <input type="radio" class="ordenDesc" name="orden" value="2">Orden Descendente<br>
+                            <p>Nombre: <input class="nombreSearch" type="text"></p>
+                            <p>Id: <input class="idSearch" type="number"></p>
                 </form>
             </div>
             <div class="ventanaPokemon">

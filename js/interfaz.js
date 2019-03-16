@@ -3,6 +3,7 @@ var engadirDisplayed = false;
 var legendariesFilter = false;
 var genFilter = false;
 var typeFilter = false;
+var type2Filter = false;
 var nameFilter = false;
 var idFilter = false;
 var pokeSrc = "assets/pokemon_images/";
@@ -162,15 +163,25 @@ function init() {
         "left": "+49.5%"
     }, "slow");
     $('.fondo').fadeIn("slow");
-    //$('.ventanaPokemon').fadeIn("slow");
-    //$('.imagenPokemon').fadeIn("slow");
     $('#imgListado.p1').fadeTo(10, 0.5);
     $('#imgListado.p7').fadeTo(10, 0.5);
     $('.buttonClose').fadeIn("slow");
+    resetFilters();
     showFilters();
     showList();
     updateList();
    // $('.p1, .p2, .p3, .p4, .p5, .p6, .p7').bind("click", '#imgLis   tado',eventosListaPokemon); // Genera y permite controlar las imagenes en un solo método
+}
+//Reinicia filtros de busqueda
+function resetFilters(){
+    $('.checkBoxLegendaries').prop('checked', false);
+    $('.tipo1Search').val('None');
+    $('.tipo2Search').val('None');
+    $('.genDisplay').val(0);
+    $('.nombreSearch').val('');
+    $('.idSearch').val(0);
+    $('.ordenAsc').prop('checked', false);
+    $('.ordenDesc').prop('checked', true);
 }
 
 //Función para obtener el pokemon según su posición en la lista
@@ -528,7 +539,7 @@ function reversePokedex(){
     updateList();
 }
 
-//Filtra busqueda por legendarios
+//Crea un nuevo Array en el que guarda los Pokemon legendarios
 function filterLegendaries(){
     legendariesFilter = true;
     legendaryArray = [];
@@ -544,7 +555,7 @@ function filterLegendaries(){
     }
 }
 
-//Filtra busqueda por generacion
+//Crea un nuevo Array en el que guarda los Pokemon de la generacion buscada
 function filterGen(genNumber){
     genFilter = true;
     genArray = [];
@@ -555,7 +566,7 @@ function filterGen(genNumber){
     }
 }
 
-//Filtra busqueda por tipo
+//Crea un nuevo Array en el que guarda los Pokemon del tipo buscado
 function filterType(type1_, type2_){
     typeFilter = true;
     typeArray = [];
@@ -586,17 +597,9 @@ function filterType(type1_, type2_){
         }
     }
 }
-
-//Guarda en pokeArray el array que queramos filtrar. Guarda pokeArray en un backup para restaurarlo luego
-function swapArrays(origin){
-    backupArray = pokeArray;
-    pokeArray = origin;
-    firstPokemon = pokeArray[0];
-    updatePokemonIndex();
-    console.log(backupArray[0].toString());
-}
-
+//Crea un nuevo Array en el que solo introduce los Pokemon que tengan un idnombre con el string introducido
 function searchByName(pokeName){
+    //Falta evitar que distinga entre mayuscula y minuscula
     nameFilter = true;
     nameArray = [];
     for (var i = 0; i < pokeArray.length; i++){
@@ -606,6 +609,7 @@ function searchByName(pokeName){
     }
 }
 
+//Crea un nuevo Array en el que solo introduce los Pokemon que tengan un id con el numero introducido
 function searchById(pokeId){
     idFilter = true;
     idArray = [];
@@ -617,20 +621,75 @@ function searchById(pokeId){
     }
 }
 
-//Restaura el array de Pokemon
-function restoreArray(){
-    pokeArray = backupArray;
-    //updatePokemonIndex();
+//Guarda en pokeArray el array que queramos filtrar. Guarda pokeArray en un backup para restaurarlo luego
+function swapArrays(origin){
+    backupArray = pokeArray;
+    pokeArray = origin;
+    firstPokemon = pokeArray[0];
+    updatePokemonIndex();
+    console.log(backupArray[0].toString());
 }
 
+//Restaura el array de Pokemon original
+function restoreArray(){
+    pokeArray = backupArray;
+}
+
+//Actualiza las posiciones en el array de los Pokemon
 function updatePokemonIndex(){
     for (var i = 0; i < pokeArray.length; i++){
         pokeArray[i].arrayPos = i;
     }
 }
 
+///SE DEBE CAMBIAR LA FORMA EN LA QUE SE HACE BACKUP DEL ARRAY ORIGINAL PARA PODER UTILIZAR CORRECTAMENTE LOS FILTROS DE BUSQUEDA
+//Llama a la funcion de cambiado de tipo cuando cambia el valor de cualquiera de los dropdown
+$('.tipo1Search').change(function(){
+    getTypesSearch();
+})
 
-$('.soloLegendarios').click(function(){
+$('.tipo2Search').change(function(){
+    getTypesSearch();
+})
+
+function getTypesSearch(){
+    var type1Search = $('.tipo1Search').val();
+    var type2Search = $('.tipo2Search').val();
+    if(!typeFilter || !type2Filter){
+        filterType(type1Search, type2Search);
+        swapArrays(typeArray);
+    } else {
+        restoreArray();
+        typeFilter = false;
+        typeFilter2 = false;
+    }
+    updateList();
+}
+
+//Llama a la funcion de reordenar la Pokedex al pulsar en uno de los botones excluyentes.
+$('.ordenDesc').change(function(){
+    reversePokedex();
+})
+
+$('.ordenAsc').change(function(){
+    reversePokedex();
+})
+
+//Llama a la funcion de filtrar generacion cuando se cambia el valor del dropdown.
+$('.genDisplay').change(function(){
+    var genNumberFilter = parseInt($('.genDisplay').val());
+    if(!genFilter){
+        filterGen(genNumberFilter);
+        swapArrays(genArray);
+    } else {
+        restoreArray();
+        genFilter = false;
+    }
+    updateList();
+})
+
+//Cuando se marca o desmarca la caja de legendarios, llama a la funcion de filtrar legendarios
+$('.checkBoxLegendaries').change(function(){
     if (!legendariesFilter){
         filterLegendaries();
         swapArrays(legendaryArray);
@@ -641,31 +700,11 @@ $('.soloLegendarios').click(function(){
     updateList();
 })
 
-$('.generacion3').click(function(){
-    if(!genFilter){
-        filterGen(3);
-        swapArrays(genArray);
-    } else {
-        restoreArray();
-        genFilter = false;
-    }
-    updateList();
-})
-
-$('.soloTipo').click(function(){
-    if(!typeFilter){
-        filterType('None', 'Agua');
-        swapArrays(typeArray);
-    } else {
-        restoreArray();
-        typeFilter = false;
-    }
-    updateList();
-})
-
-$('.buscaNombre').click(function(){
+//Cuando cambia la barra de busqueda de nombres (es decir, cuando se escribe y se pulsa enter) llama a la funcion de buscar por nombre
+$('.nombreSearch').change(function(){
+    var nameSearch_ = $('.nombreSearch').val();
     if (!nameFilter){
-        searchByName('saur');
+        searchByName(nameSearch_);
         swapArrays(nameArray);
     } else {
         restoreArray();
@@ -674,9 +713,11 @@ $('.buscaNombre').click(function(){
     updateList();
 })
 
-$('.buscaId').click(function(){
+//Cuando cambia la barra de busqueda de ID llama a la funcion de buscar por IDs
+$('.idSearch').change(function(){
+    var idSearch_ = parseInt($('.idSearch').val());
     if (!idFilter){
-        searchById(1);
+        searchById(idSearch_);
         swapArrays(idArray);
     } else {
         restoreArray();
@@ -685,16 +726,7 @@ $('.buscaId').click(function(){
     updateList();
 })
 
-$(".cambiaOrden").click(function(){
-    reversePokedex();
-});
-
-$("#checkBoxLegendaries").mousedown(function(){
-    if (this.checked){
-        console.log("Se ha pulsado");
-    }
-})
-
+//Se muestra u oculta el boton de borrado cuando se pasa el raton por encima de la imagen del Pokemon
 $('.imagenPokemon').mouseover(function(){
     $('.buttonDelete').fadeIn("slow");
 })
