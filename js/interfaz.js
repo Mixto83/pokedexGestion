@@ -308,52 +308,54 @@ function showList(){
     $('.buttonLeft').fadeIn("slow");
 
 }
-//TODO
-$(".addPokemon").click(function () {
-    //Prueba con formulario 
-    engadirPokemon();
-    if (pokeDisplayed){
-        hidePokemonDetail();
-    }
-    //Prueba para comprobar que se añaden al array y se leen bien
-   /*
-    var newPoke = new Pokemon(150, 'Mewtwo', 'Psiquico', 'None', 1, true, 3, document.getElementById("pokeImg"));
-    newPoke.image = "assets/pokemon_images/" + newPoke.id + ".png";
-    newPoke.arrayPos = pokeArray.length;
-    pokeArray.push(newPoke);
-    alert("Hecho " + newPoke.id);
-    //Metodo de insercion por el usuario
-    //Faltara incluirlo en la BD
-    /*var newId = parseInt(prompt("Id", "150"));
-    var newName = prompt("Nombre", 'Mewtwo');
-    var newType1 = prompt("Tipo1", 'Psiquico');
-    var newType2 = prompt("Tipo2", 'None');
-    var newGen = parseInt(prompt("Generacion", "1"));
-    var newLegendary = Boolean(prompt("Legendario", "true"));
-    var newForms = parseInt(prompt("Formas", "3"));
-    var newPoke = new Pokemon(newId, newName, newType1, newType2, newGen, newLegendary, newForms);
-    
-    var newPoke = new Pokemon(150, 'Mewtwo', 'Psiquico', 'None', 1, true, 3);
-    newPoke.image = "assets/pokemon_images/" + newPoke.id + ".png";
-    newPoke.arrayPos = pokeArray.length;
-    pokeArray.push(newPoke);
-    alert("Hecho " + newPoke.id);
-    console.log(newPoke.legendary === true);
 
-    //Si es el unico Pokemon del array, pasa a ser el primero y actualiza la lista
+//Nuevo Pokemon
+function addPokemon(){
+    var newId = pokeArray.length + 1;//Provisional
+    var newType1 = $('.tipo1Add').val();
+    var newType2 = $('.tipo2Add').val();
+    var newName = $('.nombreAdd').val();
+    var newGen = parseInt($('.genAdd').val());
+    //var newHab = $('habilidad0).val();
+    var newLegendary = $('.legendarioAdd').prop('checked');
+    var newNForms = parseInt($('.numberFormsAdd').val());
+    //var newDesc = $('descripcionAdd').val();
+    var newPoke = new Pokemon(newId, newName, newType1, newType2, newGen, newLegendary, newNForms);
+    newPoke.image = "assets/pokemon_images/" + newPoke.id + ".png";
+    newPoke.arrayPos = pokeArray.length;
+    pokeArray.push(newPoke);
+    //Si es el unico Pokemon del array, pasa a ser el primero
     if (pokeArray.length === 1){
         firstPokemon = pokeArray[0];
-        updateList();
-    }*/
-    
-});
+    }
+    console.log("Pokemon Engadido");
+    updateList();
+}
+
+$('.buttonEngadir').click(function(){
+    console.log("Engadir llamado")
+    addPokemon();
+})
 
 //Engadir es anhadir en gallego
 function engadirPokemon(){
     hideList();
     hideFilters();
     showFormEngadir();
+    resetAddForm();
     engadirDisplayed = true;
+}
+
+//Resetea los valores del formulario
+function resetAddForm(){
+    $('.tipo1Add').val('Fuego');
+    $('.tipo2Add').val('None');
+    $('.nombreAdd').val('Nuevo Nombre');
+    $('.genAdd').val(0);
+    //$('habilidad').val('llamas');
+    $('.legendarioAdd').prop('checked', false);
+    $('.numberFormsAdd').val(1);
+    //$('descripcionAdd').val('');
 }
 
 // Metodo para mostrar el formulario
@@ -734,3 +736,12 @@ $('.imagenPokemon').mouseover(function(){
 $('.imagenPokemon').mouseout(function(){
     $('.buttonDelete').fadeOut("slow");
 })
+
+//Boton provisional a la espera del sprite
+$(".addPokemon").click(function () {
+    //Prueba con formulario 
+    engadirPokemon();
+    if (pokeDisplayed){
+        hidePokemonDetail();
+    }
+});

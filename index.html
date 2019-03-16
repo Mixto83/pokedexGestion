@@ -7,7 +7,7 @@
     <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'></script>
     <script src="js/index.js"></script>
     <link rel="stylesheet" type="text/css" href="css/index.css">
-
+    <meta charset="utf-8"/>
 </head>
 
 <body>
@@ -16,37 +16,80 @@
         <div class="fondo">
             <div class="engadirPokemon">
                 <form>
-                    <p>Nombre: <input class="nombre" type="text"></p>
+                    <p>Nombre: <input class="nombreAdd" type="text"></p>
                     <p>Tipo 1:
-                        <select class="tipo1">
-                            <option value="fuego">Fuego</option>
-                            <option value="planta">Planta</option>
-                            <option value="agua">Agua</option>
+                        <select class="tipo1Add">
+                            <option value="Fuego">Fuego</option>
+                            <option value="Agua">Agua</option>
+                            <option value="Planta">Planta</option>
+                            <option value="Electrico">Electrico</option>
+                            <option value="Psiquico">Psiquico</option>
+                            <option value="Lucha">Lucha</option>
+                            <option value="Fantasma">Fantasma</option>
+                            <option value="Tierra">Tierrra</option>
+                            <option value="Veneno">Veneno</option>
+                            <option value="Roca">Roca</option>
+                            <option value="Volador">Volador</option>
+                            <option value="Bicho">Bicho</option>
+                            <option value="Dragon">Dragon</option>
+                            <option value="Hielo">Hielo</option>
+                            <option value="Normal">Normal</option>
+                            <option value="Siniestro">Siniestro</option>
+                            <option value="Acero">Acero</option>
+                            <option value="Hada">Hada</option>
                         </select>
                     </p>
                     <p>Tipo 2:
-                        <select class="tipo2">
-                            <option value="fuego">Fuego</option>
-                            <option value="planta">Planta</option>
-                            <option value="agua">Agua</option>
+                        <select class="tipo2Add">
+                            <option value="None">Ninguno</option>
+                            <option value="Fuego">Fuego</option>
+                            <option value="Agua">Agua</option>
+                            <option value="Planta">Planta</option>
+                            <option value="Electrico">Electrico</option>
+                            <option value="Psiquico">Psiquico</option>
+                            <option value="Lucha">Lucha</option>
+                            <option value="Fantasma">Fantasma</option>
+                            <option value="Tierra">Tierrra</option>
+                            <option value="Veneno">Veneno</option>
+                            <option value="Roca">Roca</option>
+                            <option value="Volador">Volador</option>
+                            <option value="Bicho">Bicho</option>
+                            <option value="Dragon">Dragon</option>
+                            <option value="Hielo">Hielo</option>
+                            <option value="Normal">Normal</option>
+                            <option value="Siniestro">Siniestro</option>
+                            <option value="Acero">Acero</option>
+                            <option value="Hada">Hada</option>
                         </select>
                     </p>
                     <p>Habilidad: 
                             <select class="habilidad">
-                                    <option value="llama">Mar llamas</option>
-                                    <option value="robustez">Robustez</option>
-                                </select>
+                                <option value="llama">Mar llamas</option>
+                                <option value="robustez">Robustez</option>
+                            </select>
+                    </p>
+                    <p>Generacion:
+                            <select class="genAdd">
+                                    <option value=1>Primera</option>
+                                    <option value=2>Segunda</option>
+                                    <option value=3>Tercera</option>
+                                    <option value=4>Cuarta</option>
+                                    <option value=5>Quinta</option>
+                                    <option value=6>Sexta</option>
+                                    <option value=7>Septima</option>
+                            </select>
                     </p>
                     <p>Legendario: 
-                            <input class="legendario" type="checkbox" value=false>
+                            <input class="legendarioAdd" type="checkbox" value=false>
                     </p>
+                    <p>Numero de Formas: <input class="numberFormsAdd" type="number"></p>
                     <p>Descripcion: 
-                        <textarea class="descripcion" style="resize:none;"></textarea>
+                        <textarea class="descripcionAdd" style="resize:none;"></textarea>
                     </p>
                     <p>Introduzca una imagen en formato PNG: 
                         <input type="file" accept="image/*">
                     </p>
-                    <p><input type="button" value="Engadir"></p>
+                    <p><input type="button" class="buttonEngadir" value="engadir"></p>
                 </form>
             </div>
             <div class="filtros">
