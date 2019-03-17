@@ -286,13 +286,28 @@ function hidePokemonDetail(){
 
 //Muestra la lista
 function showList(){
-    $('#imgListado.p2').fadeIn("slow");
-    $('#imgListado.p3').fadeIn("slow");
-    $('#imgListado.p4').fadeIn("slow");
-    $('#imgListado.p5').fadeIn("slow");
-    $('#imgListado.p6').fadeIn("slow");
-    $('#imgListado.p7').fadeIn("slow");
-    $('#imgListado.p1').fadeIn("slow");
+    if (pokeArray.length > 0){
+        $('#imgListado.p1').fadeIn("slow");
+    }
+    if (pokeArray.length > 1){
+        $('#imgListado.p2').fadeIn("slow");
+    }
+    if (pokeArray.length > 2){
+        $('#imgListado.p3').fadeIn("slow");
+    }
+    if (pokeArray.length > 3){
+        $('#imgListado.p4').fadeIn("slow");
+    }
+    if (pokeArray.length > 4){
+        $('#imgListado.p5').fadeIn("slow");
+    }
+    if (pokeArray.length > 5){
+        $('#imgListado.p6').fadeIn("slow");
+    }
+    if (pokeArray.length > 6){
+        $('#imgListado.p7').fadeIn("slow");
+    }
+    
 
     $('.txtListado').fadeIn("slow");
     $('.txtListado2').fadeIn("slow");
