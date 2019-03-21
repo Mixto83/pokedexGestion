@@ -3,7 +3,6 @@ var engadirDisplayed = false;
 var legendariesFilter = false;
 var genFilter = false;
 var typeFilter = false;
-var type2Filter = false;
 var nameFilter = false;
 var idFilter = false;
 var pokeSrc = "assets/pokemon_images/";
@@ -281,11 +280,11 @@ function hidePokemonDetail(){
 
     $('.buttonBack').fadeOut("slow");
     $('.buttonChangeForm').fadeOut("slow");
-
 }
 
 //Muestra la lista
 function showList(){
+    //Si el tamanio del array es menor que 7, empieza a no pintar recuadros
     if (pokeArray.length > 0){
         $('#imgListado.p1').fadeIn("slow");
     }
@@ -643,9 +642,10 @@ function swapArrays(origin){
     backupArray = pokeArray;
     pokeArray = origin;
     firstPokemon = pokeArray[0];
+
     updatePokemonIndex();
-    console.log(backupArray[0].toString());
 }
+
 
 //Restaura el array de Pokemon original
 function restoreArray(){
@@ -672,16 +672,21 @@ $('.tipo2Search').change(function(){
 function getTypesSearch(){
     var type1Search = $('.tipo1Search').val();
     var type2Search = $('.tipo2Search').val();
-    if(!typeFilter || !type2Filter){
+
+    if(!typeFilter){
         filterType(type1Search, type2Search);
         swapArrays(typeArray);
     } else {
-        restoreArray();
         typeFilter = false;
-        typeFilter2 = false;
+        restoreArray();
+        if (type1Search !== 'None' || type2Search !== 'None'){
+            filterType(type1Search, type2Search);
+            swapArrays(typeArray);
+        }
     }
     updateList();
 }
+
 
 //Llama a la funcion de reordenar la Pokedex al pulsar en uno de los botones excluyentes.
 $('.ordenDesc').change(function(){
@@ -699,8 +704,12 @@ $('.genDisplay').change(function(){
         filterGen(genNumberFilter);
         swapArrays(genArray);
     } else {
-        restoreArray();
         genFilter = false;
+        restoreArray();
+        if (genNumberFilter !== 0){
+            filterGen(genNumberFilter);
+            swapArrays(genArray);
+        }
     }
     updateList();
 })
@@ -724,8 +733,12 @@ $('.nombreSearch').change(function(){
         searchByName(nameSearch_);
         swapArrays(nameArray);
     } else {
-        restoreArray();
         nameFilter = false;
+        restoreArray();
+        if (nameSearch_ !== ""){
+            searchByName(nameSearch_);
+            swapArrays(nameArray);
+        }
     }
     updateList();
 })
@@ -737,8 +750,12 @@ $('.idSearch').change(function(){
         searchById(idSearch_);
         swapArrays(idArray);
     } else {
-        restoreArray();
         idFilter = false;
+        restoreArray();
+        if (idSearch_ !== 0){
+            searchById(idSearch_);
+            swapArrays(idArray);
+        }
     }
     updateList();
 })
@@ -760,3 +777,9 @@ $(".addPokemon").click(function () {
         hidePokemonDetail();
     }
 });
+
+$(".reseteo").click(function(){
+    resetFilters();
+    restoreArray();
+    updateList();
+})
