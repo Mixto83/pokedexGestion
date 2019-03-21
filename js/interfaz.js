@@ -265,8 +265,7 @@ function showPokemonDetail(){
     $('.buttonRightViewer').fadeIn("slow");
     $('.buttonLeftViewer').fadeIn("slow");
     formCount = 1;
-    $('.buttonBack').fadeIn("slow");
-    
+    $('.buttonBack').fadeIn("slow");    
 }
 
 //Oculta el detalle
@@ -347,7 +346,6 @@ function addPokemon(){
 }
 
 $('.buttonEngadir').click(function(){
-    console.log("Engadir llamado")
     addPokemon();
 })
 
@@ -495,6 +493,53 @@ function updateList(){
     } else {
         $("#listaPk7").html("");
     }
+
+
+    if (pokeArray.length < 1){
+        $('#imgListado.p1').fadeOut("slow");
+    }
+    if (pokeArray.length < 2){
+        $('#imgListado.p2').fadeOut("slow");
+    }
+    if (pokeArray.length < 3){
+        $('#imgListado.p3').fadeOut("slow");
+    }
+    if (pokeArray.length < 4){
+        $('#imgListado.p4').fadeOut("slow");
+    }
+    if (pokeArray.length < 5){
+        $('#imgListado.p5').fadeOut("slow");
+    }
+    if (pokeArray.length < 6){
+        $('#imgListado.p6').fadeOut("slow");
+    }
+    if (pokeArray.length < 7){
+        $('#imgListado.p7').fadeOut("slow");
+    }
+
+    if (pokeArray.length > 0){
+        $('#imgListado.p1').fadeIn("slow");
+    }
+    if (pokeArray.length > 1){
+        $('#imgListado.p2').fadeIn("slow");
+    }
+    if (pokeArray.length > 2){
+        $('#imgListado.p3').fadeIn("slow");
+    }
+    if (pokeArray.length > 3){
+        $('#imgListado.p4').fadeIn("slow");
+    }
+    if (pokeArray.length > 4){
+        $('#imgListado.p5').fadeIn("slow");
+    }
+    if (pokeArray.length > 5){
+        $('#imgListado.p6').fadeIn("slow");
+    }
+    if (pokeArray.length > 6){
+        $('#imgListado.p7').fadeIn("slow");
+    }
+
+    
     
 }
 //Cierra la ventana de detalle
@@ -557,7 +602,7 @@ function reversePokedex(){
 
 //Crea un nuevo Array en el que guarda los Pokemon legendarios
 function filterLegendaries(){
-    legendariesFilter = true;
+    //legendariesFilter = true;
     legendaryArray = [];
     for (var i = 0; i < pokeArray.length; i++){
         if (pokeArray[i].legendary){
@@ -567,7 +612,6 @@ function filterLegendaries(){
     //Debugging
     for (var i = 0; i < legendaryArray.length; i++){
         legendaryArray[i].arrayPos = i;
-        console.log(legendaryArray[i].toString());
     }
 }
 
@@ -642,7 +686,6 @@ function swapArrays(origin){
     backupArray = pokeArray;
     pokeArray = origin;
     firstPokemon = pokeArray[0];
-
     updatePokemonIndex();
 }
 
@@ -650,6 +693,8 @@ function swapArrays(origin){
 //Restaura el array de Pokemon original
 function restoreArray(){
     pokeArray = backupArray;
+    updatePokemonIndex();
+    firstPokemon = pokeArray[0];
 }
 
 //Actualiza las posiciones en el array de los Pokemon
@@ -716,14 +761,26 @@ $('.genDisplay').change(function(){
 
 //Cuando se marca o desmarca la caja de legendarios, llama a la funcion de filtrar legendarios
 $('.checkBoxLegendaries').change(function(){
-    if (!legendariesFilter){
+    legendariesFilter = $('.checkBoxLegendaries').prop('checked');
+    if (legendariesFilter){
         filterLegendaries();
         swapArrays(legendaryArray);
     } else {
         restoreArray();
-        legendariesFilter = false; 
     }
     updateList();
+
+
+
+/*
+    if (!legendariesFilter){
+        filterLegendaries();
+        swapArrays(legendaryArray);
+    } else {
+        legendariesFilter = false;
+        restoreArray();
+    }
+    updateList();*/
 })
 
 //Cuando cambia la barra de busqueda de nombres (es decir, cuando se escribe y se pulsa enter) llama a la funcion de buscar por nombre
