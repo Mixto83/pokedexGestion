@@ -1,10 +1,21 @@
-var pokeDisplayed = false;
-var engadirDisplayed = false;
-var legendariesFilter = false;
+/*var legendariesFilter = false;
 var genFilter = false;
 var typeFilter = false;
 var nameFilter = false;
 var idFilter = false;
+*/
+var pokeDisplayed = false;
+var engadirDisplayed = false;
+var generalFilter = false;
+
+var legendaryBool = false;
+var type1Value = 'None';
+var type2Value = 'None';
+var genValue = 0;
+var idValue = 0;
+var nameValue = "";
+var backupDone = false;
+
 var pokeSrc = "assets/pokemon_images/";
 //Variables para probar que funciona la lista
 var poke1 = new Pokemon(1, 'Bulbasaur', 'Planta', 'Veneno', 1, false, 1);
@@ -151,6 +162,52 @@ $(".mitad2").click(function () {
     init();
 });
 
+function showBoxesFromList(){
+    if (pokeArray.length < 1){
+        $('#imgListado.p1').fadeOut("slow");
+    }
+    if (pokeArray.length < 2){
+        $('#imgListado.p2').fadeOut("slow");
+    }
+    if (pokeArray.length < 3){
+        $('#imgListado.p3').fadeOut("slow");
+    }
+    if (pokeArray.length < 4){
+        $('#imgListado.p4').fadeOut("slow");
+    }
+    if (pokeArray.length < 5){
+        $('#imgListado.p5').fadeOut("slow");
+    }
+    if (pokeArray.length < 6){
+        $('#imgListado.p6').fadeOut("slow");
+    }
+    if (pokeArray.length < 7){
+        $('#imgListado.p7').fadeOut("slow");
+    }
+
+    if (pokeArray.length > 0){
+        $('#imgListado.p1').fadeIn("slow");
+    }
+    if (pokeArray.length > 1){
+        $('#imgListado.p2').fadeIn("slow");
+    }
+    if (pokeArray.length > 2){
+        $('#imgListado.p3').fadeIn("slow");
+    }
+    if (pokeArray.length > 3){
+        $('#imgListado.p4').fadeIn("slow");
+    }
+    if (pokeArray.length > 4){
+        $('#imgListado.p5').fadeIn("slow");
+    }
+    if (pokeArray.length > 5){
+        $('#imgListado.p6').fadeIn("slow");
+    }
+    if (pokeArray.length > 6){
+        $('#imgListado.p7').fadeIn("slow");
+    }
+}
+
 // Inicia el menú de la pokedex
 function init() {
     currentPokemon = pokeArray[0];//Controla el Pokemon que se ve en el visor de imagenes
@@ -179,8 +236,16 @@ function resetFilters(){
     $('.genDisplay').val(0);
     $('.nombreSearch').val('');
     $('.idSearch').val(0);
-    $('.ordenAsc').prop('checked', false);
-    $('.ordenDesc').prop('checked', true);
+    $('.ordenAsc').prop('checked', true);
+    $('.ordenDesc').prop('checked', false);
+
+    legendaryBool = false;
+    type1Value = 'None';
+    type2Value = 'None';
+    genValue = 0;
+    idValue = 0;
+    nameValue = "";
+    backupDone = false;
 }
 
 //Función para obtener el pokemon según su posición en la lista
@@ -492,55 +557,7 @@ function updateList(){
         $("#listaPk7").html(pokeArray[firstPokemon.arrayPos+6].id + " " + pokeArray[firstPokemon.arrayPos+6].name);
     } else {
         $("#listaPk7").html("");
-    }
-
-
-    if (pokeArray.length < 1){
-        $('#imgListado.p1').fadeOut("slow");
-    }
-    if (pokeArray.length < 2){
-        $('#imgListado.p2').fadeOut("slow");
-    }
-    if (pokeArray.length < 3){
-        $('#imgListado.p3').fadeOut("slow");
-    }
-    if (pokeArray.length < 4){
-        $('#imgListado.p4').fadeOut("slow");
-    }
-    if (pokeArray.length < 5){
-        $('#imgListado.p5').fadeOut("slow");
-    }
-    if (pokeArray.length < 6){
-        $('#imgListado.p6').fadeOut("slow");
-    }
-    if (pokeArray.length < 7){
-        $('#imgListado.p7').fadeOut("slow");
-    }
-
-    if (pokeArray.length > 0){
-        $('#imgListado.p1').fadeIn("slow");
-    }
-    if (pokeArray.length > 1){
-        $('#imgListado.p2').fadeIn("slow");
-    }
-    if (pokeArray.length > 2){
-        $('#imgListado.p3').fadeIn("slow");
-    }
-    if (pokeArray.length > 3){
-        $('#imgListado.p4').fadeIn("slow");
-    }
-    if (pokeArray.length > 4){
-        $('#imgListado.p5').fadeIn("slow");
-    }
-    if (pokeArray.length > 5){
-        $('#imgListado.p6').fadeIn("slow");
-    }
-    if (pokeArray.length > 6){
-        $('#imgListado.p7').fadeIn("slow");
-    }
-
-    
-    
+    } 
 }
 //Cierra la ventana de detalle
 $(".buttonBack").click(function () {
@@ -600,6 +617,792 @@ function reversePokedex(){
     updateList();
 }
 
+//Guarda en pokeArray el array que queramos filtrar. Guarda pokeArray en un backup para restaurarlo luego
+function swapArrays(origin){
+    backupArray = pokeArray;
+    pokeArray = origin;
+    firstPokemon = pokeArray[0];
+    updatePokemonIndex();
+}
+
+
+//Restaura el array de Pokemon original
+function restoreArray(){
+    generalFilter = false;
+    pokeArray = backupArray;
+    updatePokemonIndex();
+    firstPokemon = pokeArray[0];
+}
+
+//Actualiza las posiciones en el array de los Pokemon
+function updatePokemonIndex(){
+    for (var i = 0; i < pokeArray.length; i++){
+        pokeArray[i].arrayPos = i;
+    }
+}
+
+///SE DEBE CAMBIAR LA FORMA EN LA QUE SE HACE BACKUP DEL ARRAY ORIGINAL PARA PODER UTILIZAR CORRECTAMENTE LOS FILTROS DE BUSQUEDA
+//Llama a la funcion de cambiado de tipo cuando cambia el valor de cualquiera de los dropdown
+$('.tipo1Search').change(function(){
+    getTypesSearch();
+})
+
+$('.tipo2Search').change(function(){
+    getTypesSearch();
+})
+
+function getTypesSearch(){
+    type1Value = $('.tipo1Search').val();
+    type2Value = $('.tipo2Search').val();
+
+    search();
+}
+
+
+//Llama a la funcion de reordenar la Pokedex al pulsar en uno de los botones excluyentes.
+$('.ordenDesc').change(function(){
+    reversePokedex();
+})
+
+$('.ordenAsc').change(function(){
+    reversePokedex();
+})
+
+//Llama a la funcion de filtrar generacion cuando se cambia el valor del dropdown.
+$('.genDisplay').change(function(){
+    genValue = parseInt($('.genDisplay').val());
+    search();
+})
+
+//Cuando se marca o desmarca la caja de legendarios, llama a la funcion de filtrar legendarios
+$('.checkBoxLegendaries').change(function(){
+    legendaryBool = $('.checkBoxLegendaries').prop('checked');
+    search();
+})
+
+//Cuando cambia la barra de busqueda de nombres (es decir, cuando se escribe y se pulsa enter) llama a la funcion de buscar por nombre
+$('.nombreSearch').change(function(){
+    nameValue = $('.nombreSearch').val();
+    search();
+})
+
+//Cuando cambia la barra de busqueda de ID llama a la funcion de buscar por IDs
+$('.idSearch').change(function(){
+    idValue = parseInt($('.idSearch').val());
+    search();
+})
+
+//Se muestra u oculta el boton de borrado cuando se pasa el raton por encima de la imagen del Pokemon
+$('.imagenPokemon').mouseover(function(){
+    $('.buttonDelete').fadeIn("slow");
+})
+
+$('.imagenPokemon').mouseout(function(){
+    $('.buttonDelete').fadeOut("slow");
+})
+
+//Boton provisional a la espera del sprite
+$(".addPokemon").click(function () {
+    //Prueba con formulario 
+    engadirPokemon();
+    if (pokeDisplayed){
+        hidePokemonDetail();
+    }
+});
+
+$(".reseteo").click(function(){
+    resetFilters();
+    restoreArray();
+    updateList();
+})
+
+function search(){
+    if (!generalFilter){
+        busquedaIntensa(legendaryBool, type1Value, type2Value, genValue, nameValue, idValue);
+        swapArrays(copyArray);
+    } else {
+        restoreArray();
+        busquedaIntensa(legendaryBool, type1Value, type2Value, genValue, nameValue, idValue);
+        swapArrays(copyArray);
+        //generalFilter = false;
+    }
+    updateList();
+    showBoxesFromList();
+}
+
+function busquedaIntensa(boolLegend_, type1_, type2_, gen_, name_, id_number){
+    generalFilter = true;
+    copyArray = [];
+    if (boolLegend_){
+        if (type1_ !== 'None'){
+            if (type2_ !== 'None'){
+                if (gen_ !== 0){
+                    if (name_ !== ""){
+                        if (id_number !== 0){
+                            for (var i = 0; i < pokeArray.length; i++){
+                                var idString = pokeArray[i].id.toString();
+                                if (pokeArray[i].legendary && pokeArray[i].gen === gen_ && pokeArray[i].name.includes(name_) && idString.includes(id_number) &&
+                                ((pokeArray[i].type1 === type1_ && pokeArray[i].type2 === type2_) || (pokeArray[i].type1 === type2_ 
+                                && pokeArray[i].type2 === type1_))){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        } else {
+                            //Borrar ID
+                            for (var i = 0; i < pokeArray.length; i++){
+                                if (pokeArray[i].legendary && pokeArray[i].gen === gen_ && pokeArray[i].name.includes(name_) &&
+                                ((pokeArray[i].type1 === type1_ && pokeArray[i].type2 === type2_) || (pokeArray[i].type1 === type2_ 
+                                && pokeArray[i].type2 === type1_))){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        }
+                    } else{
+                        //Borrar Nombre
+                        if (id_number !== 0){
+                            for (var i = 0; i < pokeArray.length; i++){
+                                var idString = pokeArray[i].id.toString();
+                                if (pokeArray[i].legendary && pokeArray[i].gen === gen_ && idString.includes(id_number) &&
+                                ((pokeArray[i].type1 === type1_ && pokeArray[i].type2 === type2_) || (pokeArray[i].type1 === type2_ 
+                                && pokeArray[i].type2 === type1_))){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        } else {
+                            //Borrar ID
+                            for (var i = 0; i < pokeArray.length; i++){
+                                if (pokeArray[i].legendary && pokeArray[i].gen === gen_ &&
+                                ((pokeArray[i].type1 === type1_ && pokeArray[i].type2 === type2_) || (pokeArray[i].type1 === type2_ 
+                                && pokeArray[i].type2 === type1_))){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    //Borrar Gen
+                    if (name_ !== ""){
+                        if (id_number !== 0){
+                            for (var i = 0; i < pokeArray.length; i++){
+                                var idString = pokeArray[i].id.toString();
+                                if (pokeArray[i].legendary && pokeArray[i].name.includes(name_) && idString.includes(id_number) &&
+                                ((pokeArray[i].type1 === type1_ && pokeArray[i].type2 === type2_) || (pokeArray[i].type1 === type2_ 
+                                && pokeArray[i].type2 === type1_))){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        } else {
+                            //Borrar ID
+                            for (var i = 0; i < pokeArray.length; i++){
+                                if (pokeArray[i].legendary && pokeArray[i].name.includes(name_) &&
+                                ((pokeArray[i].type1 === type1_ && pokeArray[i].type2 === type2_) || (pokeArray[i].type1 === type2_ 
+                                && pokeArray[i].type2 === type1_))){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        }
+                    } else{
+                        //Borrar Nombre
+                        if (id_number !== 0){
+                            for (var i = 0; i < pokeArray.length; i++){
+                                var idString = pokeArray[i].id.toString();
+                                if (pokeArray[i].legendary && idString.includes(id_number) &&
+                                ((pokeArray[i].type1 === type1_ && pokeArray[i].type2 === type2_) || (pokeArray[i].type1 === type2_ 
+                                && pokeArray[i].type2 === type1_))){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        } else {
+                            //Borrar ID
+                            for (var i = 0; i < pokeArray.length; i++){
+                                if (pokeArray[i].legendary &&
+                                ((pokeArray[i].type1 === type1_ && pokeArray[i].type2 === type2_) || (pokeArray[i].type1 === type2_ 
+                                && pokeArray[i].type2 === type1_))){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        }
+                    }
+                }
+            } else {
+                //Type1 != 'None y Type2 es None, asi que (pokeArray[i].type1 === type1_ || pokeArray[i].type2 === type1_)
+                if (gen_ !== 0){
+                    if (name_ !== ""){
+                        if (id_number !== 0){
+                            for (var i = 0; i < pokeArray.length; i++){
+                                var idString = pokeArray[i].id.toString();
+                                if (pokeArray[i].legendary && pokeArray[i].gen === gen_ && pokeArray[i].name.includes(name_) && idString.includes(id_number) &&
+                                (pokeArray[i].type1 === type1_ || pokeArray[i].type2 === type1_)){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        } else {
+                            //Borrar ID
+                            for (var i = 0; i < pokeArray.length; i++){
+                                if (pokeArray[i].legendary && pokeArray[i].gen === gen_ && pokeArray[i].name.includes(name_) &&
+                                (pokeArray[i].type1 === type1_ || pokeArray[i].type2 === type1_)){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        }
+                    } else{
+                        //Borrar Nombre
+                        if (id_number !== 0){
+                            for (var i = 0; i < pokeArray.length; i++){
+                                var idString = pokeArray[i].id.toString();
+                                if (pokeArray[i].legendary && pokeArray[i].gen === gen_ && idString.includes(id_number) &&
+                                (pokeArray[i].type1 === type1_ || pokeArray[i].type2 === type1_)){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        } else {
+                            //Borrar ID
+                            for (var i = 0; i < pokeArray.length; i++){
+                                if (pokeArray[i].legendary && pokeArray[i].gen === gen_ &&
+                                    (pokeArray[i].type1 === type1_ || pokeArray[i].type2 === type1_)){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    //Borrar Gen
+                    if (name_ !== ""){
+                        if (id_number !== 0){
+                            for (var i = 0; i < pokeArray.length; i++){
+                                var idString = pokeArray[i].id.toString();
+                                if (pokeArray[i].legendary && pokeArray[i].name.includes(name_) && idString.includes(id_number) &&
+                                (pokeArray[i].type1 === type1_ || pokeArray[i].type2 === type1_)){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        } else {
+                            //Borrar ID
+                            for (var i = 0; i < pokeArray.length; i++){
+                                if (pokeArray[i].legendary && pokeArray[i].name.includes(name_) &&
+                                (pokeArray[i].type1 === type1_ || pokeArray[i].type2 === type1_)){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        }
+                    } else{
+                        //Borrar Nombre
+                        if (id_number !== 0){
+                            for (var i = 0; i < pokeArray.length; i++){
+                                var idString = pokeArray[i].id.toString();
+                                if (pokeArray[i].legendary && idString.includes(id_number) &&
+                                (pokeArray[i].type1 === type1_ || pokeArray[i].type2 === type1_)){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        } else {
+                            //Borrar ID
+                            for (var i = 0; i < pokeArray.length; i++){
+                                if (pokeArray[i].legendary &&
+                                    (pokeArray[i].type1 === type1_ || pokeArray[i].type2 === type1_)){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } else {
+            //Type 1 == None, asi que para Type 2 !='None': (pokeArray[i].type1 === type2_ || pokeArray[i].type2 === type2_)
+            
+            if (type2_ !== 'None'){
+                if (gen_ !== 0){
+                    if (name_ !== ""){
+                        if (id_number !== 0){
+                            for (var i = 0; i < pokeArray.length; i++){
+                                var idString = pokeArray[i].id.toString();
+                                if (pokeArray[i].legendary && pokeArray[i].gen === gen_ && pokeArray[i].name.includes(name_) && idString.includes(id_number) &&
+                                (pokeArray[i].type1 === type2_ || pokeArray[i].type2 === type2_)){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        } else {
+                            //Borrar ID
+                            for (var i = 0; i < pokeArray.length; i++){
+                                if (pokeArray[i].legendary && pokeArray[i].gen === gen_ && pokeArray[i].name.includes(name_) &&
+                                (pokeArray[i].type1 === type2_ || pokeArray[i].type2 === type2_)){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        }
+                    } else{
+                        //Borrar Nombre
+                        if (id_number !== 0){
+                            for (var i = 0; i < pokeArray.length; i++){
+                                var idString = pokeArray[i].id.toString();
+                                if (pokeArray[i].legendary && pokeArray[i].gen === gen_ && idString.includes(id_number) &&
+                                (pokeArray[i].type1 === type2_ || pokeArray[i].type2 === type2_)){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        } else {
+                            //Borrar ID
+                            for (var i = 0; i < pokeArray.length; i++){
+                                if (pokeArray[i].legendary && pokeArray[i].gen === gen_ &&
+                                    (pokeArray[i].type1 === type2_ || pokeArray[i].type2 === type2_)){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    //Borrar Gen
+                    if (name_ !== ""){
+                        if (id_number !== 0){
+                            for (var i = 0; i < pokeArray.length; i++){
+                                var idString = pokeArray[i].id.toString();
+                                if (pokeArray[i].legendary && pokeArray[i].name.includes(name_) && idString.includes(id_number) &&
+                                (pokeArray[i].type1 === type2_ || pokeArray[i].type2 === type2_)){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        } else {
+                            //Borrar ID
+                            for (var i = 0; i < pokeArray.length; i++){
+                                if (pokeArray[i].legendary && pokeArray[i].name.includes(name_) &&
+                                (pokeArray[i].type1 === type2_ || pokeArray[i].type2 === type2_)){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        }
+                    } else{
+                        //Borrar Nombre
+                        if (id_number !== 0){
+                            for (var i = 0; i < pokeArray.length; i++){
+                                var idString = pokeArray[i].id.toString();
+                                if (pokeArray[i].legendary && idString.includes(id_number) &&
+                                (pokeArray[i].type1 === type2_ || pokeArray[i].type2 === type2_)){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        } else {
+                            //Borrar ID
+                            for (var i = 0; i < pokeArray.length; i++){
+                                if (pokeArray[i].legendary &&
+                                    (pokeArray[i].type1 === type2_ || pokeArray[i].type2 === type2_)){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        }
+                    }
+                }
+            } else {
+                //Para Type2 == None: BORRAR TIPOS
+                if (gen_ !== 0){
+                    if (name_ !== ""){
+                        if (id_number !== 0){
+                            for (var i = 0; i < pokeArray.length; i++){
+                                var idString = pokeArray[i].id.toString();
+                                if (pokeArray[i].legendary && pokeArray[i].gen === gen_ && pokeArray[i].name.includes(name_) && idString.includes(id_number)){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        } else {
+                            //Borrar ID
+                            for (var i = 0; i < pokeArray.length; i++){
+                                if (pokeArray[i].legendary && pokeArray[i].gen === gen_ && pokeArray[i].name.includes(name_)){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        }
+                    } else{
+                        //Borrar Nombre
+                        if (id_number !== 0){
+                            for (var i = 0; i < pokeArray.length; i++){
+                                var idString = pokeArray[i].id.toString();
+                                if (pokeArray[i].legendary && pokeArray[i].gen === gen_ && idString.includes(id_number)){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        } else {
+                            //Borrar ID
+                            for (var i = 0; i < pokeArray.length; i++){
+                                if (pokeArray[i].legendary && pokeArray[i].gen === gen_){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    //Borrar Gen
+                    if (name_ !== ""){
+                        if (id_number !== 0){
+                            for (var i = 0; i < pokeArray.length; i++){
+                                var idString = pokeArray[i].id.toString();
+                                if (pokeArray[i].legendary && pokeArray[i].name.includes(name_) && idString.includes(id_number)){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        } else {
+                            //Borrar ID
+                            for (var i = 0; i < pokeArray.length; i++){
+                                if (pokeArray[i].legendary && pokeArray[i].name.includes(name_)){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        }
+                    } else{
+                        //Borrar Nombre
+                        if (id_number !== 0){
+                            for (var i = 0; i < pokeArray.length; i++){
+                                var idString = pokeArray[i].id.toString();
+                                if (pokeArray[i].legendary && idString.includes(id_number)){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        } else {
+                            //Borrar ID
+                            for (var i = 0; i < pokeArray.length; i++){
+                                if (pokeArray[i].legendary){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    } else {
+        //Borrar Legendarios
+        if (type1_ !== 'None'){
+            if (type2_ !== 'None'){
+                if (gen_ !== 0){
+                    if (name_ !== ""){
+                        if (id_number !== 0){
+                            for (var i = 0; i < pokeArray.length; i++){
+                                var idString = pokeArray[i].id.toString();
+                                if (pokeArray[i].gen === gen_ && pokeArray[i].name.includes(name_) && idString.includes(id_number) &&
+                                ((pokeArray[i].type1 === type1_ && pokeArray[i].type2 === type2_) || (pokeArray[i].type1 === type2_ 
+                                && pokeArray[i].type2 === type1_))){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        } else {
+                            //Borrar ID
+                            for (var i = 0; i < pokeArray.length; i++){
+                                if (pokeArray[i].gen === gen_ && pokeArray[i].name.includes(name_) &&
+                                ((pokeArray[i].type1 === type1_ && pokeArray[i].type2 === type2_) || (pokeArray[i].type1 === type2_ 
+                                && pokeArray[i].type2 === type1_))){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        }
+                    } else{
+                        //Borrar Nombre
+                        if (id_number !== 0){
+                            for (var i = 0; i < pokeArray.length; i++){
+                                var idString = pokeArray[i].id.toString();
+                                if (pokeArray[i].gen === gen_ && idString.includes(id_number) &&
+                                ((pokeArray[i].type1 === type1_ && pokeArray[i].type2 === type2_) || (pokeArray[i].type1 === type2_ 
+                                && pokeArray[i].type2 === type1_))){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        } else {
+                            //Borrar ID
+                            for (var i = 0; i < pokeArray.length; i++){
+                                if (pokeArray[i].gen === gen_ &&
+                                ((pokeArray[i].type1 === type1_ && pokeArray[i].type2 === type2_) || (pokeArray[i].type1 === type2_ 
+                                && pokeArray[i].type2 === type1_))){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    //Borrar Gen
+                    if (name_ !== ""){
+                        if (id_number !== 0){
+                            for (var i = 0; i < pokeArray.length; i++){
+                                var idString = pokeArray[i].id.toString();
+                                if (pokeArray[i].name.includes(name_) && idString.includes(id_number) &&
+                                ((pokeArray[i].type1 === type1_ && pokeArray[i].type2 === type2_) || (pokeArray[i].type1 === type2_ 
+                                && pokeArray[i].type2 === type1_))){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        } else {
+                            //Borrar ID
+                            for (var i = 0; i < pokeArray.length; i++){
+                                if (pokeArray[i].name.includes(name_) &&
+                                ((pokeArray[i].type1 === type1_ && pokeArray[i].type2 === type2_) || (pokeArray[i].type1 === type2_ 
+                                && pokeArray[i].type2 === type1_))){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        }
+                    } else{
+                        //Borrar Nombre
+                        if (id_number !== 0){
+                            for (var i = 0; i < pokeArray.length; i++){
+                                var idString = pokeArray[i].id.toString();
+                                if (idString.includes(id_number) &&
+                                ((pokeArray[i].type1 === type1_ && pokeArray[i].type2 === type2_) || (pokeArray[i].type1 === type2_ 
+                                && pokeArray[i].type2 === type1_))){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        } else {
+                            //Borrar ID
+                            for (var i = 0; i < pokeArray.length; i++){
+                                if (((pokeArray[i].type1 === type1_ && pokeArray[i].type2 === type2_) || (pokeArray[i].type1 === type2_ 
+                                && pokeArray[i].type2 === type1_))){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        }
+                    }
+                }
+            } else {
+                //Type1 != 'None y Type2 es None, asi que (pokeArray[i].type1 === type1_ || pokeArray[i].type2 === type1_)
+                if (gen_ !== 0){
+                    if (name_ !== ""){
+                        if (id_number !== 0){
+                            for (var i = 0; i < pokeArray.length; i++){
+                                var idString = pokeArray[i].id.toString();
+                                if (pokeArray[i].gen === gen_ && pokeArray[i].name.includes(name_) && idString.includes(id_number) &&
+                                (pokeArray[i].type1 === type1_ || pokeArray[i].type2 === type1_)){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        } else {
+                            //Borrar ID
+                            for (var i = 0; i < pokeArray.length; i++){
+                                if (pokeArray[i].gen === gen_ && pokeArray[i].name.includes(name_) &&
+                                (pokeArray[i].type1 === type1_ || pokeArray[i].type2 === type1_)){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        }
+                    } else{
+                        //Borrar Nombre
+                        if (id_number !== 0){
+                            for (var i = 0; i < pokeArray.length; i++){
+                                var idString = pokeArray[i].id.toString();
+                                if (pokeArray[i].gen === gen_ && idString.includes(id_number) &&
+                                (pokeArray[i].type1 === type1_ || pokeArray[i].type2 === type1_)){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        } else {
+                            //Borrar ID
+                            for (var i = 0; i < pokeArray.length; i++){
+                                if (pokeArray[i].gen === gen_ &&
+                                    (pokeArray[i].type1 === type1_ || pokeArray[i].type2 === type1_)){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    //Borrar Gen
+                    if (name_ !== ""){
+                        if (id_number !== 0){
+                            for (var i = 0; i < pokeArray.length; i++){
+                                var idString = pokeArray[i].id.toString();
+                                if (pokeArray[i].name.includes(name_) && idString.includes(id_number) &&
+                                (pokeArray[i].type1 === type1_ || pokeArray[i].type2 === type1_)){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        } else {
+                            //Borrar ID
+                            for (var i = 0; i < pokeArray.length; i++){
+                                if (pokeArray[i].name.includes(name_) &&
+                                (pokeArray[i].type1 === type1_ || pokeArray[i].type2 === type1_)){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        }
+                    } else{
+                        //Borrar Nombre
+                        if (id_number !== 0){
+                            for (var i = 0; i < pokeArray.length; i++){
+                                var idString = pokeArray[i].id.toString();
+                                if (idString.includes(id_number) &&
+                                (pokeArray[i].type1 === type1_ || pokeArray[i].type2 === type1_)){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        } else {
+                            //Borrar ID
+                            for (var i = 0; i < pokeArray.length; i++){
+                                if (
+                                    (pokeArray[i].type1 === type1_ || pokeArray[i].type2 === type1_)){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } else {
+            //Type 1 == None, asi que para Type 2 !='None': (pokeArray[i].type1 === type2_ || pokeArray[i].type2 === type2_)
+            
+            if (type2_ !== 'None'){
+                if (gen_ !== 0){
+                    if (name_ !== ""){
+                        if (id_number !== 0){
+                            for (var i = 0; i < pokeArray.length; i++){
+                                var idString = pokeArray[i].id.toString();
+                                if (pokeArray[i].gen === gen_ && pokeArray[i].name.includes(name_) && idString.includes(id_number) &&
+                                (pokeArray[i].type1 === type2_ || pokeArray[i].type2 === type2_)){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        } else {
+                            //Borrar ID
+                            for (var i = 0; i < pokeArray.length; i++){
+                                if (pokeArray[i].gen === gen_ && pokeArray[i].name.includes(name_) &&
+                                (pokeArray[i].type1 === type2_ || pokeArray[i].type2 === type2_)){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        }
+                    } else{
+                        //Borrar Nombre
+                        if (id_number !== 0){
+                            for (var i = 0; i < pokeArray.length; i++){
+                                var idString = pokeArray[i].id.toString();
+                                if (pokeArray[i].gen === gen_ && idString.includes(id_number) &&
+                                (pokeArray[i].type1 === type2_ || pokeArray[i].type2 === type2_)){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        } else {
+                            //Borrar ID
+                            for (var i = 0; i < pokeArray.length; i++){
+                                if (pokeArray[i].gen === gen_ &&
+                                    (pokeArray[i].type1 === type2_ || pokeArray[i].type2 === type2_)){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    //Borrar Gen
+                    if (name_ !== ""){
+                        if (id_number !== 0){
+                            for (var i = 0; i < pokeArray.length; i++){
+                                var idString = pokeArray[i].id.toString();
+                                if (pokeArray[i].name.includes(name_) && idString.includes(id_number) &&
+                                (pokeArray[i].type1 === type2_ || pokeArray[i].type2 === type2_)){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        } else {
+                            //Borrar ID
+                            for (var i = 0; i < pokeArray.length; i++){
+                                if (pokeArray[i].name.includes(name_) &&
+                                (pokeArray[i].type1 === type2_ || pokeArray[i].type2 === type2_)){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        }
+                    } else{
+                        //Borrar Nombre
+                        if (id_number !== 0){
+                            for (var i = 0; i < pokeArray.length; i++){
+                                var idString = pokeArray[i].id.toString();
+                                if (idString.includes(id_number) &&
+                                (pokeArray[i].type1 === type2_ || pokeArray[i].type2 === type2_)){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        } else {
+                            //Borrar ID
+                            for (var i = 0; i < pokeArray.length; i++){
+                                if (
+                                    (pokeArray[i].type1 === type2_ || pokeArray[i].type2 === type2_)){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        }
+                    }
+                }
+            } else {
+                //Para Type2 == None: BORRAR TIPOS
+                if (gen_ !== 0){
+                    if (name_ !== ""){
+                        if (id_number !== 0){
+                            for (var i = 0; i < pokeArray.length; i++){
+                                var idString = pokeArray[i].id.toString();
+                                if (pokeArray[i].gen === gen_ && pokeArray[i].name.includes(name_) && idString.includes(id_number)){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        } else {
+                            //Borrar ID
+                            for (var i = 0; i < pokeArray.length; i++){
+                                if (pokeArray[i].gen === gen_ && pokeArray[i].name.includes(name_)){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        }
+                    } else{
+                        //Borrar Nombre
+                        if (id_number !== 0){
+                            for (var i = 0; i < pokeArray.length; i++){
+                                var idString = pokeArray[i].id.toString();
+                                if (pokeArray[i].gen === gen_ && idString.includes(id_number)){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        } else {
+                            //Borrar ID
+                            for (var i = 0; i < pokeArray.length; i++){
+                                if (pokeArray[i].gen === gen_){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    //Borrar Gen
+                    if (name_ !== ""){
+                        if (id_number !== 0){
+                            for (var i = 0; i < pokeArray.length; i++){
+                                var idString = pokeArray[i].id.toString();
+                                if (pokeArray[i].name.includes(name_) && idString.includes(id_number)){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        } else {
+                            //Borrar ID
+                            for (var i = 0; i < pokeArray.length; i++){
+                                if (pokeArray[i].name.includes(name_)){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        }
+                    } else{
+                        //Borrar Nombre
+                        if (id_number !== 0){
+                            for (var i = 0; i < pokeArray.length; i++){
+                                var idString = pokeArray[i].id.toString();
+                                if (idString.includes(id_number)){
+                                    copyArray.push(pokeArray[i]);
+                                }
+                            }
+                        } else{
+                            for (var i = 0; i < pokeArray.length; i++){
+                                    copyArray.push(pokeArray[i]);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+/* FUNCIONES ANTIGUAS
 //Crea un nuevo Array en el que guarda los Pokemon legendarios
 function filterLegendaries(){
     //legendariesFilter = true;
@@ -679,164 +1482,4 @@ function searchById(pokeId){
             idArray.push(pokeArray[i]);
         }
     }
-}
-
-//Guarda en pokeArray el array que queramos filtrar. Guarda pokeArray en un backup para restaurarlo luego
-function swapArrays(origin){
-    backupArray = pokeArray;
-    pokeArray = origin;
-    firstPokemon = pokeArray[0];
-    updatePokemonIndex();
-}
-
-
-//Restaura el array de Pokemon original
-function restoreArray(){
-    pokeArray = backupArray;
-    updatePokemonIndex();
-    firstPokemon = pokeArray[0];
-}
-
-//Actualiza las posiciones en el array de los Pokemon
-function updatePokemonIndex(){
-    for (var i = 0; i < pokeArray.length; i++){
-        pokeArray[i].arrayPos = i;
-    }
-}
-
-///SE DEBE CAMBIAR LA FORMA EN LA QUE SE HACE BACKUP DEL ARRAY ORIGINAL PARA PODER UTILIZAR CORRECTAMENTE LOS FILTROS DE BUSQUEDA
-//Llama a la funcion de cambiado de tipo cuando cambia el valor de cualquiera de los dropdown
-$('.tipo1Search').change(function(){
-    getTypesSearch();
-})
-
-$('.tipo2Search').change(function(){
-    getTypesSearch();
-})
-
-function getTypesSearch(){
-    var type1Search = $('.tipo1Search').val();
-    var type2Search = $('.tipo2Search').val();
-
-    if(!typeFilter){
-        filterType(type1Search, type2Search);
-        swapArrays(typeArray);
-    } else {
-        typeFilter = false;
-        restoreArray();
-        if (type1Search !== 'None' || type2Search !== 'None'){
-            filterType(type1Search, type2Search);
-            swapArrays(typeArray);
-        }
-    }
-    updateList();
-}
-
-
-//Llama a la funcion de reordenar la Pokedex al pulsar en uno de los botones excluyentes.
-$('.ordenDesc').change(function(){
-    reversePokedex();
-})
-
-$('.ordenAsc').change(function(){
-    reversePokedex();
-})
-
-//Llama a la funcion de filtrar generacion cuando se cambia el valor del dropdown.
-$('.genDisplay').change(function(){
-    var genNumberFilter = parseInt($('.genDisplay').val());
-    if(!genFilter){
-        filterGen(genNumberFilter);
-        swapArrays(genArray);
-    } else {
-        genFilter = false;
-        restoreArray();
-        if (genNumberFilter !== 0){
-            filterGen(genNumberFilter);
-            swapArrays(genArray);
-        }
-    }
-    updateList();
-})
-
-//Cuando se marca o desmarca la caja de legendarios, llama a la funcion de filtrar legendarios
-$('.checkBoxLegendaries').change(function(){
-    legendariesFilter = $('.checkBoxLegendaries').prop('checked');
-    if (legendariesFilter){
-        filterLegendaries();
-        swapArrays(legendaryArray);
-    } else {
-        restoreArray();
-    }
-    updateList();
-
-
-
-/*
-    if (!legendariesFilter){
-        filterLegendaries();
-        swapArrays(legendaryArray);
-    } else {
-        legendariesFilter = false;
-        restoreArray();
-    }
-    updateList();*/
-})
-
-//Cuando cambia la barra de busqueda de nombres (es decir, cuando se escribe y se pulsa enter) llama a la funcion de buscar por nombre
-$('.nombreSearch').change(function(){
-    var nameSearch_ = $('.nombreSearch').val();
-    if (!nameFilter){
-        searchByName(nameSearch_);
-        swapArrays(nameArray);
-    } else {
-        nameFilter = false;
-        restoreArray();
-        if (nameSearch_ !== ""){
-            searchByName(nameSearch_);
-            swapArrays(nameArray);
-        }
-    }
-    updateList();
-})
-
-//Cuando cambia la barra de busqueda de ID llama a la funcion de buscar por IDs
-$('.idSearch').change(function(){
-    var idSearch_ = parseInt($('.idSearch').val());
-    if (!idFilter){
-        searchById(idSearch_);
-        swapArrays(idArray);
-    } else {
-        idFilter = false;
-        restoreArray();
-        if (idSearch_ !== 0){
-            searchById(idSearch_);
-            swapArrays(idArray);
-        }
-    }
-    updateList();
-})
-
-//Se muestra u oculta el boton de borrado cuando se pasa el raton por encima de la imagen del Pokemon
-$('.imagenPokemon').mouseover(function(){
-    $('.buttonDelete').fadeIn("slow");
-})
-
-$('.imagenPokemon').mouseout(function(){
-    $('.buttonDelete').fadeOut("slow");
-})
-
-//Boton provisional a la espera del sprite
-$(".addPokemon").click(function () {
-    //Prueba con formulario 
-    engadirPokemon();
-    if (pokeDisplayed){
-        hidePokemonDetail();
-    }
-});
-
-$(".reseteo").click(function(){
-    resetFilters();
-    restoreArray();
-    updateList();
-})
+}*/
