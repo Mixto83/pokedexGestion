@@ -5,6 +5,7 @@ var nameFilter = false;
 var idFilter = false;
 */
 var pokeDisplayed = false;
+var pokeOpen = false;
 var engadirDisplayed = false;
 var generalFilter = false;
 
@@ -210,23 +211,27 @@ function showBoxesFromList(){
 
 // Inicia el menú de la pokedex
 function init() {
-    currentPokemon = pokeArray[0];//Controla el Pokemon que se ve en el visor de imagenes
-    firstPokemon = pokeArray[0];//Controla cual es el primer Pokemon que se ve en la lista de 7
-    $('.mitad1').animate({
-        "left": "-49.5%"
-    }, "slow");
-    $('.mitad2').animate({
-        "left": "+49.5%"
-    }, "slow");
-    $('.fondo').fadeIn("slow");
-    $('#imgListado.p1').fadeTo(10, 0.5);
-    $('#imgListado.p7').fadeTo(10, 0.5);
-    $('.buttonClose').fadeIn("slow");
-    resetFilters();
-    showFilters();
-    showList();
-    updateList();
-   // $('.p1, .p2, .p3, .p4, .p5, .p6, .p7').bind("click", '#imgLis   tado',eventosListaPokemon); // Genera y permite controlar las imagenes en un solo método
+    if (pokeOpen == false) {
+        pokeOpen = true;
+        currentPokemon = pokeArray[0];//Controla el Pokemon que se ve en el visor de imagenes
+        firstPokemon = pokeArray[0];//Controla cual es el primer Pokemon que se ve en la lista de 7
+        var pokedexOpen = true
+        $('.mitad1').animate({
+            "left": "-950px"
+        }, "slow");
+        $('.mitad2').animate({
+            "left": "+950px"
+        }, "slow");
+        $('.fondo').fadeIn("slow");
+        $('#imgListado.p1').fadeTo(10, 0.5);
+        $('#imgListado.p7').fadeTo(10, 0.5);
+        $('.buttonClose').fadeIn("slow");
+        resetFilters();
+        showFilters();
+        showList();
+        updateList();
+    // $('.p1, .p2, .p3, .p4, .p5, .p6, .p7').bind("click", '#imgLis   tado',eventosListaPokemon); // Genera y permite controlar las imagenes en un solo método
+    }
 }
 //Reinicia filtros de busqueda
 function resetFilters(){
@@ -577,11 +582,12 @@ $(".buttonBack").click(function () {
 
 //Cierra la pokedex
 $(".buttonClose").click(function () {
+    pokeOpen = false;
     $('.mitad1').animate({
-        "left": "0%"
+        "left": "0px"
     }, "slow");
     $('.mitad2').animate({
-        "left": "0%"
+        "left": "0px"
     }, "slow");
     $('.fondo').fadeOut("slow");
     if (pokeDisplayed) {
@@ -644,10 +650,14 @@ function updatePokemonIndex(){
 ///SE DEBE CAMBIAR LA FORMA EN LA QUE SE HACE BACKUP DEL ARRAY ORIGINAL PARA PODER UTILIZAR CORRECTAMENTE LOS FILTROS DE BUSQUEDA
 //Llama a la funcion de cambiado de tipo cuando cambia el valor de cualquiera de los dropdown
 $('.tipo1Search').change(function(){
+    $('.ordenAsc').prop('checked', true);
+    $('.ordenDesc').prop('checked', false);
     getTypesSearch();
 })
 
 $('.tipo2Search').change(function(){
+    $('.ordenAsc').prop('checked', true);
+    $('.ordenDesc').prop('checked', false);
     getTypesSearch();
 })
 
@@ -670,6 +680,8 @@ $('.ordenAsc').change(function(){
 
 //Llama a la funcion de filtrar generacion cuando se cambia el valor del dropdown.
 $('.genDisplay').change(function(){
+    $('.ordenAsc').prop('checked', true);
+    $('.ordenDesc').prop('checked', false);
     genValue = parseInt($('.genDisplay').val());
     search();
 })
@@ -682,12 +694,16 @@ $('.checkBoxLegendaries').change(function(){
 
 //Cuando cambia la barra de busqueda de nombres (es decir, cuando se escribe y se pulsa enter) llama a la funcion de buscar por nombre
 $('.nombreSearch').change(function(){
+    $('.ordenAsc').prop('checked', true);
+    $('.ordenDesc').prop('checked', false);
     nameValue = $('.nombreSearch').val();
     search();
 })
 
 //Cuando cambia la barra de busqueda de ID llama a la funcion de buscar por IDs
 $('.idSearch').change(function(){
+    $('.ordenAsc').prop('checked', true);
+    $('.ordenDesc').prop('checked', false);
     idValue = parseInt($('.idSearch').val());
     search();
 })
