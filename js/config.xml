@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuracion>
+    <filtroFondo>
+        <valor>grayscale(1)</valor>
+        <texto>Escala de grises</texto>
+    </filtroFondo>
+     <filtroFondo>
+        <valor>saturate(8)</valor>
+        <texto>Saturacion</texto>
+    </filtroFondo>
+    
+</configuracion>

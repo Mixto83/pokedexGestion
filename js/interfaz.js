@@ -301,7 +301,25 @@ function eventosListaPokemon(event) {
     }
 
 }
+$(".btnConfiguracion").click(function(){
+    boton_configuracion();
+});
 
+//Muestra la pantalla de configuracion
+function boton_configuracion(){
+    hideList();
+    hideFilters();
+    showConfiguration();
+}
+
+//Para mostrar la configuracion extra con el XML
+function showConfiguration(){
+    $(".configuracion").fadeIn("slow");
+}
+//Para ocultar la configuracion extra con el XML
+function hideConfiguration(){
+    $(".configuracion").fadeOut("fast");
+}
 //Oculta la lista
 function hideList() {
     $('#imgListado.p2').fadeOut("fast");
