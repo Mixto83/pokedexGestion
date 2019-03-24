@@ -226,6 +226,7 @@ function init() {
         $('#imgListado.p1').fadeTo(10, 0.5);
         $('#imgListado.p7').fadeTo(10, 0.5);
         $('.buttonClose').fadeIn("slow");
+        hideConfiguration();
         resetFilters();
         showFilters();
         showList();
@@ -302,6 +303,7 @@ function eventosListaPokemon(event) {
 
 }
 $(".btnConfiguracion").click(function(){
+    hideFormEngadir();
     boton_configuracion();
 });
 
@@ -630,6 +632,7 @@ $(".buttonClose").click(function () {
     $('.txtListado7').fadeOut("slow");
     hidePokemonDetail();
     hideFormEngadir();
+    hideConfiguration();
 
 });
 
@@ -738,6 +741,7 @@ $('.imagenPokemon').mouseout(function(){
 //Boton provisional a la espera del sprite
 $(".addPokemon").click(function () {
     //Prueba con formulario 
+    hideConfiguration();
     engadirPokemon();
     if (pokeDisplayed){
         hidePokemonDetail();
