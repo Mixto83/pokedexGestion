@@ -6,15 +6,24 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'></script>
     <script src="js/index.js"></script>
+    <script src="js/config.js"></script>
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <meta charset="utf-8"/>
 </head>
 
 <body>
     <button class="addPokemon">Insertar Pokemon</button>
+    <button class="btnConfiguracion">Configuracion</button>
     <button class="reseteo">Resetear Filtros</button>
     <div class="pokedexFondo">
+       
         <div class="fondo">
+            <div class="configuracion">
+                <p>Filtro de fondo
+                    <select class="filtroFondo">
+                    </select>
+                </p>
+            </div>
             <div class="engadirPokemon">
                 <form>
                     <p>Nombre: <input class="nombreAdd" type="text"></p>
@@ -207,6 +216,7 @@
                 <p id="listaPk7">Pokemon 7</p>
             </div>
         </div>
+
         <div class="mitad1">
             <div class="botonInicio1"></div>
         </div>

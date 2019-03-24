@@ -120,6 +120,17 @@ body {
     left: 100px;
     background-position: top left;
 }
+.configuracion{
+    display:none;
+    font-size: 30px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: relative;
+    top: 100px;
+    left: 100px;
+    background-position: top left;
+}
+
 .engadirPokemon{
     display:none;
     font-size: 30px;
