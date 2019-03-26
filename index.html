@@ -12,11 +12,8 @@
 </head>
 
 <body>
-    <button class="addPokemon">Insertar Pokemon</button>
     <button class="btnConfiguracion">Configuracion</button>
-    <button class="reseteo">Resetear Filtros</button>
     <div class="pokedexFondo">
-       
         <div class="fondo">
             <div class="configuracion">
                 <p>Filtro de fondo
@@ -29,6 +26,7 @@
                     </select>
                 </p>
             </div>
+            <div class="barraDivisoria"></div>
             <div class="engadirPokemon">
                 <form>
                     <p>Nombre: <input class="nombreAdd" type="text"></p>
@@ -104,7 +102,7 @@
                     <p>Introduzca una imagen en formato PNG: 
                         <input type="file" accept="image/*">
                     </p>
-                    <p><input type="button" class="buttonEngadir" value="engadir"></p>
+                    <div class="buttonConfirmar"></div>
                 </form>
             </div>
             <div class="filtros">
@@ -171,8 +169,10 @@
                             <input type="radio" class="ordenAsc" name="orden" value="1">Orden Original<br>
                             <input type="radio" class="ordenDesc" name="orden" value="2">Orden Inverso<br>
                             <p>Nombre: <input class="nombreSearch" type="text"></p>
-                            <p>Id: <input class="idSearch" type="number"></p>
+                            <p>Id: <input class="idSearch" type="number"></p>                        
                 </form>
+                <div class="buttonEngadir"></div>
+                <div class="buttonReseteo"></div>
             </div>
             <div class="ventanaPokemon">
                 <div class="imagenPokemon">

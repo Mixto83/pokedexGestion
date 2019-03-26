@@ -226,6 +226,7 @@ function init() {
         $('#imgListado.p1').fadeTo(10, 0.5);
         $('#imgListado.p7').fadeTo(10, 0.5);
         $('.buttonClose').fadeIn("slow");
+        $('.barraDivisoria').fadeIn("slow");
         hideConfiguration();
         resetFilters();
         showFilters();
@@ -351,6 +352,7 @@ function hideList() {
 function showPokemonDetail(){
     $('.ventanaPokemon').fadeIn("slow");
     $('.imagenPokemon').fadeIn("slow");
+    //$('.buttonDelete').fadeIn("slow");
 
     $('.buttonRightViewer').fadeIn("slow");
     $('.buttonLeftViewer').fadeIn("slow");
@@ -363,6 +365,7 @@ function hidePokemonDetail(){
 
     $('.ventanaPokemon').fadeOut("fast");
     $('.imagenPokemon').fadeOut("fast");
+    //$('.buttonDelete').fadeOut("fast");
 
     $('.buttonRightViewer').fadeOut("slow");
     $('.buttonLeftViewer').fadeOut("slow");
@@ -435,7 +438,7 @@ function addPokemon(){
     updateList();
 }
 
-$('.buttonEngadir').click(function(){
+$('.buttonConfirmar').click(function(){
     addPokemon();
 })
 
@@ -464,21 +467,26 @@ function resetAddForm(){
 function showFormEngadir(){
     $(".engadirPokemon").fadeIn("slow");
     $(".buttonBack").fadeIn("slow");
+    $(".buttonConfirmar").fadeIn("slow");
 }
 
 //Oculta el formulario
 function hideFormEngadir(){
     $(".engadirPokemon").fadeOut("fast");
     $(".buttonBack").fadeOut("slow");
+    $(".buttonConfirmar").fadeOut("slow");
 }
 
 function showFilters(){
-    $('.filtros').fadeIn("slow");//Meter en funcion
-
+    $('.filtros').fadeIn("slow");
+    $('.buttonEngadir').fadeIn("slow");
+    $('.buttonReseteo').fadeIn("slow");
 }
 
 function hideFilters(){
-    $('.filtros').fadeOut("slow");//Meter en funcion
+    $('.filtros').fadeOut("slow");
+    $('.buttonEngadir').fadeOut("slow");
+    $('.buttonReseteo').fadeOut("slow");
 }
 //Baja la lista
 $(".buttonDown").click(function () {
@@ -668,7 +676,6 @@ function updatePokemonIndex(){
     }
 }
 
-///SE DEBE CAMBIAR LA FORMA EN LA QUE SE HACE BACKUP DEL ARRAY ORIGINAL PARA PODER UTILIZAR CORRECTAMENTE LOS FILTROS DE BUSQUEDA
 //Llama a la funcion de cambiado de tipo cuando cambia el valor de cualquiera de los dropdown
 $('.tipo1Search').change(function(){
     $('.ordenAsc').prop('checked', true);
@@ -735,11 +742,19 @@ $('.imagenPokemon').mouseover(function(){
 })
 
 $('.imagenPokemon').mouseout(function(){
-    $('.buttonDelete').fadeOut("slow");
+    console.log($('.buttonDelete').is(':hover'));
+    if ($('.buttonDelete').is(':hover') === false){
+        $('.buttonDelete').fadeOut("slow");
+    }     
 })
 
-//Boton provisional a la espera del sprite
-$(".addPokemon").click(function () {
+$('.buttonDelete').mouseout(function(){
+    if ($('.imagenPokemon').is(':hover') === false){
+        $('.buttonDelete').fadeOut("slow");
+    }     
+})
+
+$(".buttonEngadir").click(function () {
     //Prueba con formulario 
     hideConfiguration();
     engadirPokemon();
@@ -748,10 +763,12 @@ $(".addPokemon").click(function () {
     }
 });
 
-$(".reseteo").click(function(){
+//Posible presencia de bugs: en caso de presentarse alguno, se resolvera cuando esten hechas las consultas de Mongo
+$(".buttonReseteo").click(function(){
     resetFilters();
     restoreArray();
     updateList();
+    showList();
 })
 
 function search(){

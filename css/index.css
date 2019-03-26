@@ -109,15 +109,28 @@ body {
 }
 
 .ventanaPokemon {
-    background-image: url("../assets/ventanaPokemon.png");
+    background-image: url("../assets/marcoPokemonGr.png");
     display: none;
     width: 280px;
     height: 280px;
     background-repeat: no-repeat;
-    background-size: auto;
+    background-size: cover;
     position: relative;
     top: 100px;
     left: 100px;
+    background-position: top left;
+}
+
+.barraDivisoria {
+    background-image: url("../assets/barraDivisoria.png");
+    display: none;
+    width: 9px;
+    height: 955px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: absolute;
+    top: 50px;
+    left: 1000px;
     background-position: top left;
 }
 .configuracion{
@@ -155,6 +168,34 @@ body {
 
 .filtros select{
     font-size: 40px;
+}
+
+.buttonEngadir{
+    background-image: url("../assets/botonAnadirPokemon.png");
+    display: none;
+    width: 279px;
+    height: 111px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    background-position: top left;
+    flex:1;
+}
+
+.buttonReseteo{
+    background-image: url("../assets/botonResetearFiltros.png");
+    display: none;
+    width: 279px;
+    height: 111px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: relative;
+    top: -111px;
+    left: 290px;
+    background-position: top left;
+    flex:1;
 }
 
 .buttonRightViewer{
@@ -220,8 +261,22 @@ body {
     background-repeat: no-repeat;
     background-size: auto;
     position: absolute;
-    top: 315px;
-    left: 318px;
+    top: 318px;
+    left: 317px;
+    background-position: top left;
+    flex:1;
+}
+
+.buttonConfirmar{
+    background-image: url("../assets/botonConfirmar.png");
+    display: none;
+    width: 233px;
+    height: 67px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: relative;
+    top: 0px;
+    left: 0px;
     background-position: top left;
     flex:1;
 }
