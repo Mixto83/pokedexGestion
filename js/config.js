@@ -8,12 +8,18 @@ $(document).ready(function(){
 
     function parser(doc){
         $(".filtroFondo").append($("<option></option>").val("None").html("Sin filtros"));
-        $(doc).find("filtroFondo").each(function(){
+        $(doc).find("filtros").find("filtroFondo").each(function(){
            var valor=($(this).find('valor').text());
             var ide= ($(this).find('texto').text());
             $(".filtroFondo").append($("<option></option>").val(valor).html(ide));
         });
 
+        $(".famFuente").append($("<option></option>").val("initial").html("Default"));
+        $(doc).find("fuentes").find("fuente").each(function(){
+            var valor=$(this).find("valor").text();
+            var text=$(this).find("texto").text();
+            $(".famFuente").append($("<option></option>").val(valor).html(text));
+        });
     }
     $.ajax({
         url:"js/config.xml",
@@ -25,6 +31,11 @@ $(document).ready(function(){
     $(".filtroFondo").change(function(){
         $(".fondo").css("filter",this.value);
     });
+
+    $(".famFuente").change(function(){
+        $(".fondo").css("font-family",this.value);
+    });
+
 });
 
 
