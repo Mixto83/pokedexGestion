@@ -7,6 +7,8 @@ var idFilter = false;
 var pokeDisplayed = false;
 var pokeOpen = false;
 var engadirDisplayed = false;
+var configDisplayed = false;
+
 var generalFilter = false;
 
 var legendaryBool = false;
@@ -16,6 +18,7 @@ var genValue = 0;
 var idValue = 0;
 var nameValue = "";
 var backupDone = false;
+
 
 var pokeSrc = "assets/pokemon_images/";
 //Variables para probar que funciona la lista
@@ -303,7 +306,7 @@ function eventosListaPokemon(event) {
     }
 
 }
-$(".btnConfiguracion").click(function(){
+$(".buttonConfig").click(function(){
     hideFormEngadir();
     boton_configuracion();
 });
@@ -318,10 +321,13 @@ function boton_configuracion(){
 //Para mostrar la configuracion extra con el XML
 function showConfiguration(){
     $(".configuracion").fadeIn("slow");
+    $(".buttonBack").fadeIn("slow");
+    configDisplayed = true;
 }
 //Para ocultar la configuracion extra con el XML
 function hideConfiguration(){
     $(".configuracion").fadeOut("fast");
+    $(".buttonBack").fadeOut("fast");
 }
 //Oculta la lista
 function hideList() {
@@ -362,7 +368,6 @@ function showPokemonDetail(){
 
 //Oculta el detalle
 function hidePokemonDetail(){
-
     $('.ventanaPokemon').fadeOut("fast");
     $('.imagenPokemon').fadeOut("fast");
     //$('.buttonDelete').fadeOut("fast");
@@ -481,12 +486,15 @@ function showFilters(){
     $('.filtros').fadeIn("slow");
     $('.buttonEngadir').fadeIn("slow");
     $('.buttonReseteo').fadeIn("slow");
+    $('.buttonConfig').fadeIn("slow");
 }
 
 function hideFilters(){
     $('.filtros').fadeOut("slow");
     $('.buttonEngadir').fadeOut("slow");
     $('.buttonReseteo').fadeOut("slow");
+    $('.buttonConfig').fadeOut("slow");
+
 }
 //Baja la lista
 $(".buttonDown").click(function () {
@@ -594,17 +602,19 @@ function updateList(){
 }
 //Cierra la ventana de detalle
 $(".buttonBack").click(function () {
+    showList();
+    showFilters();
     if (pokeDisplayed) {
-        showList();
-        showFilters();
         hidePokemonDetail();
         pokeDisplayed = false;
     }
     if (engadirDisplayed){
-        showList();
-        showFilters();
         hideFormEngadir();
         engadirDisplayed = false;
+    }
+    if (configDisplayed){
+        hideConfiguration();
+        configDisplayed = false;
     }
 })
 

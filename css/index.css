@@ -281,6 +281,20 @@ body {
     flex:1;
 }
 
+.buttonConfig{
+    background-image: url("../assets/botonConfiguracion.png");
+    display: none;
+    width: 77px;
+    height: 77px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: relative;
+    top: -55px;
+    left: 620px;
+    background-position: top left;
+    flex:1;
+}
+
 .buttonChangeForm{
     background-image: url("../assets/botonCambioForma.png");
     display: none;
