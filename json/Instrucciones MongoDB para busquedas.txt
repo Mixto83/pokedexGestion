@@ -1,0 +1,27 @@
+Antes de ello inicializar la coleccion como pokemon
+Todas estas se pueden combinar, y lo hace automaticamente el metodo de javascript createQuery().
+
+Buscar pokemon legendarios:
+db.pokemon.find({"is_legendary":1})
+
+Buscar pokemon por tipo (Solo introduciendo un tipo):
+db.pokemon.find({$or:[{"type1":"Entrada"}, {"type2:"Entrada"}]})
+
+Buscar pokemon por tipo (Introduciendo tipo doble):
+db.pokemon.find({$or:[{"type1":"Entrada1", "type2":"Entrada2"}, {"type1":"Entrada2", "type2":"Entrada1"}]})
+
+Buscar pokemon por generacion:
+db.pokemon.find({"generation":num})
+
+Buscar pokemon por nombre:
+db.pokemon.find({"name":"Entrada"})
+
+Buscar pokemon por id (posicion en la pokedex):
+db.pokemon.find({"pokedex_number": num})
+
+Orden normal:
+db.pokemon.find().sort({"pokedex_number":1})
+
+Orden inverso:
+db.pokemon.find().sort({"pokedex_number":-1})
+

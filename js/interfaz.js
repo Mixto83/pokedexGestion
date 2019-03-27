@@ -12,45 +12,48 @@ var configDisplayed = false;
 var generalFilter = false;
 
 var legendaryBool = false;
-var type1Value = 'None';
-var type2Value = 'None';
+var type1Value = "";
+var type2Value = "";
 var genValue = 0;
 var idValue = 0;
 var nameValue = "";
 var backupDone = false;
 
+var youNeedSlice = false;
+var queryString;
+
 
 var pokeSrc = "assets/pokemon_images/";
 //Variables para probar que funciona la lista
-var poke1 = new Pokemon(1, 'Bulbasaur', 'Planta', 'Veneno', 1, false, 1);
-var poke2 = new Pokemon(2, 'Ivysaur', 'Planta', 'Veneno', 1, false, 1);
-var poke3 = new Pokemon(3, 'Venusaur', 'Planta', 'Veneno', 1, false, 2);
-var poke4 = new Pokemon(4, 'Charmander', 'Fuego', 'None', 1, false, 1);
-var poke5 = new Pokemon(5, 'Charmeleon', 'Fuego', 'None', 1, false, 1);
-var poke6 = new Pokemon(6, 'Charizard', 'Fuego', 'Volador', 1, false, 3);
-var poke7 = new Pokemon(7, 'Squirtle', 'Agua', 'None', 1, false, 1);
-var poke8 = new Pokemon(8, 'Wartortle', 'Agua', 'None', 1, false, 1);
-var poke9 = new Pokemon(9, 'Blastoise', 'Agua', 'None', 1, false, 2);
-var poke10 = new Pokemon(10, 'Caterpie', 'Bicho', 'None', 1, false, 1);
-var poke11 = new Pokemon(11, 'Metapod', 'Bicho', 'None', 1, false, 1);
-var poke12 = new Pokemon(12, 'Butterfree', 'Bicho', 'Volador', 1, false, 1);
-var poke13 = new Pokemon(13, 'Weedle', 'Bicho', 'Veneno', 1, false, 1);
-var poke14 = new Pokemon(14, 'Kakuna', 'Bicho', 'Veneno', 1, false, 1);
-var poke15 = new Pokemon(15, 'Beedrill', 'Bicho', 'Veneno', 1, false, 2);
-var poke16 = new Pokemon(16, 'Pidgey', 'Normal', 'Volador', 1, false, 1);
-var poke17 = new Pokemon(17, 'Pidgeotto', 'Normal', 'Volador', 1, false, 1);
-var poke18 = new Pokemon(18, 'Pidgeot', 'Normal', 'Volador', 1, false, 2);
-var poke19 = new Pokemon(19, 'Rattata', 'Normal', 'None', 1, false, 1);
-var poke20 = new Pokemon(20, 'Raticate', 'Normal', 'None', 1, false, 1);
-var poke21 = new Pokemon(21, 'Spearow', 'Normal', 'Volador', 1, false, 1);
-var poke22 = new Pokemon(22, 'Fearow', 'Normal', 'Volador', 1, false, 1);
-var poke23 = new Pokemon(23, 'Ekans', 'Veneno', 'None', 1, false, 1);
-var poke24 = new Pokemon(24, 'Arbok', 'Veneno', 'None', 1, false, 1);
-var poke25 = new Pokemon(25, 'Pikachu', 'Electrico', 'None', 1, false, 5);
-var poke26 = new Pokemon(150, 'Mewtwo', 'Psiquico', 'None', 1, true, 3);
-var poke27 = new Pokemon(254, 'Sceptyle', 'Planta', 'None', 3, false, 2);
-var poke28 = new Pokemon(386, 'Deoxys', 'Psiquico', 'None', 3, true, 4);
-var poke29 = new Pokemon(793, 'Nihilego', 'Psiquico', 'None', 7, true, 1);
+var poke1 = new Pokemon(1, 'Bulbasaur', 'grass', 'poison', 1, false, 1);
+var poke2 = new Pokemon(2, 'Ivysaur', 'grass', 'poison', 1, false, 1);
+var poke3 = new Pokemon(3, 'Venusaur', 'grass', 'poison', 1, false, 2);
+var poke4 = new Pokemon(4, 'Charmander', 'fire', "", 1, false, 1);
+var poke5 = new Pokemon(5, 'Charmeleon', 'fire', "", 1, false, 1);
+var poke6 = new Pokemon(6, 'Charizard', 'fire', 'flying', 1, false, 3);
+var poke7 = new Pokemon(7, 'Squirtle', 'water', "", 1, false, 1);
+var poke8 = new Pokemon(8, 'Wartortle', 'water', "", 1, false, 1);
+var poke9 = new Pokemon(9, 'Blastoise', 'water', "", 1, false, 2);
+var poke10 = new Pokemon(10, 'Caterpie', 'bug', "", 1, false, 1);
+var poke11 = new Pokemon(11, 'Metapod', 'bug', "", 1, false, 1);
+var poke12 = new Pokemon(12, 'Butterfree', 'bug', 'flying', 1, false, 1);
+var poke13 = new Pokemon(13, 'Weedle', 'bug', 'poison', 1, false, 1);
+var poke14 = new Pokemon(14, 'Kakuna', 'bug', 'poison', 1, false, 1);
+var poke15 = new Pokemon(15, 'Beedrill', 'bug', 'poison', 1, false, 2);
+var poke16 = new Pokemon(16, 'Pidgey', 'normal', 'flying', 1, false, 1);
+var poke17 = new Pokemon(17, 'Pidgeotto', 'normal', 'flying', 1, false, 1);
+var poke18 = new Pokemon(18, 'Pidgeot', 'normal', 'flying', 1, false, 2);
+var poke19 = new Pokemon(19, 'Rattata', 'normal', "", 1, false, 1);
+var poke20 = new Pokemon(20, 'Raticate', 'normal', "", 1, false, 1);
+var poke21 = new Pokemon(21, 'Spearow', 'normal', 'flying', 1, false, 1);
+var poke22 = new Pokemon(22, 'Fearow', 'normal', 'flying', 1, false, 1);
+var poke23 = new Pokemon(23, 'Ekans', 'poison', "", 1, false, 1);
+var poke24 = new Pokemon(24, 'Arbok', 'poison', "", 1, false, 1);
+var poke25 = new Pokemon(25, 'Pikachu', 'electric', "", 1, false, 5);
+var poke26 = new Pokemon(150, 'Mewtwo', 'psychic', "", 1, true, 3);
+var poke27 = new Pokemon(254, 'Sceptyle', 'grass', "", 3, false, 2);
+var poke28 = new Pokemon(386, 'Deoxys', 'psychic', "", 3, true, 4);
+var poke29 = new Pokemon(793, 'Nihilego', 'psychic', "", 7, true, 1);
 //Array para probar la lista
 pokeArray = [poke1, poke2, poke3, poke4, poke5, poke6, poke7, poke8, poke9, poke10, poke11, poke12, 
     poke13, poke14, poke15, poke16, poke17, poke18, poke19, poke20, poke21, poke22, poke23, poke24, poke25, poke26, poke27, poke28, poke29];
@@ -144,7 +147,7 @@ $(".buttonRightViewer").click(function () {
 //Función para mostrar la información del Pokémon en la ventana
 function showInfo(){
     pokeImg.src = currentPokemon.image;
-    if (currentPokemon.type2 !== 'None'){
+    if (currentPokemon.type2 !== ""){
         $("#textoPk").html("Nombre: " + currentPokemon.name + "\nTipo1: " +
         currentPokemon.type1 + "\nTipo2: " + currentPokemon.type2); 
     } else {
@@ -241,8 +244,8 @@ function init() {
 //Reinicia filtros de busqueda
 function resetFilters(){
     $('.checkBoxLegendaries').prop('checked', false);
-    $('.tipo1Search').val('None');
-    $('.tipo2Search').val('None');
+    $('.tipo1Search').val("");
+    $('.tipo2Search').val("");
     $('.genDisplay').val(0);
     $('.nombreSearch').val('');
     $('.idSearch').val(0);
@@ -250,8 +253,8 @@ function resetFilters(){
     $('.ordenDesc').prop('checked', false);
 
     legendaryBool = false;
-    type1Value = 'None';
-    type2Value = 'None';
+    type1Value = "";
+    type2Value = "";
     genValue = 0;
     idValue = 0;
     nameValue = "";
@@ -459,7 +462,7 @@ function engadirPokemon(){
 //Resetea los valores del formulario
 function resetAddForm(){
     $('.tipo1Add').val('Fuego');
-    $('.tipo2Add').val('None');
+    $('.tipo2Add').val("");
     $('.nombreAdd').val('Nuevo Nombre');
     $('.genAdd').val(0);
     //$('habilidad').val('llamas');
@@ -557,7 +560,7 @@ $(".buttonLeft").click(function () {
 
 //Actualiza la lista
 function updateList(){
-    console.log(pokeArray.length)
+    //console.log(pokeArray.length)
     if (pokeArray.length >= 1){
         $("#listaPk1").html(pokeArray[firstPokemon.arrayPos].id + " " + pokeArray[firstPokemon.arrayPos].name);
     } else {
@@ -702,7 +705,10 @@ $('.tipo2Search').change(function(){
 function getTypesSearch(){
     type1Value = $('.tipo1Search').val();
     type2Value = $('.tipo2Search').val();
-
+    if (type2Value === type1Value){
+        $('.tipo2Search').val("");
+        type2Value = $('.tipo2Search').val();
+    }
     search();
 }
 
@@ -710,10 +716,12 @@ function getTypesSearch(){
 //Llama a la funcion de reordenar la Pokedex al pulsar en uno de los botones excluyentes.
 $('.ordenDesc').change(function(){
     reversePokedex();
+    createQuery();
 })
 
 $('.ordenAsc').change(function(){
     reversePokedex();
+    createQuery();
 })
 
 //Llama a la funcion de filtrar generacion cuando se cambia el valor del dropdown.
@@ -752,7 +760,6 @@ $('.imagenPokemon').mouseover(function(){
 })
 
 $('.imagenPokemon').mouseout(function(){
-    console.log($('.buttonDelete').is(':hover'));
     if ($('.buttonDelete').is(':hover') === false){
         $('.buttonDelete').fadeOut("slow");
     }     
@@ -793,14 +800,69 @@ function search(){
     }
     updateList();
     showBoxesFromList();
+    createQuery();
+}
+
+function createQuery(){
+    var dbName = "pokemon";
+    queryString = "db." + dbName + ".find({";
+    //Generacion
+    if (genValue !== 0){
+        queryString += "generation:" + genValue + ",";
+        youNeedSlice = true;
+    }
+    //Tipo(s)
+    if (type1Value !== "" && type2Value !==""){
+        queryString += "$or:[{type1:\""+type1Value+"\", type2:\"" + type2Value + "\"}, {type1:\""+type2Value + "\", type2:\"" + type1Value + "\"}],"
+        youNeedSlice = true;
+    } else if (type1Value !== ""){
+        queryString +="$or:[{type1:\""+type1Value+"\"}, {type2:\""+type1Value +"\"}],"; 
+        youNeedSlice = true;
+    } else if (type2Value !== ""){
+        queryString +="$or:[{type1:\""+type2Value+"\"}, {type2:\""+type2Value +"\"}],"; 
+        youNeedSlice = true;
+    }
+    //Legendarios
+    if (legendaryBool){
+        queryString += "is_legendary:" + 1 + ",";
+        youNeedSlice = true;
+    }
+
+    //Id
+    if (idValue !== 0){
+        queryString += "pokedex_number:" + idValue + ",";
+        youNeedSlice = true;
+    }
+
+    //Nombre
+    if (nameValue !== ""){
+        queryString += "name:\"" + nameValue + "\",";
+        youNeedSlice = true;
+    }
+
+    //Elimina la ultima coma
+    if (youNeedSlice){
+        queryString = queryString.slice(0,-1);
+        youNeedSlice = false;
+    }
+
+    queryString += "})";
+    //If innecesario, se puede recoger el valor en una variable
+    if ($('.ordenAsc').prop('checked') === true){
+        queryString += ".sort({pokedex_number:1})";
+    } else {
+        //Hay que ver como recoger correctamente este valor, porque nunca entra al else
+        queryString += ".sort({pokedex_number:-1})";
+    }
+    console.log(queryString);
 }
 
 function busquedaIntensa(boolLegend_, type1_, type2_, gen_, name_, id_number){
     generalFilter = true;
     copyArray = [];
     if (boolLegend_){
-        if (type1_ !== 'None'){
-            if (type2_ !== 'None'){
+        if (type1_ !== ""){
+            if (type2_ !== ""){
                 if (gen_ !== 0){
                     if (name_ !== ""){
                         if (id_number !== 0){
@@ -975,7 +1037,7 @@ function busquedaIntensa(boolLegend_, type1_, type2_, gen_, name_, id_number){
         } else {
             //Type 1 == None, asi que para Type 2 !='None': (pokeArray[i].type1 === type2_ || pokeArray[i].type2 === type2_)
             
-            if (type2_ !== 'None'){
+            if (type2_ !== ""){
                 if (gen_ !== 0){
                     if (name_ !== ""){
                         if (id_number !== 0){
@@ -1134,8 +1196,8 @@ function busquedaIntensa(boolLegend_, type1_, type2_, gen_, name_, id_number){
         }
     } else {
         //Borrar Legendarios
-        if (type1_ !== 'None'){
-            if (type2_ !== 'None'){
+        if (type1_ !== ""){
+            if (type2_ !== ""){
                 if (gen_ !== 0){
                     if (name_ !== ""){
                         if (id_number !== 0){
@@ -1309,7 +1371,7 @@ function busquedaIntensa(boolLegend_, type1_, type2_, gen_, name_, id_number){
         } else {
             //Type 1 == None, asi que para Type 2 !='None': (pokeArray[i].type1 === type2_ || pokeArray[i].type2 === type2_)
             
-            if (type2_ !== 'None'){
+            if (type2_ !== ""){
                 if (gen_ !== 0){
                     if (name_ !== ""){
                         if (id_number !== 0){
@@ -1391,7 +1453,6 @@ function busquedaIntensa(boolLegend_, type1_, type2_, gen_, name_, id_number){
                     }
                 }
             } else {
-                //Para Type2 == None: BORRAR TIPOS
                 if (gen_ !== 0){
                     if (name_ !== ""){
                         if (id_number !== 0){
