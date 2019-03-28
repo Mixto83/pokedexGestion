@@ -21,7 +21,7 @@ var backupDone = false;
 
 var youNeedSlice = false;
 var queryString;
-
+var pokePrueba;
 
 var pokeSrc = "assets/pokemon_images/";
 //Variables para probar que funciona la lista
@@ -85,7 +85,7 @@ $('.buttonDelete').click(function(){
 
     //Solo permite eliminar Pokemon en el visor
     if(pokeDisplayed){
-        console.log("Se borro: " + currentPokemon.toString());
+        removeQuery(currentPokemon.name)
         pokeArray.splice(deletePos,1);
     }
     
@@ -443,6 +443,8 @@ function addPokemon(){
         firstPokemon = pokeArray[0];
     }
     console.log("Pokemon Engadido");
+    createPrueba();
+    insertQuery(pokePrueba);
     updateList();
 }
 
@@ -854,6 +856,27 @@ function createQuery(){
         //Hay que ver como recoger correctamente este valor, porque nunca entra al else
         queryString += ".sort({pokedex_number:-1})";
     }
+    console.log(queryString);
+}
+
+function removeQuery(removeName){
+    var dbName = "pokemon";
+    queryString = "db." + dbName + ".remove({name:\"" + removeName + "\"})";
+    console.log(queryString);
+}
+
+function insertQuery(data){
+    var dbName = "pokemon";
+    queryString = "db." + dbName + ".insert({abilities:\"" + data.abilities + "]\", against_bug:" + data.bug + ",against_dark:" + data.dark +
+    ",against_electric:" + data.electric + ",against_fairy:" + data.fairy + ",against_fight:" + data.fight + ",against_fire:" + data.fire +
+    ",against_flying:" + data.flying + ",against_ghost:" + data.ghost + ",against_grass:" + data.grass + ",against_ground:" + data.ground +
+    ",against_ice:" + data.ice + ",against_normal:" + data.normal + ",against_poison:" + data.poison + ",against_psychic:" + data.psychic +
+    ",against_rock:" + data.rock + ",against_steel:" + data.steel + ",against_water:" + data.water + ",base_egg_steps:" + data.eggSteps +
+    ",base_happiness:" + data.happiness + ",base_total:" + data.baseTotal + ",capture_rate:" + data.captureRate + ",classfication:" + data.classification +
+    ",defense:" + data.defense + ",experience_growth:" + data.expGrowth + ",height_m:" + data.height + ",hp:" + data.hp +
+    ",japanese_name:" + data.japName + ",name:" + data.name + ",percentage_male:" + data.percMale + ",pokedex_number:" + data.id +
+    ",sp_attack:" + data.spAttack + ",sp_defense:" + data.spDefense + ",speed:" + data.speed + ",type1:" + data.type1 +
+    ",type2:" + data.type2 + ",weight_kg:" + data.weight + ",generation:" + data.gen + ",is_legendary:" + data.legendaryNum  + "})"
     console.log(queryString);
 }
 
