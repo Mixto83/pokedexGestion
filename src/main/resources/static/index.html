@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Pokedex-gestion</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'></script>
+    <script src="js/index.js"></script>
+    <script src="js/config.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <meta charset="utf-8"/>
+</head>
+
+<body>
+    <div class="pokedexFondo">
+        <div class="fondo">
+            <div class="configuracion">
+                <p>Filtro de fondo
+                    <select class="filtroFondo">
+                    </select>
+                </p>
+                <p>
+                    Fuente
+                    <select class="famFuente">
+                    </select>
+                </p>
+            </div>
+            <div class="barraDivisoria"></div>
+            <div class="engadirPokemon">
+                <form>
+                    <p>Nombre: <input class="nombreAdd" type="text"></p>
+                    <p>Tipo 1:
+                        <select class="tipo1Add">
+                            <option value="fire">Fuego</option>
+                            <option value="water">Agua</option>
+                            <option value="grass">Planta</option>
+                            <option value="electric">Electrico</option>
+                            <option value="psychic">Psiquico</option>
+                            <option value="fighting">Lucha</option>
+                            <option value="ghost">Fantasma</option>
+                            <option value="ground">Tierrra</option>
+                            <option value="poison">Veneno</option>
+                            <option value="rock">Roca</option>
+                            <option value="flying">Volador</option>
+                            <option value="bug">Bicho</option>
+                            <option value="dragon">Dragon</option>
+                            <option value="ice">Hielo</option>
+                            <option value="normal">Normal</option>
+                            <option value="dark">Siniestro</option>
+                            <option value="steel">Acero</option>
+                            <option value="fairy">Hada</option>
+                        </select>
+                    </p>
+                    <p>Tipo 2:
+                        <select class="tipo2Add">
+                            <option value="">Ninguno</option>
+                            <option value="fire">Fuego</option>
+                            <option value="water">Agua</option>
+                            <option value="plant">Planta</option>
+                            <option value="electric">Electrico</option>
+                            <option value="psychic">Psiquico</option>
+                            <option value="fighting">Lucha</option>
+                            <option value="ghost">Fantasma</option>
+                            <option value="ground">Tierrra</option>
+                            <option value="poison">Veneno</option>
+                            <option value="rock">Roca</option>
+                            <option value="flying">Volador</option>
+                            <option value="bug">Bicho</option>
+                            <option value="dragon">Dragon</option>
+                            <option value="ice">Hielo</option>
+                            <option value="normal">Normal</option>
+                            <option value="dark">Siniestro</option>
+                            <option value="steel">Acero</option>
+                            <option value="flying">Hada</option>
+                        </select>
+                    </p>
+                    <p>Habilidad: 
+                            <select class="habilidad">
+                                <option value="llama">Mar llamas</option>
+                                <option value="robustez">Robustez</option>
+                            </select>
+                    </p>
+                    <p>Generacion:
+                            <select class="genAdd">
+                                    <option value=1>Primera</option>
+                                    <option value=2>Segunda</option>
+                                    <option value=3>Tercera</option>
+                                    <option value=4>Cuarta</option>
+                                    <option value=5>Quinta</option>
+                                    <option value=6>Sexta</option>
+                                    <option value=7>Septima</option>
+                            </select>
+                    </p>
+                    <p>Legendario: 
+                            <input class="legendarioAdd" type="checkbox" value=false>
+                    </p>
+                    <p>Numero de Formas: <input class="numberFormsAdd" type="number"></p>
+                    <p>Descripcion: 
+                        <textarea class="descripcionAdd" style="resize:none;"></textarea>
+                    </p>
+                    <p>Introduzca una imagen en formato PNG: 
+                        <input type="file" accept="image/*">
+                    </p>
+                    <div class="buttonConfirmar"></div>
+                </form>
+            </div>
+            <div class="filtros">
+                <form>
+                        <p>Tipo 1:
+                                <select id="t1" class="tipo1Search">
+                                            <option value="">Todos</option>
+                                            <option value="fire">Fuego</option>
+                                            <option value="water">Agua</option>
+                                            <option value="grass">Planta</option>
+                                            <option value="electric">Electrico</option>
+                                            <option value="psychic">Psiquico</option>
+                                            <option value="fighting">Lucha</option>
+                                            <option value="ghost">Fantasma</option>
+                                            <option value="ground">Tierrra</option>
+                                            <option value="poison">Veneno</option>
+                                            <option value="rock">Roca</option>
+                                            <option value="flying">Volador</option>
+                                            <option value="bug">Bicho</option>
+                                            <option value="dragon">Dragon</option>
+                                            <option value="ice">Hielo</option>
+                                            <option value="normal">Normal</option>
+                                            <option value="dark">Siniestro</option>
+                                            <option value="steel">Acero</option>
+                                            <option value="fairy">Hada</option>
+                                </select>
+                            </p>
+                            <p>Tipo 2:
+                                <select class="tipo2Search">
+                                        <option value="">Todos</option>
+                                        <option value="fire">Fuego</option>
+                                        <option value="water">Agua</option>
+                                        <option value="grass">Planta</option>
+                                        <option value="electric">Electrico</option>
+                                        <option value="psychic">Psiquico</option>
+                                        <option value="fighting">Lucha</option>
+                                        <option value="ghost">Fantasma</option>
+                                        <option value="ground">Tierrra</option>
+                                        <option value="poison">Veneno</option>
+                                        <option value="rock">Roca</option>
+                                        <option value="flying">Volador</option>
+                                        <option value="bug">Bicho</option>
+                                        <option value="dragon">Dragon</option>
+                                        <option value="ice">Hielo</option>
+                                        <option value="normal">Normal</option>
+                                        <option value="dark">Siniestro</option>
+                                        <option value="steel">Acero</option>
+                                        <option value="fairy">Hada</option>
+                                </select>
+                            </p>
+                            <p>Generacion:
+                                    <select class="genDisplay">
+                                            <option value=0>Todas</option>
+                                            <option value=1>Primera</option>
+                                            <option value=2>Segunda</option>
+                                            <option value=3>Tercera</option>
+                                            <option value=4>Cuarta</option>
+                                            <option value=5>Quinta</option>
+                                            <option value=6>Sexta</option>
+                                            <option value=7>Septima</option>
+                                    </select>
+                                </p>
+                            <input type="checkbox" class="checkBoxLegendaries", checked=false> Solo Legendarios<br>
+                            <input type="radio" class="ordenAsc" name="orden" value="1">Orden Original<br>
+                            <input type="radio" class="ordenDesc" name="orden" value="2">Orden Inverso<br>
+                            <p>Nombre: <input class="nombreSearch" type="text"></p>
+                            <p>Id: <input class="idSearch" type="number"></p>                        
+                </form>
+                <div class="buttonEngadir"></div>
+                <div class="buttonReseteo"></div>
+                <div class="buttonConfig"></div>
+            </div>
+            <div class="ventanaPokemon">
+                <div class="imagenPokemon">
+                    <img id="pokeImg" src="assets/pokemon_images/1.png" />
+                </div>
+                <div class="textoPokemon">
+                        <p id="textoPk" style="font-size:40px; font-family:Times New Roman">Informacion del Pokemon</p>
+                </div>
+            </div>
+            <div class="buttonUp"></div>
+            <div class="buttonDown"></div>
+            <div class="buttonLeft"></div>
+            <div class="buttonRight"></div>
+            <div class="buttonRightViewer"></div>
+            <div class="buttonLeftViewer"></div>
+            <div class="buttonBack"></div>
+            <div class="buttonClose"></div>
+            <div class="buttonChangeForm"></div>
+            <div class="buttonDelete"></div>
+            <div id="imgListado" class="p1"></div>
+            <div class="txtListado">
+                <p id="listaPk1">Pokemon 1</p>
+            </div>
+            <div id="imgListado" class="p2"></div>
+            <div class="txtListado2">
+                <p id="listaPk2">Pokemon 2</p>
+            </div>
+            <div id="imgListado" class="p3"></div>
+            <div class="txtListado3">
+                <p id="listaPk3">Pokemon 3</p>
+            </div>
+            <div id="imgListado" class="p4"></div>
+            <div class="txtListado4">
+                <p id="listaPk4">Pokemon 4</p>
+            </div>
+            <div id="imgListado" class="p5"></div>
+            <div class="txtListado5">
+                <p id="listaPk5">Pokemon 5</p>
+            </div>
+            <div id="imgListado" class="p6"></div>
+            <div class="txtListado6">
+                <p id="listaPk6">Pokemon 6</p>
+            </div>
+            <div id="imgListado" class="p7"></div>
+            <div class="txtListado7">
+                <p id="listaPk7">Pokemon 7</p>
+            </div>
+        </div>
+
+        <div class="mitad1">
+            <div class="botonInicio1"></div>
+        </div>
+        <div class="mitad2">
+            <div class="botonInicio2"></div>
+        </div>
+    </div>
+</body>
+
+<script src="js/interfaz.js"></script>
+
+</html>

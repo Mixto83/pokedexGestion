@@ -1,0 +1,525 @@
+body {
+    width: 100%;
+    margin: auto;
+    min-width: 600px;
+    max-width: 2000px
+}
+
+.pokedexFondo {
+    display: grid;
+    width: 1920px;
+    height: 1080px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.mitad1 {
+    background-image: url("../assets/PokedexL.png");
+    grid-row-start: 1;
+    grid-row-end:3;
+    grid-column-start:1;
+    grid-column-end:1;
+    width: 960px;
+    height: 1080px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+.mitad2 {
+    background-image: url("../assets/PokedexR.png");
+    grid-row-start: 1;
+    grid-row-end:3;
+    grid-column-start:3;
+    grid-column-end:3;
+    width: 960px;
+    height: 1080px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+
+}
+
+.fondo{
+    background-image: url("../assets/Pantallapokedex.png");
+    display:none;
+    grid-row-start: 1;
+    grid-row-end:3;
+    grid-column-start:2;
+    grid-column-end:2;
+    width: 1920px;
+    height: 1080px;
+    background-position: top left;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+}
+
+.buttonRight{
+    background-image: url("../assets/botonDerecha.png");
+    display: none;
+    width: 60px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: absolute;
+    top: 980px;
+    left: 400px;
+    background-position: top left;
+}
+
+.buttonLeft{
+    background-image: url("../assets/botonIzquierda.png");
+    display: none;
+    width: 60px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: absolute;
+    top: 980px;
+    left: 300px;
+    background-position: top left;
+    flex:1;
+}
+
+.buttonUp{
+    background-image: url("../assets/botonArriba.png");
+    display: none;
+    width: 60px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: absolute;
+    top: 370px;
+    left: 800px;
+    background-position: top left;
+}
+
+.buttonDown{
+    background-image: url("../assets/botonAbajo.png");
+    display: none;
+    width: 60px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: absolute;
+    top: 460px;
+    left: 800px;
+    background-position: top left;
+}
+
+.ventanaPokemon {
+    background-image: url("../assets/marcoPokemonGr.png");
+    display: none;
+    width: 280px;
+    height: 280px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    top: 100px;
+    left: 100px;
+    background-position: top left;
+}
+
+.barraDivisoria {
+    background-image: url("../assets/barraDivisoria.png");
+    display: none;
+    width: 9px;
+    height: 955px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: absolute;
+    top: 50px;
+    left: 1000px;
+    background-position: top left;
+}
+.configuracion{
+    display:none;
+    font-size: 30px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: relative;
+    top: 100px;
+    left: 100px;
+    background-position: top left;
+}
+
+.engadirPokemon{
+    display:none;
+    font-size: 30px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: relative;
+    top: 100px;
+    left: 100px;
+    background-position: top left;
+}
+
+.filtros{
+    display:none;
+    font-size: 40px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: absolute;
+    top: 120px;
+    left: 1200px;
+    background-position: top left;
+}
+
+.filtros select{
+    font-size: 40px;
+}
+
+.buttonEngadir{
+    background-image: url("../assets/botonAnadirPokemon.png");
+    display: none;
+    width: 279px;
+    height: 111px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    background-position: top left;
+    flex:1;
+}
+
+.buttonReseteo{
+    background-image: url("../assets/botonResetearFiltros.png");
+    display: none;
+    width: 279px;
+    height: 111px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: relative;
+    top: -111px;
+    left: 290px;
+    background-position: top left;
+    flex:1;
+}
+
+.buttonRightViewer{
+    background-image: url("../assets/botonDerecha.png");
+    display: none;
+    width: 60px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: absolute;
+    top: 195px;
+    left: 400px;
+    background-position: top left;
+}
+
+.buttonLeftViewer{
+    background-image: url("../assets/botonIzquierda.png");
+    display: none;
+    width: 60px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: absolute;
+    top: 195px;
+    left: 20px;
+    background-position: top left;
+    flex:1;
+}
+
+.buttonBack{
+    background-image: url("../assets/BotonBack1.png");
+    display: none;
+    width: 60px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: absolute;
+    top: 20px;
+    left: 9px;
+    background-position: top left;
+    flex:1;
+}
+
+.buttonClose{
+    background-image: url("../assets/botonCerrar.png");
+    display: none;
+    width: 60px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: absolute;
+    top: 20px;
+    left: 1847px;
+    background-position: top left;
+    flex:1;
+}
+
+.buttonDelete{
+    background-image: url("../assets/botonCerrar.png");
+    display: none;
+    width: 60px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: absolute;
+    top: 318px;
+    left: 317px;
+    background-position: top left;
+    flex:1;
+}
+
+.buttonConfirmar{
+    background-image: url("../assets/botonConfirmar.png");
+    display: none;
+    width: 233px;
+    height: 67px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    background-position: top left;
+    flex:1;
+}
+
+.buttonConfig{
+    background-image: url("../assets/botonConfiguracion.png");
+    display: none;
+    width: 77px;
+    height: 77px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: relative;
+    top: -55px;
+    left: 620px;
+    background-position: top left;
+    flex:1;
+}
+
+.buttonChangeForm{
+    background-image: url("../assets/botonCambioForma.png");
+    display: none;
+    width: 60px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: absolute;
+    top: 28px;
+    left: 200px;
+    background-position: top left;
+    flex:1;
+}
+
+ #imgListado.p1{
+    background-image: url("../assets/listadoPokemon.png");
+    display: none;
+    width: 731px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: relative;
+    top: 50px;
+    left: 30px;
+    background-position: top left;
+    flex: 1;
+}
+
+.txtListado {
+    position: absolute;
+    top: 45px;
+    left: 50px;
+    font-family: Arial;
+    font-size: 20px;
+    color: black;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#imgListado.p2 {
+    background-image: url("../assets/listadoPokemon.png");
+    display: none;
+    width: 731px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: relative;
+    top: 130px;
+    left: 30px;
+    background-position: top left;
+    flex: 1;
+}
+
+.txtListado2 {
+    position: absolute;
+    top: 185px;
+    left: 50px;
+    font-family: Arial;
+    font-size: 20px;
+    color: black;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#imgListado.p3{
+    background-image: url("../assets/listadoPokemon.png");
+    display: none;
+    width: 731px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: relative;
+    top: 210px;
+    left: 30px;
+    background-position: top left;
+    flex: 1;
+}
+
+.txtListado3 {
+    position: absolute;
+    top: 325px;
+    left: 50px;
+    font-family: Arial;
+    font-size: 20px;
+    color: black;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#imgListado.p4 {
+    background-image: url("../assets/listadoPokemon.png");
+    display: none;
+    width: 731px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: relative;
+    top: 290px;
+    left: 30px;
+    background-position: top left;
+    flex: 1;
+}
+
+.txtListado4 {
+    position: absolute;
+    top: 465px;
+    left: 50px;
+    font-family: Arial;
+    font-size: 20px;
+    color: black;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#imgListado.p5 {
+    background-image: url("../assets/listadoPokemon.png");
+    display: none;
+    width: 731px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: relative;
+    top: 370px;
+    left: 30px;
+    background-position: top left;
+    flex: 1;
+}
+
+.txtListado5 {
+    position: absolute;
+    top: 605px;
+    left: 50px;
+    font-family: Arial;
+    font-size: 20px;
+    color: black;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#imgListado.p6 {
+    background-image: url("../assets/listadoPokemon.png");
+    display: none;
+    width: 731px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: relative;
+    top: 450px;
+    left: 30px;
+    background-position: top left;
+    flex: 1;
+}
+
+.txtListado6 {
+    position: absolute;
+    top: 745px;
+    left: 50px;
+    font-family: Arial;
+    font-size: 20px;
+    color: black;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#imgListado.p7{
+    background-image: url("../assets/listadoPokemon.png");
+    display: none;
+    width: 731px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: relative;
+    top: 530px;
+    left: 30px;
+    background-position: top left;
+    flex: 1;
+}
+
+.txtListado7 {
+    position: absolute;
+    top: 885px;
+    left: 50px;
+    font-family: Arial;
+    font-size: 20px;
+    color: black;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+/*.textoListado{
+    display:none;
+    width: 715px;
+    height: 260px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: relative;
+    top: 2px;
+    left: 2px;
+    background-position: top left;
+    flex: 1;
+}*/
+
+
+.imagenPokemon {
+    display: none;
+    width: 256px;
+    height: 256px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: relative;
+    top: 10px;
+    left: 10px;
+    background-position: top left;
+    flex: 1;
+}
+
+.infoPokemon {
+    display: none;
+    width: 280px;
+    height: 280px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: relative;
+    top: 400px;
+    left: 100px;
+    background-position: top left;
+    flex: 1;
+}
