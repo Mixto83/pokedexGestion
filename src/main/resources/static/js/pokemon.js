@@ -60,4 +60,3 @@ function createPrueba(){
     pokePrueba.gen = 5;
     pokePrueba.legendaryNum = 1;
 }
-
