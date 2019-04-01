@@ -20,22 +20,28 @@ import com.mongodb.client.MongoDatabase;
 @RestController
 public class PeticionesRest {
 
-	@RequestMapping(value="/test", method = RequestMethod.PUT)
+MongoDBQueries handler;//Objeto de la clase que maneja las queries de MongoDB
+	
+	@RequestMapping(value="/pokemon", method =RequestMethod.GET)
+	public boolean initDataBase() {//Inicializacion de la BD. Solo llamado una vez al iniciar la aplicacion
+		boolean done = false;
+		handler = new MongoDBQueries();//Inicializacion del objeto
+		handler.initialize();//Inicializacion de la BD y la coleccion
+		handler.getFile();//Lectura del fichero JSON e introduccion en la coleccion
+		done = true;
+		return done;
+	}
+	
+	@RequestMapping(value="/pokemon", method = RequestMethod.PUT)
 	public List<Document> getPokemonList( @RequestBody Pokemon poke){
-		System.out.println(poke.toString());
-		System.out.println("dddddddd");
-		MongoDBQueries handler = new MongoDBQueries();
-		handler.initialize();//Inicializo BD y coleccion
-		handler.getFile();//Recojo json e inserto en coleccion
-		MongoCollection<Document> pokemon = handler.dataBase.getCollection("pokemon");//Manejo coleccion
-		List<Document> pokemonList = new ArrayList<>();
-		//pokemonList = handler.getWithFilters(_legendary, _type1, _type2, _gen, _name, _pokedexNumber, pokemon);
+		MongoCollection<Document> pokemon = handler.dataBase.getCollection("pokemon");//Coleccion a usar
+		List<Document> pokemonList = new ArrayList<>();//Lista a devolver
 		pokemonList = handler.getWithFilters(poke.isLegendary(), poke.getType1(), poke.getType2(), 
-				poke.getGen(), poke.getName(), poke.getPokedexNumber(), pokemon);
-
+				poke.getGen(), poke.getName(), poke.getPokedexNumber(), poke.isSort(), pokemon);
+				//Llamada al metodo que devuelve los Pokemon bajo los filtros indicados.
 		for (Document p: pokemonList)
-			System.out.println(p.toJson());
-		return pokemonList;
+			System.out.println(p.toJson());//Muestra por consola
+		return pokemonList;//Devuelve la lista al cliente
 	}
 	
 }

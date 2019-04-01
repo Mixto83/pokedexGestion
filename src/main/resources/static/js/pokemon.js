@@ -1,62 +1,72 @@
 class Pokemon {
-    constructor(id, name, type1, type2, gen, legendary, nForms){
-        this.id = id;
-        this.name = name;
-        this.type1 = type1;
-        this.type2 = type2;
-        this.gen = gen;
-        this.legendary = legendary;
-        this.nForms = nForms;
+	constructor(jsonPokemon){
+		//Informacion clave
+		this.id = jsonPokemon.pokedex_number;
+		this.name = jsonPokemon.name;
+		this.type1 = jsonPokemon.type1;
+		this.type2 = jsonPokemon.type2;
+		this.gen = jsonPokemon.generation;
+		if (jsonPokemon.is_legendary){
+			this.legendary = true;
+		} else {
+			this.legendary = false;
+		}
+		this.abilities = jsonPokemon.abilities;
+		this.japanese_name = jsonPokemon.japanese_name;
+		
+		//Stats de combate
+		this.hp = jsonPokemon.hp;
+		this.attack = jsonPokemon.attack;
+		this.defense = jsonPokemon.defense;
+		this.sp_attack = jsonPokemon.sp_attack;
+		this.sp_defense = jsonPokemon.sp_defense;
+		this.speed = jsonPokemon.speed;
+		
+		//Stats de otro tipo
+		this.base_total = jsonPokemon.base_total;
+		this.base_egg_steps = jsonPokemon.base_egg_steps;
+		this.base_happiness = jsonPokemon.base_happiness;
+		this.capture_rate = jsonPokemon.capture_rate;
+		this.classfication = jsonPokemon.classfication;
+		this.experience_growth = jsonPokemon.experience_growth;
+		this.height_m = jsonPokemon.height_m;
+		this.weight_kg = jsonPokemon.weight_kg;
+		this.percentage_male = jsonPokemon.percentage_male;
+		
+		//Debilidades
+		this.against_normal = jsonPokemon.against_normal;
+		this.against_electric = jsonPokemon.against_electric;
+		this.against_water = jsonPokemon.against_water;
+		this.against_fire = jsonPokemon.against_fire;
+		this.against_grass = jsonPokemon.against_grass;
+		this.against_bug = jsonPokemon.against_bug;
+		this.against_fight = jsonPokemon.against_fight; 
+		this.against_flying = jsonPokemon.against_flying;
+		this.against_poison = jsonPokemon.against_poison;
+		this.against_ghost = jsonPokemon.against_ghost;
+		this.against_psychic = jsonPokemon.against_psychic;
+		this.against_rock = jsonPokemon.against_rock;
+		this.against_ground = jsonPokemon.against_ground;
+		this.against_ice = jsonPokemon.against_ice;
+		this.against_dragon = jsonPokemon.against_dragon;
+		this.against_steel = jsonPokemon.against_steel;
+		this.against_dark = jsonPokemon.against_dark;
+		this.against_fairy = jsonPokemon.against_fairy;
+
+		this.nForms = 2;
+    }
+    
+    setImages(_src){
+        this.image = _src + this.id + ".png";
     }
 
-    toString(){
-        return "id: " + this.id + ", name: " + this.name + ", type1: " + this.type1 + ", type2: " + this.type2
-        +", gen: " + this.gen + ", legendary: " + this.legendary + ", nForms: " + this.nForms + ", arrayPos: " 
-        + this.arrayPos;
+    setArrayPos(_pos){
+        this.arrayPos = _pos;
     }
-}
-
-//Constructor con todos los elementos de la base de datos
-function createPrueba(){
-    pokePrueba = new Pokemon();
-    pokePrueba.abilities = "['MarLlamas', 'Torrente']";
-    pokePrueba.fire = 1;
-    pokePrueba.water = 1;
-    pokePrueba.grass = 1;
-    pokePrueba.electric = 1;
-    pokePrueba.psychic = 1;
-    pokePrueba.ghost = 1;
-    pokePrueba.fight = 1;
-    pokePrueba.normal = 1;
-    pokePrueba.flying = 1;
-    pokePrueba.ground = 1;
-    pokePrueba.rock = 1;
-    pokePrueba.poison = 1;
-    pokePrueba.bug = 1;
-    pokePrueba.ice = 1;
-    pokePrueba.dragon = 1;
-    pokePrueba.dark = 1;
-    pokePrueba.steel = 1;
-    pokePrueba.fairy = 1;
-    pokePrueba.eggSteps = 200;
-    pokePrueba.happiness = 200;
-    pokePrueba.baseTotal = 200;
-    pokePrueba.captureRate = 200;
-    pokePrueba.classification = "\"Esto es una descripcion\"";
-    pokePrueba.defense = 200;
-    pokePrueba.spAttack = 200;
-    pokePrueba.speed = 200;
-    pokePrueba.hp = 200;
-    pokePrueba.spDefense = 200;
-    pokePrueba.expGrowth = 200;
-    pokePrueba.height = 200;
-    pokePrueba.japName = "\"Marshadow en Japones\"";
-    pokePrueba.name = "\"Marshadow\"";
-    pokePrueba.percMale = 50;
-    pokePrueba.id = 802;
-    pokePrueba.type1 = "\"fighting\"";
-    pokePrueba.type2 = "\"ghost\"";
-    pokePrueba.weight = 50;
-    pokePrueba.gen = 5;
-    pokePrueba.legendaryNum = 1;
-}
+		
+	toString(){
+	        return "id: " + this.id + ", name: " + this.name + ", type1: " + this.type1 + ", type2: " + this.type2
+	        +", gen: " + this.gen + ", legendary: " + this.legendary + ", nForms: " + this.nForms + ", arrayPos: " 
+	        + this.arrayPos;
+	    }
+	}

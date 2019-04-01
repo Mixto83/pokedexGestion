@@ -1,12 +1,13 @@
 package Equipo4.PokedexGestion;
 
-public class Pokemon {
+public class Pokemon {//Clase Pokemon, que sirve para controlar los criterios de busqueda o filtros.
 	private int pokedexNumber;
 	private int gen;
 	private String name;
 	private String type1;
 	private String type2;
 	private boolean legendary;
+	private boolean sort;
 	
 	public Pokemon() {
 		super();
@@ -16,6 +17,7 @@ public class Pokemon {
 		this.type1 = "";
 		this.type2 = "";
 		this.legendary = false;
+		this.sort = true;
 	}
 
 	public int getPokedexNumber() {
@@ -65,11 +67,21 @@ public class Pokemon {
 	public void setLegendary(boolean legendary) {
 		this.legendary = legendary;
 	}
+	
+	public boolean isSort() {
+		return sort;
+	}
+
+	public void setSort(boolean sort) {
+		this.sort = sort;
+	}
 
 	@Override
 	public String toString() {
 		return "Pokemon [pokedexNumber=" + pokedexNumber + ", gen=" + gen + ", name=" + name + ", type1=" + type1
-				+ ", type2=" + type2 + ", legendary=" + legendary + "]";
+				+ ", type2=" + type2 + ", legendary=" + legendary + ", sort=" + sort + "]";
 	}
+
+	
 	
 }

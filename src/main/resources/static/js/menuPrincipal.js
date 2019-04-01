@@ -277,10 +277,11 @@ function showBoxesFromList(){ //Cajas con el nombre pokemon
 ///////////////////////////////////////////////////////////////////////////botonesLadoDerecho
 //Reordena la Pokedex
 function reversePokedex() {
-    pokeArray = pokeArray.reverse();
-    updatePokemonIndex();
-    firstPokemon = pokeArray[0];
-    updateList();
+    //pokeArray = pokeArray.reverse();
+    //updatePokemonIndex();
+    //firstPokemon = pokeArray[0];
+    //updateList();
+    peticionAServidor();
 }
 
 //Guarda en pokeArray el array que queramos filtrar. Guarda pokeArray en un backup para restaurarlo luego
@@ -332,10 +333,13 @@ function getTypesSearch() {
 
 //Llama a la funcion de reordenar la Pokedex al pulsar en uno de los botones excluyentes.
 $('.ordenDesc').change(function () {
+    ordenAscValue = false;
     reversePokedex();
+    
 })
 
 $('.ordenAsc').change(function () {
+    ordenAscValue = true;
     reversePokedex();
 })
 
@@ -370,17 +374,9 @@ $('.idSearch').change(function () {
 })
 
 function search() { //gestiona las opciones de busqueda
-    if (!generalFilter) {
-        busquedaIntensa(legendaryBool, type1Value, type2Value, genValue, nameValue, idValue);
-        swapArrays(copyArray);
-    } else {
-        restoreArray();
-        busquedaIntensa(legendaryBool, type1Value, type2Value, genValue, nameValue, idValue);
-        swapArrays(copyArray);
-        //generalFilter = false;
-    }
-    updateList();
-    showBoxesFromList();
+    peticionAServidor();//Llamada Ajax
+    //updateList();
+    //showBoxesFromList();
 }
 ///////////////////////////////////////////////////////////////////////////anadirPokemon
 $(".buttonEngadir").click(function () { //boton anadir pokemon
