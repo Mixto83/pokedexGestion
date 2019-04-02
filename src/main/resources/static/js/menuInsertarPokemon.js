@@ -12,6 +12,60 @@ function hideFormEngadir(){ //Oculta el formulario para anadir pokemon
 }
 
 function addPokemon() { //Nuevo Pokemon
+    var jsonNew = {
+        pokedex_number : 802,//Default for testing
+        gen : parseInt($('.genAdd').val()),
+        name : $('.nombreAdd').val(),
+		type1 : $('.tipo1Add').val(),
+		type2 : $('.tipo2Add').val(),
+		legendary: 0,//Default for testing
+		abilities:  "['Prueba']",//Default for testing
+		japanese_name : "Za Warudo",//Default for testing
+        
+		//Stats de combate
+		hp : 50,
+		attack : 50,
+		defense : 50,
+		sp_attack : 50,
+		sp_defense : 50,
+		speed : 50,
+		
+		//Stats de otro tipo
+		base_total : 50,
+		base_egg_steps : 50,
+		base_happiness : 50,
+		capture_rate : 50,
+		classfication : $('.descripcionAdd').val(),
+		experience_growth : 50,
+		height_m : 50,
+		weight_kg : 50,
+		percentage_male : 50,
+		
+		//Debilidades
+		against_normal : 1,
+		against_electric : 1,
+		against_water : 1,
+		against_fire : 1,
+		against_grass : 1,
+		against_bug : 1,
+		against_fight : 1, 
+		against_flying : 1,
+		against_poison : 1,
+		against_ghost : 1,
+		against_psychic : 1,
+		against_rock : 1,
+		against_ground : 1,
+		against_ice : 1,
+		against_dragon : 1,
+		against_steel : 1,
+		against_dark : 1,
+		against_fairy : 1
+    }
+    console.log(jsonNew.against_bug);
+    console.log(jsonNew.type1);
+    console.log(jsonNew.name);
+    var newPokemon = new Pokemon(jsonNew);
+    insertNewPokemon(newPokemon);
     /*var newId = pokeArray.length + 1;//Provisional
     var newType1 = $('.tipo1Add').val();
     var newType2 = $('.tipo2Add').val();
@@ -29,8 +83,7 @@ function addPokemon() { //Nuevo Pokemon
     if (pokeArray.length === 1) {
         firstPokemon = pokeArray[0];
     }*/
-    var newPoke = 1;
-    insertNewPokemon(newPoke);
+    
     //updateList();
 }
 

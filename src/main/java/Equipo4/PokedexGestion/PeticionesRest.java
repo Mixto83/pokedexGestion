@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.util.JSON;
 
 @RestController
 public class PeticionesRest {
@@ -47,12 +48,11 @@ MongoDBQueries handler;//Objeto de la clase que maneja las queries de MongoDB
 	@RequestMapping(value="/pokemon", method = RequestMethod.POST)
 	public boolean insertPokemon(@RequestBody Pokemon poke) {
 		boolean done = false;
-		MongoCollection<Document> pokemon = handler.dataBase.getCollection("pokemon");//Coleccion a usar
+		MongoCollection<Document> pokemon = handler.dataBase.getCollection("pokemon", Document.class);//Coleccion a usar
 		System.out.println("Pokemon a insertar:");
 		System.out.println(poke.toString());
-		//Pasar Pokemon a JSON e insertar
-		//JSONObject jsonPoke = new JSONObject(poke);
-		//handler.JSONToMongo((Object) poke, pokemon);//Llama al metodo que introduce un Pokemon en la lista
+		Object pokeString = poke.toString();
+		handler.insertPokemon(pokeString, pokemon);//Llama al metodo que introduce un Pokemon en la lista
 		done = true;
 		return done;
 	}
@@ -61,9 +61,8 @@ MongoDBQueries handler;//Objeto de la clase que maneja las queries de MongoDB
 	public boolean deletePokemon(@RequestBody SearchFilter poke) {
 		boolean done = false;
 		MongoCollection<Document> pokemon = handler.dataBase.getCollection("pokemon");//Coleccion a usar
-		//Borrar pokemon de la lista: Buscarlo por nombre y eliminarlo
-		System.out.println("Pokemon a borrar:");
-		System.out.println(poke.getName());
+		Bson filter = new Document("name", poke.getName());//Filtro que recoge el nombre del pokemon a borrar
+		pokemon.findOneAndDelete(filter);//Borra el pokemon con el nombre indicado
 		done = true;
 		return done;
 	}

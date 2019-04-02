@@ -2,6 +2,8 @@ package Equipo4.PokedexGestion;
 
 import java.util.Arrays;
 
+import org.json.simple.JSONObject;
+
 import com.mongodb.util.JSON;
 public class Pokemon {
 	private int pokedex_number;
@@ -11,7 +13,7 @@ public class Pokemon {
 	private String type2;
 	private int legendary;
 	
-	private String[] abilities;
+	private String abilities;
 	private String japanese_name;
 	
 	private int hp;
@@ -54,12 +56,15 @@ public class Pokemon {
 	public Pokemon() {
 		super();
 	}
-	public int getPokedex_Number() {
+	
+	public int getPokedex_number() {
 		return pokedex_number;
 	}
-	public void setPokedex_Number(int pokedex_number) {
+
+	public void setPokedex_number(int pokedex_number) {
 		this.pokedex_number = pokedex_number;
 	}
+
 	public int getGen() {
 		return gen;
 	}
@@ -91,10 +96,10 @@ public class Pokemon {
 	public void setLegendary(int legendary) {
 		this.legendary = legendary;
 	}
-	public String[] getAbilities() {
+	public String getAbilities() {
 		return abilities;
 	}
-	public void setAbilities(String[] abilities) {
+	public void setAbilities(String abilities) {
 		this.abilities = abilities;
 	}
 	public String getJapanese_name() {
@@ -304,21 +309,21 @@ public class Pokemon {
 
 	@Override
 	public String toString() {
-		return "Pokemon [pokedex_number=" + pokedex_number + ", gen=" + gen + ", name=" + name + ", type1=" + type1
-				+ ", type2=" + type2 + ", legendary=" + legendary + ", abilities=" + Arrays.toString(abilities)
-				+ ", japanese_name=" + japanese_name + ", hp=" + hp + ", attack=" + attack + ", defense=" + defense
-				+ ", sp_attack=" + sp_attack + ", sp_defense=" + sp_defense + ", speed=" + speed + ", base_total="
-				+ base_total + ", base_egg_steps=" + base_egg_steps + ", base_happiness=" + base_happiness
-				+ ", capture_rate=" + capture_rate + ", classfication=" + classfication + ", experience_growth="
-				+ experience_growth + ", height_m=" + height_m + ", weight_kg=" + weight_kg + ", percentage_male="
-				+ percentage_male + ", against_normal=" + against_normal + ", against_electric=" + against_electric
-				+ ", against_water=" + against_water + ", against_fire=" + against_fire + ", against_grass="
-				+ against_grass + ", against_bug=" + against_bug + ", against_fight=" + against_fight
-				+ ", against_flying=" + against_flying + ", against_poison=" + against_poison + ", against_ghost="
-				+ against_ghost + ", against_psychic=" + against_psychic + ", against_rock=" + against_rock
-				+ ", against_ground=" + against_ground + ", against_ice=" + against_ice + ", against_dragon="
-				+ against_dragon + ", against_steel=" + against_steel + ", against_dark=" + against_dark
-				+ ", against_fairy=" + against_fairy + "]";
-	}
-	
+		return "{\"against_bug\" : " + this.against_bug + ", \"percentage_male\" : " + this.percentage_male + ",\"weight_kg\" : " +
+				this.weight_kg + ",\"against_water\" : " + this.against_water + ",\"base_egg_steps\" : " + this.base_egg_steps + ",\"hp\" : " +
+				this.hp + ",\"against_poison\" : " + this.against_poison + ",\"against_normal\" : " + this.against_normal + ",\"height_m\" : " +
+				this.height_m +	",\"sp_defense\" : " + this.sp_defense + ",\"capture_rate\" : " + this.capture_rate + ",\"classfication\" : \"" +
+				this.classfication + "\",\"speed\" : " + this.speed + ",\"abilities\" : \"" + this.abilities + "\",\"against_ghost\" : " +
+				this.against_ghost + ",\"against_psychic\" : " + this.against_psychic +	",\"pokedex_number\" : " +
+				this.pokedex_number + ",\"defense\" : " + this.defense + ",\"against_flying\" : " + this.against_flying + ",\"attack\" : " +
+				this.attack + ",\"against_electric\" : " + this.against_electric + ",\"against_fight\" : " + this.against_fight + ",\"generation\" : " +
+				this.gen + ",\"experience_growth\" : " + this.experience_growth + ",\"is_legendary\" : " + this.legendary + ",\"against_steel\" : " +
+				this.against_steel + ",\"type2\" : \"" + this.type2 + "\",\"against_ground\" : " + this.against_ground + ",\"against_dragon\" : " +
+				this.against_dragon + ",\"against_rock\" : " + this.against_rock + ",\"type1\" : \"" + this.type1 + "\",\"base_total\" : " +
+				this.base_total + ",\"base_happiness\" : " + this.base_happiness + ",\"against_dark\" : " + this.against_dark + ",\"against_fire\" : " +
+				this.against_fire + ",\"against_fairy\" : " + this.against_fairy + ",\"name\" : \"" + this.name + "\",\"against_ice\" : " +
+				this.against_ice +",\"sp_attack\" : " + this.sp_attack + ",\"against_grass\" : " + this.against_grass + ",\"japanese_name\" : \"" +
+				this.japanese_name + "\"}";
+
+	}	
 }

@@ -57,7 +57,7 @@ public class MongoDBQueries {
 			Object obj = jsonParser.parse(reader);//Read JSON File
 			pokemonList = (JSONArray) obj;		
 			for (int i = 0; i < pokemonList.size(); i++) {//Iterar sobre el array
-				JSONToMongo(pokemonList.get(i), dataBase.getCollection("pokemon", Document.class));//Pasa cada objeto JSON a la coleccion
+				insertPokemon(pokemonList.get(i), dataBase.getCollection("pokemon", Document.class));//Pasa cada objeto JSON a la coleccion
 			}
 		} catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -68,7 +68,7 @@ public class MongoDBQueries {
         }
 	}
 	
-	public void JSONToMongo(Object pokemon, MongoCollection<Document> collection) {//Inserta un objeto Pokemon en la coleccion
+	public void insertPokemon(Object pokemon, MongoCollection<Document> collection) {//Inserta un objeto Pokemon en la coleccion
 		Document document = Document.parse(pokemon.toString());
 		collection.insertOne(document);
 	}

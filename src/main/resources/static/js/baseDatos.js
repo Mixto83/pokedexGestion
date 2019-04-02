@@ -78,13 +78,13 @@ function insertNewPokemon(_newPokemon){
     } else {
         legendaryToInsert = 0;
     }
-    /*var insertPetition = {
-        id : _newPokemon.pokedex_number,
+    var insertPetition = {
+        pokedex_number : _newPokemon.id,
+        gen : _newPokemon.gen,
 		name : _newPokemon.name,
 		type1 : _newPokemon.type1,
 		type2 : _newPokemon.type2,
-		generation : _newPokemon.gen,
-		is_legendary: legendaryToInsert,
+		legendary: legendaryToInsert,
 		abilities:  _newPokemon.abilities,
 		japanese_name : _newPokemon.japanese_name,
 		
@@ -126,55 +126,6 @@ function insertNewPokemon(_newPokemon){
 		against_steel : _newPokemon.against_steel,
 		against_dark : _newPokemon.against_dark,
 		against_fairy : _newPokemon.against_fairy
-    }*/
-    var insertPetition = {
-        pokedex_number : 802,
-        gen : 8,
-        name : "Marshadow",
-		type1 : "Fighting",
-		type2 : "Ghost",
-		legendary: 1,
-		abilities:  ["Prueba"],
-		japanese_name : "Za Warudo",
-		
-		//Stats de combate
-		hp : 200,
-		attack : 200,
-		defense : 200,
-		sp_attack : 200,
-		sp_defense : 200,
-		speed : 200,
-		
-		//Stats de otro tipo
-		base_total : 200,
-		base_egg_steps : 200,
-		base_happiness : 200,
-		capture_rate : 200,
-		classfication : "Eoooo",
-		experience_growth : 200,
-		height_m : 200,
-		weight_kg : 200,
-		percentage_male : 50,
-		
-		//Debilidades
-		against_normal : 1,
-		against_electric : 1,
-		against_water : 1,
-		against_fire : 1,
-		against_grass : 1,
-		against_bug : 1,
-		against_fight : 1, 
-		against_flying : 1,
-		against_poison : 1,
-		against_ghost : 1,
-		against_psychic : 1,
-		against_rock : 1,
-		against_ground : 1,
-		against_ice : 1,
-		against_dragon : 1,
-		against_steel : 1,
-		against_dark : 1,
-		against_fairy : 1
     }
     $.ajax({
         method: "POST",
