@@ -1,6 +1,6 @@
 package Equipo4.PokedexGestion;
 
-public class Pokemon {//Clase Pokemon, que sirve para controlar los criterios de busqueda o filtros.
+public class SearchFilter {//Sirve para controlar los criterios de busqueda o filtros.
 	private int pokedexNumber;
 	private int gen;
 	private String name;
@@ -9,7 +9,7 @@ public class Pokemon {//Clase Pokemon, que sirve para controlar los criterios de
 	private boolean legendary;
 	private boolean sort;
 	
-	public Pokemon() {
+	public SearchFilter() {
 		super();
 		this.pokedexNumber = 0;
 		this.gen = 0;

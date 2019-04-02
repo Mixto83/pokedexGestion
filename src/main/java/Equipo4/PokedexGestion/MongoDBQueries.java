@@ -68,7 +68,7 @@ public class MongoDBQueries {
         }
 	}
 	
-	public static void JSONToMongo(Object pokemon, MongoCollection<Document> collection) {//Inserta un objeto Pokemon en la coleccion
+	public void JSONToMongo(Object pokemon, MongoCollection<Document> collection) {//Inserta un objeto Pokemon en la coleccion
 		Document document = Document.parse(pokemon.toString());
 		collection.insertOne(document);
 	}

@@ -12,7 +12,7 @@ function hideFormEngadir(){ //Oculta el formulario para anadir pokemon
 }
 
 function addPokemon() { //Nuevo Pokemon
-    var newId = pokeArray.length + 1;//Provisional
+    /*var newId = pokeArray.length + 1;//Provisional
     var newType1 = $('.tipo1Add').val();
     var newType2 = $('.tipo2Add').val();
     var newName = $('.nombreAdd').val();
@@ -28,10 +28,10 @@ function addPokemon() { //Nuevo Pokemon
     //Si es el unico Pokemon del array, pasa a ser el primero
     if (pokeArray.length === 1) {
         firstPokemon = pokeArray[0];
-    }
-    console.log("Pokemon Engadido");
-    createPrueba();
-    updateList();
+    }*/
+    var newPoke = 1;
+    insertNewPokemon(newPoke);
+    //updateList();
 }
 
 $('.buttonConfirmar').click(function () { //boton de confirmar

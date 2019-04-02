@@ -33,7 +33,7 @@ MongoDBQueries handler;//Objeto de la clase que maneja las queries de MongoDB
 	}
 	
 	@RequestMapping(value="/pokemon", method = RequestMethod.PUT)
-	public List<Document> getPokemonList( @RequestBody Pokemon poke){
+	public List<Document> getPokemonList( @RequestBody SearchFilter poke){
 		MongoCollection<Document> pokemon = handler.dataBase.getCollection("pokemon");//Coleccion a usar
 		List<Document> pokemonList = new ArrayList<>();//Lista a devolver
 		pokemonList = handler.getWithFilters(poke.isLegendary(), poke.getType1(), poke.getType2(), 
@@ -42,6 +42,30 @@ MongoDBQueries handler;//Objeto de la clase que maneja las queries de MongoDB
 		for (Document p: pokemonList)
 			System.out.println(p.toJson());//Muestra por consola
 		return pokemonList;//Devuelve la lista al cliente
+	}
+	
+	@RequestMapping(value="/pokemon", method = RequestMethod.POST)
+	public boolean insertPokemon(@RequestBody Pokemon poke) {
+		boolean done = false;
+		MongoCollection<Document> pokemon = handler.dataBase.getCollection("pokemon");//Coleccion a usar
+		System.out.println("Pokemon a insertar:");
+		System.out.println(poke.toString());
+		//Pasar Pokemon a JSON e insertar
+		//JSONObject jsonPoke = new JSONObject(poke);
+		//handler.JSONToMongo((Object) poke, pokemon);//Llama al metodo que introduce un Pokemon en la lista
+		done = true;
+		return done;
+	}
+	
+	@RequestMapping(value="/pokemon", method = RequestMethod.DELETE)
+	public boolean deletePokemon(@RequestBody SearchFilter poke) {
+		boolean done = false;
+		MongoCollection<Document> pokemon = handler.dataBase.getCollection("pokemon");//Coleccion a usar
+		//Borrar pokemon de la lista: Buscarlo por nombre y eliminarlo
+		System.out.println("Pokemon a borrar:");
+		System.out.println(poke.getName());
+		done = true;
+		return done;
 	}
 	
 }

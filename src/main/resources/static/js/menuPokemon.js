@@ -41,6 +41,7 @@ $('.buttonDelete').mouseout(function () {
 
 // Function para eliminar el pokemon que se muestra en pantalla
 $('.buttonDelete').click(function () {
+    removePokemon(currentPokemon);//PRUEBA
     var deletePos = currentPokemon.arrayPos;
     //Solo permite eliminar Pokemon en el visor
     if (pokeDisplayed) {
