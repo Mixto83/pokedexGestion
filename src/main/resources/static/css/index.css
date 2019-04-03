@@ -82,6 +82,33 @@ body {
     flex:1;
 }
 
+.buttonLast{
+    background-image: url("../assets/botonDerecha.png");
+    display: none;
+    width: 60px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: absolute;
+    top: 980px;
+    left: 500px;
+    background-position: top left;
+}
+
+.buttonFirst{
+    background-image: url("../assets/botonIzquierda.png");
+    display: none;
+    width: 60px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: absolute;
+    top: 980px;
+    left: 200px;
+    background-position: top left;
+    flex:1;
+}
+
 .buttonUp{
     background-image: url("../assets/botonArriba.png");
     display: none;

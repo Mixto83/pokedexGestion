@@ -61,30 +61,12 @@ function addPokemon() { //Nuevo Pokemon
 		against_dark : 1,
 		against_fairy : 1
     }
-    console.log(jsonNew.against_bug);
-    console.log(jsonNew.type1);
-    console.log(jsonNew.name);
+    hideFormEngadir();
+    showList();
+    showFilters();
     var newPokemon = new Pokemon(jsonNew);
     insertNewPokemon(newPokemon);
-    /*var newId = pokeArray.length + 1;//Provisional
-    var newType1 = $('.tipo1Add').val();
-    var newType2 = $('.tipo2Add').val();
-    var newName = $('.nombreAdd').val();
-    var newGen = parseInt($('.genAdd').val());
-    //var newHab = $('habilidad0).val();
-    var newLegendary = $('.legendarioAdd').prop('checked');
-    var newNForms = parseInt($('.numberFormsAdd').val());
-    //var newDesc = $('descripcionAdd').val();
-    var newPoke = new Pokemon(newId, newName, newType1, newType2, newGen, newLegendary, newNForms);
-    newPoke.image = "assets/pokemon_images/" + newPoke.id + ".png";
-    newPoke.arrayPos = pokeArray.length;
-    pokeArray.push(newPoke);
-    //Si es el unico Pokemon del array, pasa a ser el primero
-    if (pokeArray.length === 1) {
-        firstPokemon = pokeArray[0];
-    }*/
     
-    //updateList();
 }
 
 $('.buttonConfirmar').click(function () { //boton de confirmar

@@ -20,6 +20,7 @@ function init() { // Inicia el menú de la pokedex
         showFilters();
         showList();
         updateList();
+        showBoxesFromList();
     // $('.p1, .p2, .p3, .p4, .p5, .p6, .p7').bind("click", '#imgLis   tado',eventosListaPokemon); // Genera y permite controlar las imagenes en un solo método
     }
 }
@@ -110,6 +111,34 @@ $(".buttonLeft").click(function () { //Avanza en la lista en grupo
     updateList();
 })
 
+$(".buttonFirst").click(function () {
+    if (pokeArray.length > 0){
+        firstPokemon = pokeArray[0];
+    }
+    updateList();
+})
+
+$(".buttonLast").click(function () {
+    if (pokeArray.length > 6){
+        firstPokemon = pokeArray[pokeArray.length - 7];
+    } else if (pokeArray.length > 5){
+        firstPokemon = pokeArray[pokeArray.length - 6];
+    } else if (pokeArray.length > 4){
+        firstPokemon = pokeArray[pokeArray.length - 5];
+    } else if (pokeArray.length > 3){
+        firstPokemon = pokeArray[pokeArray.length - 4];
+    } else if (pokeArray.length > 2){
+        firstPokemon = pokeArray[pokeArray.length - 3];
+    } else if (pokeArray.length > 1){
+        firstPokemon = pokeArray[pokeArray.length - 2];
+    } else if (pokeArray.length > 0){
+        firstPokemon = pokeArray[pokeArray.length - 1];
+    }
+    updateList();
+})
+
+
+
 $("body").on("click", ".pokedexFondo .fondo #imgListado", function (event) { //Este permite que todo lo que se genere con #imgListado tenga este metodo directamente, 
     eventosListaPokemon(event);                                              //sin tener que bindearlo dinamicamente
 });
@@ -146,6 +175,8 @@ function hideList() { //Oculta la lista
     $('.buttonUp').fadeOut("slow");
     $('.buttonRight').fadeOut("slow");
     $('.buttonLeft').fadeOut("slow");
+    $('.buttonFirst').fadeOut("slow");
+    $('.buttonLast').fadeOut("slow");
 }
 
 function showList() { //Muestra la lista
@@ -183,6 +214,10 @@ function showList() { //Muestra la lista
     $('.buttonUp').fadeIn("slow");
     $('.buttonRight').fadeIn("slow");
     $('.buttonLeft').fadeIn("slow");
+    $('.buttonFirst').fadeIn("slow");
+    $('.buttonLast').fadeIn("slow");
+
+    showBoxesFromList();
 }
 
 function updateList(){ //Actualiza los nombres de las cajas
@@ -275,14 +310,7 @@ function showBoxesFromList(){ //Cajas con el nombre pokemon
     }
 }
 ///////////////////////////////////////////////////////////////////////////botonesLadoDerecho
-//Reordena la Pokedex
-function reversePokedex() {
-    //pokeArray = pokeArray.reverse();
-    //updatePokemonIndex();
-    //firstPokemon = pokeArray[0];
-    //updateList();
-    peticionAServidor();
-}
+
 
 //Guarda en pokeArray el array que queramos filtrar. Guarda pokeArray en un backup para restaurarlo luego
 function swapArrays(origin) {
@@ -290,15 +318,6 @@ function swapArrays(origin) {
     pokeArray = origin;
     firstPokemon = pokeArray[0];
     updatePokemonIndex();
-}
-
-
-//Restaura el array de Pokemon original
-function restoreArray() {
-    generalFilter = false;
-    pokeArray = backupArray;
-    updatePokemonIndex();
-    firstPokemon = pokeArray[0];
 }
 
 //Actualiza las posiciones en el array de los Pokemon
@@ -310,14 +329,10 @@ function updatePokemonIndex() {
 
 //Llama a la funcion de cambiado de tipo cuando cambia el valor de cualquiera de los dropdown
 $('.tipo1Search').change(function () {
-    $('.ordenAsc').prop('checked', true);
-    $('.ordenDesc').prop('checked', false);
     getTypesSearch();
 })
 
 $('.tipo2Search').change(function () {
-    $('.ordenAsc').prop('checked', true);
-    $('.ordenDesc').prop('checked', false);
     getTypesSearch();
 })
 
@@ -328,56 +343,45 @@ function getTypesSearch() {
         $('.tipo2Search').val("");
         type2Value = $('.tipo2Search').val();
     }
-    search();
+    peticionAServidor();
 }
 
 //Llama a la funcion de reordenar la Pokedex al pulsar en uno de los botones excluyentes.
 $('.ordenDesc').change(function () {
     ordenAscValue = false;
-    reversePokedex();
+    peticionAServidor();
     
 })
 
 $('.ordenAsc').change(function () {
     ordenAscValue = true;
-    reversePokedex();
+    peticionAServidor();
 })
 
 //Llama a la funcion de filtrar generacion cuando se cambia el valor del dropdown.
 $('.genDisplay').change(function () {
-    $('.ordenAsc').prop('checked', true);
-    $('.ordenDesc').prop('checked', false);
     genValue = parseInt($('.genDisplay').val());
-    search();
+    peticionAServidor();
 })
 
 //Cuando se marca o desmarca la caja de legendarios, llama a la funcion de filtrar legendarios
 $('.checkBoxLegendaries').change(function () {
     legendaryBool = $('.checkBoxLegendaries').prop('checked');
-    search();
+    peticionAServidor();
 })
 
 //Cuando cambia la barra de busqueda de nombres (es decir, cuando se escribe y se pulsa enter) llama a la funcion de buscar por nombre
 $('.nombreSearch').change(function () {
-    $('.ordenAsc').prop('checked', true);
-    $('.ordenDesc').prop('checked', false);
     nameValue = $('.nombreSearch').val();
-    search();
+    peticionAServidor();
 })
 
 //Cuando cambia la barra de busqueda de ID llama a la funcion de buscar por IDs
 $('.idSearch').change(function () {
-    $('.ordenAsc').prop('checked', true);
-    $('.ordenDesc').prop('checked', false);
     idValue = parseInt($('.idSearch').val());
-    search();
+    peticionAServidor();
 })
 
-function search() { //gestiona las opciones de busqueda
-    peticionAServidor();//Llamada Ajax
-    //updateList();
-    //showBoxesFromList();
-}
 ///////////////////////////////////////////////////////////////////////////anadirPokemon
 $(".buttonEngadir").click(function () { //boton anadir pokemon
     //Prueba con formulario 
@@ -390,9 +394,6 @@ $(".buttonEngadir").click(function () { //boton anadir pokemon
 ///////////////////////////////////////////////////////////////////////////resetearFiltros
 $(".buttonReseteo").click(function(){ //boton resetear filtros
     resetFilters();
-    restoreArray();
-    updateList();
-    showList();
 })
 
 function resetFilters(){ //Reinicia filtros de busqueda
@@ -404,7 +405,6 @@ function resetFilters(){ //Reinicia filtros de busqueda
     $('.idSearch').val(0);
     $('.ordenAsc').prop('checked', true);
     $('.ordenDesc').prop('checked', false);
-
     legendaryBool = false;
     type1Value = "";
     type2Value = "";
@@ -412,6 +412,10 @@ function resetFilters(){ //Reinicia filtros de busqueda
     idValue = 0;
     nameValue = "";
     backupDone = false;
+    ordenAscValue = true;
+    peticionAServidor();
+    updateList();
+    showList();
 }
 
 function showFilters(){ //Muestra el boton resetear filtros

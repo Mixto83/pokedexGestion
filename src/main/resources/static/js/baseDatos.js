@@ -30,8 +30,8 @@ function peticionAServidor() {
             pokeArray[i].setArrayPos(i);
         }
         firstPokemon = pokeArray[0];
-        updateList();
-        showBoxesFromList();
+        updateList(); 
+        showBoxesFromList();//Provisional, se debe mover
     })
 }
 
@@ -137,6 +137,6 @@ function insertNewPokemon(_newPokemon){
         }
     }).done(function(){
         console.log("Pokemon anadido");
-        updateList();
+        peticionAServidor();
     })
 }
