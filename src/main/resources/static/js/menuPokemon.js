@@ -142,9 +142,10 @@ function showInfo() {
             currentPokemon.nForms--;
             console.log(currentPokemon.imagesArray);
         }
-        auxImg2.onload = addForm();//No consigue terminar de ser recursiva,
-                                   //el evento se ejecuta solo una vez
         
+        auxImg2.onload = function(){
+            addForm();
+        }
 
         addForm();
 
