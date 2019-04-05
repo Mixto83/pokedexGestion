@@ -53,7 +53,7 @@ class Pokemon {
 		this.against_dark = jsonPokemon.against_dark;
 		this.against_fairy = jsonPokemon.against_fairy;
 
-		this.nForms = 2;
+		this.nForms = 0;
     }
     
     setImages(_src){

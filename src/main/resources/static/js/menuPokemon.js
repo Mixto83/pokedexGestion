@@ -6,7 +6,7 @@ function showPokemonDetail() { //Muestra el detalle
 
     $('.buttonRightViewer').fadeIn("slow");
     $('.buttonLeftViewer').fadeIn("slow");
-    formCount = 1;
+    formCount = 0;
     $('.buttonBack').fadeIn("slow");
 }
 
@@ -78,21 +78,18 @@ $('.buttonDelete').click(function () {
 
 // Creamos un boton para diferenciar los pokemon con diferentes formas (Megas ej)
 $(".buttonChangeForm").click(function () {
-    if (currentPokemon.nForms > 1) {
+    if (currentPokemon.nForms > 0) {
         formCount++;
-        if (formCount <= currentPokemon.nForms) {
-            currentPokemon.image = "assets/pokemon_images/" + currentPokemon.id + "-" + formCount + ".png";
-        } else {
-            formCount = 1;
-            currentPokemon.image = "assets/pokemon_images/" + currentPokemon.id + ".png";
+        if (formCount > currentPokemon.nForms) {
+            formCount = 0;
         }
-        pokeImg.src = currentPokemon.image;
+        pokeImg.src =  currentPokemon.imagesArray[formCount];
     }
 })
 
 // Función para ver el siguiente pokemon en el visor
 $(".buttonLeftViewer").click(function () {
-    formCount = 1;
+    formCount = 0;
     if (currentPokemon.arrayPos == 0) {
         currentPokemon = pokeArray[pokeArray.length - 1];
     } else {
@@ -103,7 +100,7 @@ $(".buttonLeftViewer").click(function () {
 
 //Función para ver el anterior pokemon en el visor
 $(".buttonRightViewer").click(function () {
-    formCount = 1;
+    formCount = 0;
     if (currentPokemon.arrayPos == pokeArray.length - 1) {
         currentPokemon = pokeArray[0];
     } else {
@@ -114,7 +111,46 @@ $(".buttonRightViewer").click(function () {
 
 //Función para mostrar la información del Pokémon en la ventana
 function showInfo() {
-    pokeImg.src = currentPokemon.image;
+    var auxImg = new Image();
+    currentPokemon.imagesArray = [];//se vacia el array de imagenes cada vez que se muestran los datos
+    currentPokemon.nForms = 0;
+    auxImg.src = currentPokemon.image;
+
+    //si la direccion de la imagen guardada existe (tiene 1 forma)
+    //esa imagen se muestra y el boton de cambio de forma desaparece
+    auxImg.onload = function (e) {
+        console.log(currentPokemon.id + ' Success!');
+        pokeImg.src = auxImg.src; 
+        $('.buttonChangeForm').fadeOut("slow");
+    }
+    //si no existe (tiene mas de una forma)
+    auxImg.onerror = function (e) {
+        var auxImg2 = new Image();
+        currentPokemon.imagesArray = [];
+        //se muestra la imagen de su primera forma (0)
+        pokeImg.src = pokeSrc + currentPokemon.id + "-" + 0 + ".png";
+
+        //se entra en una funcion recursiva que se ejecuta cada vez que se carga la imagen
+        //en una segunda variable auxiliar. Rellena el array de imagenes con los 
+        //directorios de todas las imagenes de sus formas e incrementa el numero de formas
+        addForm = function () {
+            currentPokemon.imagesArray.push(pokeSrc + currentPokemon.id + "-" + currentPokemon.nForms + ".png");
+            currentPokemon.nForms++;
+            auxImg2.src = pokeSrc + currentPokemon.id + "-" + currentPokemon.nForms + ".png";
+        }
+        auxImg2.onerror = function () {
+            currentPokemon.nForms--;
+            console.log(currentPokemon.imagesArray);
+        }
+        auxImg2.onload = addForm();//No consigue terminar de ser recursiva,
+                                   //el evento se ejecuta solo una vez
+        
+
+        addForm();
+
+        $('.buttonChangeForm').fadeIn("slow");//se muestra el boton de cambio de formas
+
+    }
     if (currentPokemon.type2 !== "") {
         $("#textoPk").html("Nombre: " + currentPokemon.name + "\nTipo1: " +
             currentPokemon.type1 + "\nTipo2: " + currentPokemon.type2);
@@ -122,8 +158,4 @@ function showInfo() {
         $("#textoPk").html("Nombre: " + currentPokemon.name + "\nTipo1: " +
             currentPokemon.type1);
     }
-    if (currentPokemon.nForms > 1)
-        $('.buttonChangeForm').fadeIn("slow");
-    else
-        $('.buttonChangeForm').fadeOut("slow");
 }
