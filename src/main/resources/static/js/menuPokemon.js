@@ -120,7 +120,7 @@ function showInfo() {
     //esa imagen se muestra y el boton de cambio de forma desaparece
     auxImg.onload = function (e) {
         console.log(currentPokemon.id + ' Success!');
-        pokeImg.src = auxImg.src; 
+        pokeImg.src = auxImg.src;
         $('.buttonChangeForm').fadeOut("slow");
     }
     //si no existe (tiene mas de una forma)
@@ -129,7 +129,7 @@ function showInfo() {
         currentPokemon.imagesArray = [];
         //se muestra la imagen de su primera forma (0)
         pokeImg.src = pokeSrc + currentPokemon.id + "-" + 0 + ".png";
-
+        
         //se entra en una funcion recursiva que se ejecuta cada vez que se carga la imagen
         //en una segunda variable auxiliar. Rellena el array de imagenes con los 
         //directorios de todas las imagenes de sus formas e incrementa el numero de formas
