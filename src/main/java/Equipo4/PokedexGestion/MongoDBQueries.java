@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.bson.Document;
 import org.bson.conversions.Bson;
@@ -89,7 +90,9 @@ public class MongoDBQueries {
 		}
 			
 		if (_name != "") {//Filtrar por nombre
-			fields.add(new Document("name", _name));
+			//fields.add(new Document("name", _name));
+			Pattern regex = Pattern.compile(_name, Pattern.CASE_INSENSITIVE);
+			fields.add(new Document("name", regex));
 			notNull = true;
 		}
 			

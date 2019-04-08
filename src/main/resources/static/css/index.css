@@ -83,12 +83,12 @@ body {
 }
 
 .buttonLast{
-    background-image: url("../assets/botonDerecha.png");
+    background-image: url("../assets/botonAbajoMagenta.png");
     display: none;
     width: 60px;
     height: 60px;
     background-repeat: no-repeat;
-    background-size: auto;
+    background-size: cover;
     position: absolute;
     top: 980px;
     left: 500px;
@@ -96,12 +96,12 @@ body {
 }
 
 .buttonFirst{
-    background-image: url("../assets/botonIzquierda.png");
+    background-image: url("../assets/botonArribaMagenta.png");
     display: none;
     width: 60px;
     height: 60px;
     background-repeat: no-repeat;
-    background-size: auto;
+    background-size: cover;
     position: absolute;
     top: 980px;
     left: 200px;

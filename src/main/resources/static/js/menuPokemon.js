@@ -119,7 +119,6 @@ function showInfo() {
     //si la direccion de la imagen guardada existe (tiene 1 forma)
     //esa imagen se muestra y el boton de cambio de forma desaparece
     auxImg.onload = function (e) {
-        console.log(currentPokemon.id + ' Success!');
         pokeImg.src = auxImg.src;
         $('.buttonChangeForm').fadeOut("slow");
     }
@@ -140,7 +139,6 @@ function showInfo() {
         }
         auxImg2.onerror = function () {
             currentPokemon.nForms--;
-            console.log(currentPokemon.imagesArray);
         }
         
         auxImg2.onload = function(){
