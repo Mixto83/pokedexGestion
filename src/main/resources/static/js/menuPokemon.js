@@ -2,6 +2,7 @@
 function showPokemonDetail() { //Muestra el detalle
     $('.ventanaPokemon').fadeIn("slow");
     $('.imagenPokemon').fadeIn("slow");
+    $('.informacionExtra').fadeIn("slow");
     //$('.buttonDelete').fadeIn("slow");
 
     $('.buttonRightViewer').fadeIn("slow");
@@ -13,6 +14,7 @@ function showPokemonDetail() { //Muestra el detalle
 function hidePokemonDetail() { //Oculta el detalle
     $('.ventanaPokemon').fadeOut("fast");
     $('.imagenPokemon').fadeOut("fast");
+    $('.informacionExtra').fadeOut("fast");
     //$('.buttonDelete').fadeOut("fast");
 
     $('.buttonRightViewer').fadeOut("slow");
@@ -72,6 +74,7 @@ $('.buttonDelete').click(function () {
     } else {
         pokeImg.src = null;
         $("#textoPk").html("");
+        $("#infoExtra").html("");
     }
     updateList();
 });
@@ -150,11 +153,23 @@ function showInfo() {
         $('.buttonChangeForm').fadeIn("slow");//se muestra el boton de cambio de formas
 
     }
+    $("#nombrePk").html("Nombre: " + currentPokemon.name);
+    $("#japanPk").html("Nombre original: " + currentPokemon.japanese_name);
+    $("#classPk").html(""+currentPokemon.classfication);
+    $("#type1Pk").html("Tipo 1: "+currentPokemon.type1);
     if (currentPokemon.type2 !== "") {
-        $("#textoPk").html("Nombre: " + currentPokemon.name + "\nTipo1: " +
-            currentPokemon.type1 + "\nTipo2: " + currentPokemon.type2);
+        $("#type2Pk").html("Tipo2: " + currentPokemon.type2);
     } else {
-        $("#textoPk").html("Nombre: " + currentPokemon.name + "\nTipo1: " +
-            currentPokemon.type1);
+        $("#type2Pk").html("");
     }
+
+    $("#infoExtra").html("Peso: " + currentPokemon.weight_kg + 
+                        "kg , Altura: " + currentPokemon.height_m + "m");
+    $("#abilitiesPk").html("Habilidades: " + currentPokemon.abilities);
+    $("#hpPk").html("HP: "+ currentPokemon.hp)
+    $("#attackPk").html("Ataque: " + currentPokemon.attack);
+    $("#defensePk").html("Defensa: " + currentPokemon.defense);
+    $("#spAtPk").html("Ataque Especial: " + currentPokemon.sp_attack);
+    $("#spDefPk").html("Defensa Especial: " + currentPokemon.sp_defense);
+    $("#speedPk").html("Velociadad: " + currentPokemon.speed);
 }

@@ -135,19 +135,6 @@ body {
     background-position: top left;
 }
 
-.ventanaPokemon {
-    background-image: url("../assets/marcoPokemonGr.png");
-    display: none;
-    width: 280px;
-    height: 280px;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-    top: 100px;
-    left: 100px;
-    background-position: top left;
-}
-
 .barraDivisoria {
     background-image: url("../assets/barraDivisoria.png");
     display: none;
@@ -234,7 +221,7 @@ body {
     background-size: auto;
     position: absolute;
     top: 195px;
-    left: 400px;
+    left: 650px;
     background-position: top left;
 }
 
@@ -247,7 +234,7 @@ body {
     background-size: auto;
     position: absolute;
     top: 195px;
-    left: 20px;
+    left: 270px;
     background-position: top left;
     flex:1;
 }
@@ -289,7 +276,7 @@ body {
     background-size: auto;
     position: absolute;
     top: 318px;
-    left: 317px;
+    left: 567px;
     background-position: top left;
     flex:1;
 }
@@ -331,7 +318,7 @@ body {
     background-size: auto;
     position: absolute;
     top: 28px;
-    left: 200px;
+    left: 450px;
     background-position: top left;
     flex:1;
 }
@@ -524,6 +511,19 @@ body {
     flex: 1;
 }*/
 
+.ventanaPokemon {
+    background-image: url("../assets/marcoPokemonGr.png");
+    display: none;
+    width: 280px;
+    height: 280px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    top: 100px;
+    left: 350px;
+    background-position: top left;
+}
+
 
 .imagenPokemon {
     display: none;
@@ -538,15 +538,95 @@ body {
     flex: 1;
 }
 
-.infoPokemon {
+.informacionExtra {
     display: none;
-    width: 280px;
+    width: 800px;
     height: 280px;
     background-repeat: no-repeat;
-    background-size: auto;
-    position: relative;
-    top: 400px;
-    left: 100px;
+    background-size: cover;
+    position: absolute;
+    top: 100px;
+    left: 1025px;
     background-position: top left;
-    flex: 1;
+}
+
+#infoExtra {
+    position: relative;
+    top: 0px;
+    left: 0px;
+    font-family: Arial;
+    font-size: 20px;
+    color: black;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+#abilitiesPk {
+    position: relative;
+    top: 0px;
+    left: 0px;
+    font-family: Arial;
+    font-size: 20px;
+    color: black;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+#hpPk {
+    position: relative;
+    top: 0px;
+    left: 0px;
+    font-family: Arial;
+    font-size: 20px;
+    color: black;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+#attackPk {
+    position: relative;
+    top: 0px;
+    left: 0px;
+    font-family: Arial;
+    font-size: 20px;
+    color: black;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+#defensePk {
+    position: relative;
+    top: 0px;
+    left: 0px;
+    font-family: Arial;
+    font-size: 20px;
+    color: black;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+#spAtPk {
+    position: relative;
+    top: 0px;
+    left: 0px;
+    font-family: Arial;
+    font-size: 20px;
+    color: black;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+#spDefPk {
+    position: relative;
+    top: 0px;
+    left: 0px;
+    font-family: Arial;
+    font-size: 20px;
+    color: black;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+#speedPk {
+    position: relative;
+    top: 0px;
+    left: 0px;
+    font-family: Arial;
+    font-size: 20px;
+    color: black;
+    padding-left: 20px;
+    padding-right: 20px;
 }

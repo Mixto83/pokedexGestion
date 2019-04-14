@@ -43,6 +43,7 @@ $(".buttonClose").click(function () { //Cierra la pokedex
     if (pokeDisplayed) {
         $('.ventanaPokemon').fadeOut("fast");
         $('.imagenPokemon').fadeOut("fast");
+        $('.informacionExtra').fadeOut("fast");
         pokeDisplayed = false;
     }
     $('#imgListado.p2').fadeOut("slow");
