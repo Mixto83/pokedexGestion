@@ -165,11 +165,12 @@ function showInfo() {
 
     $("#infoExtra").html("Peso: " + currentPokemon.weight_kg + 
                         "kg , Altura: " + currentPokemon.height_m + "m");
-    $("#abilitiesPk").html("Habilidades: " + currentPokemon.abilities);
+    $("#abilitiesPk").html("Habilidades: " + 
+                        currentPokemon.abilities.slice(1,currentPokemon.abilities.length-1));
     $("#hpPk").html("HP: "+ currentPokemon.hp)
     $("#attackPk").html("Ataque: " + currentPokemon.attack);
     $("#defensePk").html("Defensa: " + currentPokemon.defense);
     $("#spAtPk").html("Ataque Especial: " + currentPokemon.sp_attack);
     $("#spDefPk").html("Defensa Especial: " + currentPokemon.sp_defense);
-    $("#speedPk").html("Velociadad: " + currentPokemon.speed);
+    $("#speedPk").html("Velocidad: " + currentPokemon.speed);
 }

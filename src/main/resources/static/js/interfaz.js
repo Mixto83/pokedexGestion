@@ -19,6 +19,7 @@ var idValue = 0;
 var nameValue = "";
 var ordenAscValue = true;
 var backupDone = false;
+arrayAbs = [];
 
 
 var youNeedSlice = false;

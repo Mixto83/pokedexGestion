@@ -11,16 +11,21 @@ function hideFormEngadir(){ //Oculta el formulario para anadir pokemon
     $(".buttonConfirmar").fadeOut("slow");
 }
 
+$('.habilidadAdd').change(function () {
+	arrayAbs.push("\'"+$('.habilidadAdd').val()+"\'");
+})
+
 function addPokemon() { //Nuevo Pokemon
+	var stringAbs = "["+arrayAbs.toString()+"]";
     var jsonNew = {
         pokedex_number : 802,//Default for testing
-        gen : parseInt($('.genAdd').val()),
+        gen : $('.genAdd').val(),
         name : $('.nombreAdd').val(),
 		type1 : $('.tipo1Add').val(),
 		type2 : $('.tipo2Add').val(),
-		legendary: 0,//Default for testing
-		abilities:  "['Prueba']",//Default for testing
-		japanese_name : "Za Warudo",//Default for testing
+		is_legendary: $(".legendarioAdd").prop('checked'),
+		abilities: stringAbs,
+		japanese_name : $('.nombreJAdd').val(),
         
 		//Stats de combate
 		hp : 50,
@@ -37,8 +42,8 @@ function addPokemon() { //Nuevo Pokemon
 		capture_rate : 50,
 		classfication : $('.descripcionAdd').val(),
 		experience_growth : 50,
-		height_m : 50,
-		weight_kg : 50,
+		height_m : $('.alturaAdd').val(),
+		weight_kg : $('.pesoAdd').val(),
 		percentage_male : 50,
 		
 		//Debilidades
@@ -60,7 +65,7 @@ function addPokemon() { //Nuevo Pokemon
 		against_steel : 1,
 		against_dark : 1,
 		against_fairy : 1
-    }
+	}
     hideFormEngadir();
     showList();
     showFilters();
@@ -84,10 +89,14 @@ function engadirPokemon() { //Engadir es anhadir en gallego
 function resetAddForm() { //Resetea los valores del formulario
     $('.tipo1Add').val('Fuego');
     $('.tipo2Add').val("");
-    $('.nombreAdd').val('Nuevo Nombre');
-    $('.genAdd').val(0);
-    //$('habilidad').val('llamas');
+	$('.nombreAdd').val('Nuevo Nombre');
+	$('.nombreJAdd').val('Nuevo Nombre');
+    $('.genAdd').val(1);
+	$('habilidad').val('');
+	arrayAbs = [];
     $('.legendarioAdd').prop('checked', false);
-    $('.numberFormsAdd').val(1);
+	$('.numberFormsAdd').val(1);
+	$('.pesoAdd').val(0);
+	$('.alturaAdd').val(0);
     //$('descripcionAdd').val('');
 }
