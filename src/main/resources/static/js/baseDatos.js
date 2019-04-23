@@ -17,7 +17,6 @@ function peticionAServidor() {
             "Content-Type": "application/json"
         }
     }).done(function (dataReceived) {
-        console.log(dataReceived.length);
         pokeArray = [];
         for (var i = 0; i < dataReceived.length; i++) {
             var pokemon = new Pokemon(dataReceived[i]);
@@ -67,7 +66,6 @@ function removePokemon(pokemonToDelete){
             "Content-Type": "application/json"
         }
     }).done(function(){
-        console.log("Pokemon eliminado");
     })
 }
 
@@ -136,7 +134,6 @@ function insertNewPokemon(_newPokemon){
             "Content-Type": "application/json"
         }
     }).done(function(){
-        console.log("Pokemon anadido");
         peticionAServidor();
     })
 }
